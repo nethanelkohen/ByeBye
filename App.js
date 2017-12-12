@@ -1,13 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { Constants, Audio } from 'expo';
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <Button
+          title="byebye"
+          onPress={async () => {
+            const soundObject = new Expo.Audio.Sound();
+            try {
+              await soundObject.loadAsync(require('./byebye.mp3'));
+              await soundObject.playAsync();
+              // Your sound is playing!
+              } catch (error) {
+              // An error occurred!
+              }
+            }}
+        />
       </View>
     );
   }
