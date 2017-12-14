@@ -1,5 +1,9 @@
 {
   "expo": {
-    "sdkVersion": "23.0.0"
+    "name": "ByeBye",
+    "slug": "byebye",
+    "sdkVersion": "23.0.0",
+    "privacy": "public",
+    "icon": "./assets/images/bye.png"
   }
 }

@@ -11,7 +11,7 @@ export default class App extends React.Component {
           onPress={async () => {
             const soundObject = new Expo.Audio.Sound();
             try {
-              await soundObject.loadAsync(require('./byebye.mp3'));
+              await soundObject.loadAsync(require('./assets/audio/byebye.mp3'));
               await soundObject.playAsync();
               // Your sound is playing!
               } catch (error) {
