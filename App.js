@@ -1,11 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
-import { Constants, Audio } from 'expo';
+import { Constants, Audio, MapView } from 'expo';
+import  Map  from './components/Map.js'
+
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Map
+        style={styles.map}
+         />
+        
         <Button
           title="byebye"
           onPress={async () => {
@@ -32,4 +38,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  map: {
+    flex:2,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });
