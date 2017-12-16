@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import { Facebook } from 'expo';
 import ByeByes from './ByeByes';
