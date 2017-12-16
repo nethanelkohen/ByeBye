@@ -5,6 +5,7 @@
     "sdkVersion": "23.0.0",
     "privacy": "public",
     "icon": "./assets/images/bye.png",
+    "facebookScheme": "fb134927923842970"
     "splash": {
       "image": "./assets/images/bye.png",
       "backgroundColor": "#FEF9B0"

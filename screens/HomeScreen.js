@@ -1,9 +1,27 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { TabNavigator } from 'react-navigation';
+import { Facebook } from 'expo';
 import ByeByes from './ByeByes';
 
 class HomeScreen extends Component {
+
+  async logIn() {
+    const { type, token } = await Facebook.logInWithReadPermissionsAsync('134927923842970', {
+      permissions: ['public_profile'],
+    });
+
+    if (type === 'success') {
+      // Get the user's name using Facebook's Graph API
+      const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+
+      Alert.alert(
+        'Logged in!',
+        `Hi ${(await response.json()).name}!`,
+      );
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -11,6 +29,8 @@ class HomeScreen extends Component {
           <Button onPress={() =>
           this.props.navigation.navigate('EventScreen')}
           title="Go to Events Screen" />
+        <Button onPress={this.logIn.bind(this)}
+          title="Sign in with Facebook" />
       </View>
     );
   }
