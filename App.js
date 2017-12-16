@@ -1,34 +1,29 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import { Constants, Audio } from 'expo';
+import {StackNavigator} from 'react-navigation';
+import HomeScreen from './screens/HomeScreen.js'
+import EventScreen from './screens/EventScreen.js'
+import ByeByeButton from './components/ByeByeButton.js';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Button
-          title="byebye"
-          onPress={async () => {
-            const soundObject = new Expo.Audio.Sound();
-            try {
-              await soundObject.loadAsync(require('./assets/audio/byebye.mp3'));
-              await soundObject.playAsync();
-              // Your sound is playing!
-              } catch (error) {
-              // An error occurred!
-              }
-            }}
-        />
-      </View>
+      <AppNavigator />
     );
   }
 }
 
+const AppNavigator = StackNavigator({
+  HomeScreen: { screen: HomeScreen},
+  EventScreen: { screen: EventScreen}
+})
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    backgroundColor: 'yellow',
+    alignItems: 'stretch',
     justifyContent: 'center',
   },
 });
