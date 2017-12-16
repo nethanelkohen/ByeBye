@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-} from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import { TabNavigator } from 'react-navigation';
+import ByeByes from './ByeByes';
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -19,8 +16,21 @@ export default class HomeScreen extends Component {
   }
 }
 
+const HomeScreenTabNavigator = TabNavigator({
+  HomeScreen: {
+    screen: HomeScreen
+  },
+  ByeByes: {
+    screen: ByeByes
+  }
+}, {
+  animationEnabled: true
+})
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
 });
+
+export default HomeScreenTabNavigator;
