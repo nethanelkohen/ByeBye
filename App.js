@@ -2,14 +2,20 @@ import React from "react";
 import { StyleSheet, Text, View, Button, Alert } from "react-native";
 import { Constants, Audio } from "expo";
 import { StackNavigator } from "react-navigation";
+import  Map  from './components/Map.js'
 import HomeScreen from "./screens/HomeScreen.js";
 import EventScreen from "./screens/EventScreen.js";
 import ByeByeButton from "./components/ByeByeButton.js";
 
 export default class App extends React.Component {
-  render() {
-    return <AppNavigator />;
-  }
+  render() { 
+    return ( <AppNavigator />;
+            <View style={styles.container}>
+        <Map
+        style={styles.map}
+         />
+      </View>
+  )}
 }
 
 const AppNavigator = StackNavigator({
@@ -20,8 +26,10 @@ const AppNavigator = StackNavigator({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "yellow",
-    alignItems: "stretch",
-    justifyContent: "center"
+  map: {
+    flex:1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });
