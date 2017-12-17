@@ -9,13 +9,8 @@ import ByeByeButton from "./components/ByeByeButton.js";
 
 export default class App extends React.Component {
   render() { 
-    return ( <AppNavigator />;
-            <View style={styles.container}>
-        <Map
-        style={styles.map}
-         />
-      </View>
-  )}
+    return  <AppNavigator />;
+  }
 }
 
 const AppNavigator = StackNavigator({
@@ -26,8 +21,6 @@ const AppNavigator = StackNavigator({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  map: {
-    flex:1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
