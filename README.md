@@ -4,8 +4,6 @@
 
  <br>
 
- [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/nethanelkohen/ByeBye/blob/master/LICENSE)
-
 ### *Make Sure That One Friend Gets Home Okay*
 
 <br>
