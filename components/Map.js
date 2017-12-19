@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
 import { MapView, Location, Permissions, Constants } from 'expo';
-// import MapView ,{ PROVIDER_GOOGLE } from 'react-native-maps';
+// import MapView from 'react-native-maps';
+import AnimatedMarkers from './Marker.js'
 
   export default class Map extends React.Component {
     constructor(props){
@@ -10,6 +11,10 @@ import { MapView, Location, Permissions, Constants } from 'expo';
         center: null,
         radius: 500,
         location: {},
+        coordinate: {
+          latitude: 37.78825,
+          longitude: -122.4324,
+        },
         errorMessage: null,
       }
     }
@@ -17,7 +22,7 @@ import { MapView, Location, Permissions, Constants } from 'expo';
   componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
       this.setState({
-        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+        errorMessage: 'Oops, this will not work.',
       });
     } else {
       this._getLocationAsync();
@@ -80,7 +85,15 @@ import { MapView, Location, Permissions, Constants } from 'expo';
           onRegionChange={this.onRegionChange.bind(this)}
           >
           
-          </MapView>
+              <MapView.Marker
+              key={1}
+              // coordinate={{latitude: 37.78825, longitude: -122.4324}}
+              coordinate={this.state.region}
+              title={"Some Title"}
+              description={"Hello world"}
+              />
+            
+        </MapView>       
       </View>
     );
   }
@@ -94,8 +107,8 @@ import { MapView, Location, Permissions, Constants } from 'expo';
     backgroundColor: '#ecf0f1',
   },
   paragraph: {
-    margin: 24,
-    fontSize: 18,
+    margin: 14,
+    fontSize: 10,
     textAlign: 'center',
   },
 });
