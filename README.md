@@ -13,11 +13,11 @@
 
 [React-Native](https://facebook.github.io/react-native/)
 
-<img src="./assets/images/facebook.png" align= "center" width="50" height="50" />
+<img src="https://avatars2.githubusercontent.com/u/1335026?s=200&v=4" align= "center" width="50" height="50" />
 
 [Firebase](https://firebase.google.com/)
 
-<img src="https://avatars2.githubusercontent.com/u/1335026?s=200&v=4" align= "center" width="50" height="50" />
+<img src="./assets/images/styled-components.png" align= "center" width="50" height="50" />
 
 [Styled-Components](https://www.styled-components.com/)
 
