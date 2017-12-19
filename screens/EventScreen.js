@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import ByeByeButton from "../components/ByeByeButton.js";
+import React, { Component } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import ByeByeButton from '../components/ByeByeButton.js';
 import Map from '../components/Map.js';
 
 export default class EventScreen extends Component {
@@ -8,12 +8,8 @@ export default class EventScreen extends Component {
     return (
       <View style={styles.container}>
         <Text>Hello World! You are on the Events Screen</Text>
-       { /*// <ByeByeButton /> */}
-
-        <Map
-        style={styles.map}
-         />
-
+        {/*<ByeByeButton />*/}
+        <Map style={styles.map} />
       </View>
     );
   }
@@ -24,9 +20,9 @@ const styles = StyleSheet.create({
     flex: 1
   },
   map: {
-    flex:1,
+    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   }
 });
