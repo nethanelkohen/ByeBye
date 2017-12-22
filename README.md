@@ -1,12 +1,10 @@
-<img src="https://media.giphy.com/media/3ohhweICxyvVLfq2sM/giphy.gif" width="200" height="200" align="right">
+<img src="https://www.thewrap.com/wp-content/uploads/2014/08/nathan-for-you-daddys-watching.jpg.jpg" width="200" height="200" align="right">
 
-# ByeBye
+# Daddy Is Watching
 
  <br>
 
- [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/nethanelkohen/ByeBye/blob/master/LICENSE)
-
-### *Never Say Goodbye Again*
+### *Make Sure That One Friend Gets Home Okay*
 
 <br>
 
@@ -15,9 +13,9 @@
 
 [React-Native](https://facebook.github.io/react-native/)
 
-<img src="./assets/images/facebook.png" align= "center" width="50" height="50" />
+<img src="https://avatars2.githubusercontent.com/u/1335026?s=200&v=4" align= "center" width="50" height="50" />
 
-[Facebook Graph API](https://developers.facebook.com/docs/graph-api/)
+[Firebase](https://firebase.google.com/)
 
 <img src="./assets/images/styled-components.png" align= "center" width="50" height="50" />
 

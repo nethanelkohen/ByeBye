@@ -1,41 +1,183 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet, Button, Alert } from "react-native";
-import { TabNavigator } from "react-navigation";
-import { Facebook } from "expo";
-import ByeByes from "./ByeByes";
+import React, { Component } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Alert,
+  Image,
+  ScrollView
+} from 'react-native';
+import { TabNavigator } from 'react-navigation';
+import App from '../App.js';
+// import { Constants, Facebook } from 'expo';
+import ByeByes from './ByeByes';
+import * as firebase from 'firebase';
+import { FormLabel, FormInput } from 'react-native-elements';
 
 class HomeScreen extends Component {
-  async logIn() {
-    const { type, token } = await Facebook.logInWithReadPermissionsAsync(
-      "134927923842970",
-      {
-        permissions: ["public_profile"]
-      }
-    );
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      error: '',
+      loading: false
+    };
+  }
 
-    if (type === "success") {
-      // Get the user's name using Facebook's Graph API
-      const response = await fetch(
-        `https://graph.facebook.com/me?access_token=${token}`
-      );
+  onLoginPress() {
+    this.setState({ error: '', loading: true });
 
-      Alert.alert("Logged in!", `Hi ${(await response.json()).name}!`);
+    const { email, password } = this.state;
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        this.setState({ error: '', loading: false });
+        this.props.navigation.navigate('EventScreen');
+      })
+      .catch(() => {
+        this.setState({ error: 'Authentication failed', loading: false });
+      });
+  }
+
+  onSignUpPress() {
+    this.setState({ error: '', loading: true });
+    const { email, password } = this.state;
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        this.setState({ error: '', loading: false });
+        this.props.navigation.navigate('EventScreen');
+      })
+      .catch(() => {
+        this.setState({ error: 'Authentication failed', loading: false });
+      });
+  }
+
+  renderButtonOrLoading() {
+    if (this.state.loading) {
+      return <Text> Loading </Text>;
     }
+    return (
+      <View>
+        <Button onPress={this.onLoginPress.bind(this)} title="Login" />
+        <Button onPress={this.onSignUpPress.bind(this)} title="Sign up" />
+      </View>
+    );
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <View>
+        <FormLabel>Email</FormLabel>
+        <FormInput
+          value={this.state.email}
+          autoCorrect={false}
+          autoCapitalize={'none'}
+          onChangeText={email => this.setState({ email })}
+          placeholder="nate@nycda.com"
+        />
+        <FormLabel>Password</FormLabel>
+        <FormInput
+          value={this.state.password}
+          autoCorrect={false}
+          autoCapitalize={'none'}
+          secureTextEntry
+          placeholder="*****"
+          onChangeText={password => this.setState({ password })}
+        />
+        <Text>{this.state.error}</Text>
+        {this.renderButtonOrLoading()}
+      </View>
+    );
+  }
+}
+
+/*_handleFacebookLogin = async () => {
+    const self = this;
+    try {
+      const {
+        type,
+        token,
+      } = await Facebook.logInWithReadPermissionsAsync('134927923842970', {
+        permissions: ['public_profile', 'user_events']
+      });
+
+      switch (type) {
+        case 'success':
+          {
+            const response = await fetch(
+              `https://graph.facebook.com/me/events?access_token=${token}`);
+            const events = await response.json();
+            console.log(events);
+            self.setState({
+              results: events
+            });
+            break;
+          }
+        case 'cancel':
+          {
+            Alert.alert('Cancelled!', 'Login was cancelled!');
+            break;
+          }
+        default:
+          {
+            Alert.alert('Oops!', 'Login failed!');
+          }
+      }
+    } catch (e) {
+      Alert.alert('Oops!', 'Login failed!');
+    }
+  };
+
+  render() {
+    return (
+      <ScrollView style={styles.container}>
+        <Button
+         title="Login with Facebook"
+         onPress={this._handleFacebookLogin}
+         />
         <Text>Hello World! You are on the Home Screen</Text>
         <Button
           onPress={() => this.props.navigation.navigate("EventScreen")}
           title="Go to Events Screen"
         />
-        <Button onPress={this.logIn.bind(this)} title="Sign in with Facebook" />
-      </View>
+      { this.state.results.data
+        ? this.state.results.data.map((item) => {
+
+            return (
+                <View key={item.name}>
+                  <Text>
+                    {item.name}
+                  </Text>
+                </View>
+              );
+          })
+
+        :
+        null
+        }
+      </ScrollView>
     );
   }
 }
+}
+
+{
+    _renderUserInfo = () => {
+     return (
+       <View style={{ alignItems: 'center' }}>
+  {      <Image
+          source={{ uri: this.state.userInfo.picture.data.url }}
+          style={{ width: 100, height: 100, borderRadius: 50 }}
+         />  }
+       <Text style={{ fontSize: 20 }}>{this.state.userInfo.data}</Text>
+       </View>
+     );
+   }; */
 
 const HomeScreenTabNavigator = TabNavigator(
   {
@@ -54,6 +196,8 @@ const HomeScreenTabNavigator = TabNavigator(
 const styles = StyleSheet.create({
   container: {
     flex: 1
+    // alignItems: 'center',
+    // justifyContent: 'center',
   }
 });
 
