@@ -12,49 +12,16 @@ import { TabNavigator } from 'react-navigation';
 import App from '../App.js';
 // import { Constants, Facebook } from 'expo';
 import ByeByes from './ByeByes';
-import * as firebase from 'firebase';
 import { FormLabel, FormInput } from 'react-native-elements';
 
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: '',
-      password: '',
-      error: '',
-      loading: false
-    };
+    this.state = {};
   }
 
   onLoginPress() {
-    this.setState({ error: '', loading: true });
-
-    const { email, password } = this.state;
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState({ error: '', loading: false });
-        this.props.navigation.navigate('EventScreen');
-      })
-      .catch(() => {
-        this.setState({ error: 'Authentication failed', loading: false });
-      });
-  }
-
-  onSignUpPress() {
-    this.setState({ error: '', loading: true });
-    const { email, password } = this.state;
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState({ error: '', loading: false });
-        this.props.navigation.navigate('EventScreen');
-      })
-      .catch(() => {
-        this.setState({ error: 'Authentication failed', loading: false });
-      });
+    this.props.navigation.navigate('EventScreen');
   }
 
   renderButtonOrLoading() {
@@ -63,8 +30,7 @@ class HomeScreen extends Component {
     }
     return (
       <View>
-        <Button onPress={this.onLoginPress.bind(this)} title="Login" />
-        <Button onPress={this.onSignUpPress.bind(this)} title="Sign up" />
+        <Button onPress={this.onLoginPress.bind(this)} title="Map" />
       </View>
     );
   }
