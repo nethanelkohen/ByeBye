@@ -118,16 +118,12 @@ export default class Map extends React.Component {
           {this.state.markers.map((marker, index) => (
             <MapView>
               <MapView.Marker
-                title={marker.title}
+                key={index.key}
                 coordinate={marker.coordinate}
-                key={marker.key}
+                title="ByeBye"
                 draggable
               />
-              <MapView.Circle
-                center={marker.coordinate}
-                key={index.key}
-                radius={200}
-              />
+              <MapView.Circle center={marker.coordinate} radius={2000} />
             </MapView>
           ))}
         </MapView>
