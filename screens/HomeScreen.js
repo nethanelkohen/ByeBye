@@ -20,7 +20,7 @@ class HomeScreen extends Component {
   }
 
   mapScreenPress() {
-    this.props.navigation.navigate('EventScreen');
+    this.props.navigation.navigate('MapScreen');
   }
 
   renderButtonOrLoading() {
