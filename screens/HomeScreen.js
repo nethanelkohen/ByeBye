@@ -6,22 +6,48 @@ import {
   Button,
   Alert,
   Image,
-  ScrollView
+  ScrollView,
+  TextInput
 } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import App from '../App.js';
-// import { Constants, Facebook } from 'expo';
 import ByeByes from './ByeByes';
 import { FormLabel, FormInput } from 'react-native-elements';
+// import InputContact from '../components/Input.js';
+import axios from 'axios';
+require('json-circular-stringify');
 
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+        contact: null,
+        message: null
+    };
   }
 
-  onLoginPress() {
-    this.props.navigation.navigate('EventScreen');
+  handleSubmit() {
+    let contact = this.state.contact;
+    let message = this.state.message;
+    fetch('https://frozen-ridge-66479.herokuapp.com/message', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'contact': contact,
+        'message': message
+      })
+    })
+      .then(response => {
+        console.log(response);
+      })
+      .done();
+  }
+
+  mapScreenPress() {
+    this.props.navigation.navigate('MapScreen');
   }
 
   renderButtonOrLoading() {
@@ -30,7 +56,7 @@ class HomeScreen extends Component {
     }
     return (
       <View>
-        <Button onPress={this.onLoginPress.bind(this)} title="Map" />
+        <Button onPress={this.mapScreenPress.bind(this)} title="Map" />
       </View>
     );
   }
@@ -38,112 +64,32 @@ class HomeScreen extends Component {
   render() {
     return (
       <View>
-        <FormLabel>Email</FormLabel>
-        <FormInput
-          value={this.state.email}
-          autoCorrect={false}
-          autoCapitalize={'none'}
-          onChangeText={email => this.setState({ email })}
-          placeholder="nate@nycda.com"
-        />
-        <FormLabel>Password</FormLabel>
-        <FormInput
-          value={this.state.password}
-          autoCorrect={false}
-          autoCapitalize={'none'}
-          secureTextEntry
-          placeholder="*****"
-          onChangeText={password => this.setState({ password })}
-        />
-        <Text>{this.state.error}</Text>
         {this.renderButtonOrLoading()}
+        <TextInput
+          style={styles.input}
+          placeholder="Contact"
+          placeholderTextColor="#9a73ef"
+          autoCapitalize="none"
+          onChangeText={text => this.setState({ contact: text })}
+          value={this.state.contact}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Message"
+          placeholderTextColor="#9a73ef"
+          autoCapitalize="none"
+          onChangeText={text => this.setState({ message: text })}
+          value={this.state.message}
+        />
+        <Button
+          style={styles.button}
+          title="Send Message"
+          onPress={this.handleSubmit.bind(this)}
+        />
       </View>
     );
   }
 }
-
-/*_handleFacebookLogin = async () => {
-    const self = this;
-    try {
-      const {
-        type,
-        token,
-      } = await Facebook.logInWithReadPermissionsAsync('134927923842970', {
-        permissions: ['public_profile', 'user_events']
-      });
-
-      switch (type) {
-        case 'success':
-          {
-            const response = await fetch(
-              `https://graph.facebook.com/me/events?access_token=${token}`);
-            const events = await response.json();
-            console.log(events);
-            self.setState({
-              results: events
-            });
-            break;
-          }
-        case 'cancel':
-          {
-            Alert.alert('Cancelled!', 'Login was cancelled!');
-            break;
-          }
-        default:
-          {
-            Alert.alert('Oops!', 'Login failed!');
-          }
-      }
-    } catch (e) {
-      Alert.alert('Oops!', 'Login failed!');
-    }
-  };
-
-  render() {
-    return (
-      <ScrollView style={styles.container}>
-        <Button
-         title="Login with Facebook"
-         onPress={this._handleFacebookLogin}
-         />
-        <Text>Hello World! You are on the Home Screen</Text>
-        <Button
-          onPress={() => this.props.navigation.navigate("EventScreen")}
-          title="Go to Events Screen"
-        />
-      { this.state.results.data
-        ? this.state.results.data.map((item) => {
-
-            return (
-                <View key={item.name}>
-                  <Text>
-                    {item.name}
-                  </Text>
-                </View>
-              );
-          })
-
-        :
-        null
-        }
-      </ScrollView>
-    );
-  }
-}
-}
-
-{
-    _renderUserInfo = () => {
-     return (
-       <View style={{ alignItems: 'center' }}>
-  {      <Image
-          source={{ uri: this.state.userInfo.picture.data.url }}
-          style={{ width: 100, height: 100, borderRadius: 50 }}
-         />  }
-       <Text style={{ fontSize: 20 }}>{this.state.userInfo.data}</Text>
-       </View>
-     );
-   }; */
 
 const HomeScreenTabNavigator = TabNavigator(
   {
