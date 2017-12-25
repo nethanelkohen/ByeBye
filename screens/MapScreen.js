@@ -15,6 +15,7 @@ export default class MapScreen extends Component {
       .then(res => {})
       .catch(error => console.log(error));
   };
+
   render() {
     return (
       <View style={styles.container}>
