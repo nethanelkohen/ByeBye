@@ -21,55 +21,30 @@ class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
-      contact: '',
-      message: ''
+        contact: null,
+        message: null
     };
   }
 
-  // handleContactChange = e => {
-  //   console.log(e);
-  //   this.setState({ contact: e });
-  // };
-  //
-  // handleMessageChange = e => {
-  //   console.log(e);
-  //   this.setState({ message: e });
-  // };
-
   handleSubmit() {
+    let contact = this.state.contact;
+    let message = this.state.message;
     fetch('https://frozen-ridge-66479.herokuapp.com/message', {
       method: 'POST',
       headers: {
+        Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      data: JSON.stringify({
-        contact: this.state.contact,
-        message: this.state.message
-      }).replace(/{|}/gi, '')
+      body: JSON.stringify({
+        'contact': contact,
+        'message': message
+      })
     })
       .then(response => {
-        Alert.alert(
-          'POST Response',
-          'Response Body -> ' + JSON.stringify(response)
-        );
+        console.log(response);
       })
       .done();
   }
-
-  // handleSubmit(e) {
-  //   axios
-  //     .post('https://frozen-ridge-66479.herokuapp.com/message', {
-  //       contentType: 'application/json',
-  //       data: JSON.stringify(e)
-  //     })
-  //     .then(response => {
-  //       console.log(response);
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }
 
   mapScreenPress() {
     this.props.navigation.navigate('MapScreen');
