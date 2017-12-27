@@ -15,7 +15,7 @@ import { Contacts } from 'expo';
 import { TabNavigator } from 'react-navigation';
 import App from '../App.js';
 import TextMessage from '../components/TextMessage.js';
-import ByeByes from './ByeByes';
+import MapScreen from './MapScreen';
 import { FormLabel, FormInput } from 'react-native-elements';
 
 class HomeScreen extends Component {
@@ -50,14 +50,9 @@ class HomeScreen extends Component {
     }
   }
 
-  mapScreenPress() {
-    this.props.navigation.navigate('MapScreen');
-  }
-
   render() {
     return (
       <View>
-        <Button onPress={this.mapScreenPress.bind(this)} title="Map" />
         <Button
           style={styles.button}
           title="Get Contacts"
@@ -74,8 +69,8 @@ const HomeScreenTabNavigator = TabNavigator(
     HomeScreen: {
       screen: HomeScreen
     },
-    ByeByes: {
-      screen: ByeByes
+    MapScreen: {
+      screen: MapScreen
     }
   },
   {
