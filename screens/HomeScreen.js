@@ -1,3 +1,4 @@
+import Expo from 'expo';
 import React, { Component } from 'react';
 import {
   View,
@@ -7,23 +8,20 @@ import {
   Alert,
   Image,
   ScrollView,
-  TextInput
+  TextInput,
+  Picker
 } from 'react-native';
 import { Contacts } from 'expo';
 import { TabNavigator } from 'react-navigation';
 import App from '../App.js';
+import TextMessage from '../components/TextMessage.js';
 import ByeByes from './ByeByes';
 import { FormLabel, FormInput } from 'react-native-elements';
-// import InputContact from '../components/Input.js';
-import axios from 'axios';
-require('json-circular-stringify');
 
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contact: null,
-      message: null,
       contactSearch: null
     };
   }
@@ -38,8 +36,8 @@ class HomeScreen extends Component {
       return;
     }
     const contacts = await Expo.Contacts.getContactsAsync({
-      fields: [Expo.Contacts.PHONE_NUMBERS, Expo.Contacts.EMAILS],
-      pageSize: 10,
+      fields: [Expo.Contacts.PHONE_NUMBERS],
+      pageSize: 100,
       pageOffset: 0
     });
     if (contacts.total > 0) {
@@ -50,26 +48,6 @@ class HomeScreen extends Component {
           `Emails: ${JSON.stringify(contacts.data[0].emails)}`
       );
     }
-  }
-
-  handleSubmit() {
-    let contact = this.state.contact;
-    let message = this.state.message;
-    fetch('https://frozen-ridge-66479.herokuapp.com/message', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        contact: contact,
-        message: message
-      })
-    })
-      .then(response => {
-        console.log(response);
-      })
-      .done();
   }
 
   mapScreenPress() {
@@ -85,27 +63,7 @@ class HomeScreen extends Component {
           title="Get Contacts"
           onPress={this.showFirstContactAsync.bind(this)}
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Contact"
-          placeholderTextColor="#9a73ef"
-          autoCapitalize="none"
-          onChangeText={text => this.setState({ contact: text })}
-          value={this.state.contact}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Message"
-          placeholderTextColor="#9a73ef"
-          autoCapitalize="none"
-          onChangeText={text => this.setState({ message: text })}
-          value={this.state.message}
-        />
-        <Button
-          style={styles.button}
-          title="Send Message"
-          onPress={this.handleSubmit.bind(this)}
-        />
+        <TextMessage />
       </View>
     );
   }
