@@ -6,7 +6,8 @@ import {
   Platform,
   TextInput,
   Button,
-  Dimensions
+  Dimensions,
+  Picker
 } from 'react-native';
 import { MapView, Location, Permissions, Constants } from 'expo';
 import Geocoder from 'react-native-geocoding';
@@ -109,6 +110,15 @@ export default class Map extends React.Component {
           title="go"
           onPress={this.getFromLocation}
         />
+        <Picker
+          selectedValue={this.state.radius}
+          onValueChange={choice => this.setState({ radius: choice })}
+        >
+          <Picker.Item label="200" value={200} />
+          <Picker.Item label="500" value={500} />
+          <Picker.Item label="1000" value={1000} />
+        </Picker>
+
         <MapView
           style={{ flex: 2 }}
           showsUserLocation={true}
@@ -123,7 +133,10 @@ export default class Map extends React.Component {
                 title="ByeBye"
                 draggable
               />
-              <MapView.Circle center={marker.coordinate} radius={2000} />
+              <MapView.Circle
+                center={marker.coordinate}
+                radius={this.state.radius}
+              />
             </MapView>
           ))}
         </MapView>
