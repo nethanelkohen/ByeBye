@@ -9,6 +9,7 @@ import {
   ScrollView,
   TextInput
 } from 'react-native';
+import { Contacts } from 'expo';
 import { TabNavigator } from 'react-navigation';
 import App from '../App.js';
 import ByeByes from './ByeByes';
@@ -21,9 +22,34 @@ class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        contact: null,
-        message: null
+      contact: null,
+      message: null,
+      contactSearch: null
     };
+  }
+
+  async showFirstContactAsync() {
+    // Ask for permission to query contacts.
+    const permission = await Expo.Permissions.askAsync(
+      Expo.Permissions.CONTACTS
+    );
+    if (permission.status !== 'granted') {
+      // Permission was denied...
+      return;
+    }
+    const contacts = await Expo.Contacts.getContactsAsync({
+      fields: [Expo.Contacts.PHONE_NUMBERS, Expo.Contacts.EMAILS],
+      pageSize: 10,
+      pageOffset: 0
+    });
+    if (contacts.total > 0) {
+      Alert.alert(
+        'Your first contact is...',
+        `Name: ${contacts.data[0].name}\n` +
+          `Phone numbers: ${JSON.stringify(contacts.data[0].phoneNumbers)}\n` +
+          `Emails: ${JSON.stringify(contacts.data[0].emails)}`
+      );
+    }
   }
 
   handleSubmit() {
@@ -36,8 +62,8 @@ class HomeScreen extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        'contact': contact,
-        'message': message
+        contact: contact,
+        message: message
       })
     })
       .then(response => {
@@ -50,21 +76,15 @@ class HomeScreen extends Component {
     this.props.navigation.navigate('MapScreen');
   }
 
-  renderButtonOrLoading() {
-    if (this.state.loading) {
-      return <Text> Loading </Text>;
-    }
-    return (
-      <View>
-        <Button onPress={this.mapScreenPress.bind(this)} title="Map" />
-      </View>
-    );
-  }
-
   render() {
     return (
       <View>
-        {this.renderButtonOrLoading()}
+        <Button onPress={this.mapScreenPress.bind(this)} title="Map" />
+        <Button
+          style={styles.button}
+          title="Get Contacts"
+          onPress={this.showFirstContactAsync.bind(this)}
+        />
         <TextInput
           style={styles.input}
           placeholder="Contact"
