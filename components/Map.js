@@ -96,6 +96,7 @@ export default class Map extends React.Component {
   }
 
   render() {
+    console.log('radius', this.state.radius);
     return (
       <View style={styles.container}>
         <TextInput
@@ -130,7 +131,7 @@ export default class Map extends React.Component {
               <MapView.Marker
                 key={index.key}
                 coordinate={marker.coordinate}
-                title="ByeBye"
+                title="Endpoint"
                 draggable
               />
               <MapView.Circle
