@@ -32,43 +32,6 @@ export default class Map extends React.Component {
     };
   }
 
-  handleAddress = text => {
-    console.log(text);
-    this.setState({ address: text });
-  };
-
-  getFromLocation = () => {
-    Geocoder.getFromLocation(this.state.address).then(
-      json => {
-        let geoLocation = json.results[0].geometry.location;
-        let id = 0;
-        this.setState({
-          markers: [
-            ...this.state.markers,
-            {
-              coordinate: {
-                longitude: geoLocation.lng,
-                latitude: geoLocation.lat
-              },
-              key: `${id++}`
-            }
-          ]
-        });
-        console.log('this is what i want', geoLocation);
-      },
-      error => {
-        alert(error);
-      }
-    );
-  };
-
-  componentWillMount() {
-    geolib.getDistance({
-      latitude: this.state.markers.coordinate.latitude,
-      longitude: this.state.markers.coordinate.longitude
-    });
-  }
-
   componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
       this.setState({
@@ -98,23 +61,30 @@ export default class Map extends React.Component {
     });
   };
 
-  howFar = () => {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        alert(
-          'You are ' +
-            geolib.getDistance(position.coords, {
-              latitude: this.state.region.latitude,
-              longitude: this.state.region.longitude
-            }) +
-            ' meters away from 51.525, 7.4575'
-        );
+  handleAddress = text => {
+    this.setState({ address: text });
+  };
+
+  getFromLocation = () => {
+    Geocoder.getFromLocation(this.state.address).then(
+      json => {
+        const geoLocation = json.results[0].geometry.location;
+        let id = 0;
+        this.setState({
+          markers: [
+            ...this.state.markers,
+            {
+              coordinate: {
+                longitude: geoLocation.lng,
+                latitude: geoLocation.lat
+              },
+              key: `${id++}`
+            }
+          ]
+        });
       },
-      () => {
-        alert('Position could not be determined.');
-      },
-      {
-        enableHighAccuracy: true
+      error => {
+        alert(error);
       }
     );
   };
@@ -123,8 +93,28 @@ export default class Map extends React.Component {
     this.setState({ region });
   }
 
+  howFar = () => {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        alert(
+          'You are ' +
+            geolib.getDistance(position.coords, {
+              latitude: this.state.coordinate.latitude,
+              longitude: this.state.coordinate.longitude
+            }) +
+            ' meters away from the marker'
+        );
+      },
+      function() {
+        alert('Position could not be determined.');
+      },
+      {
+        enableHighAccuracy: true
+      }
+    );
+  };
+
   render() {
-    console.log(this.state.region);
     return (
       <View style={styles.container}>
         <TextInput
