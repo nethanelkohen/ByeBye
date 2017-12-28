@@ -21,6 +21,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "expo": "^23.0.4",
+    "geolib": "^2.0.24",
     "json-circular-stringify": "0.0.1",
     "react": "16.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",

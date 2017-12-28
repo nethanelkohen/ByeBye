@@ -6,14 +6,14 @@ import {
   Platform,
   TextInput,
   Button,
-  Dimensions
+  Dimensions,
+  Picker
 } from 'react-native';
 import { MapView, Location, Permissions, Constants } from 'expo';
 import Geocoder from 'react-native-geocoding';
+import geolib from 'geolib';
 
 Geocoder.setApiKey('AIzaSyBakh5h7JIfXWWZmj-vm08iGO0pXUwV4Y4');
-
-let id = 0;
 
 export default class Map extends React.Component {
   constructor(props) {
@@ -32,35 +32,6 @@ export default class Map extends React.Component {
     };
   }
 
-  handleAddress = text => {
-    console.log(text);
-    this.setState({ address: text });
-  };
-
-  getFromLocation = () => {
-    Geocoder.getFromLocation(this.state.address).then(
-      json => {
-        let geoLocation = json.results[0].geometry.location;
-        this.setState({
-          markers: [
-            ...this.state.markers,
-            {
-              coordinate: {
-                longitude: geoLocation.lng,
-                latitude: geoLocation.lat
-              },
-              key: `${id++}`
-            }
-          ]
-        });
-        console.log('this is what i want', geoLocation);
-      },
-      error => {
-        alert(error);
-      }
-    );
-  };
-
   componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
       this.setState({
@@ -75,7 +46,7 @@ export default class Map extends React.Component {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
       this.setState({
-        errorMessage: 'Permission to access location was denied'
+        errorMessage: 'Address not found'
       });
     }
 
@@ -90,9 +61,58 @@ export default class Map extends React.Component {
     });
   };
 
+  handleAddress = text => {
+    this.setState({ address: text });
+  };
+
+  getFromLocation = () => {
+    Geocoder.getFromLocation(this.state.address).then(
+      json => {
+        const geoLocation = json.results[0].geometry.location;
+        let id = 0;
+        this.setState({
+          markers: [
+            ...this.state.markers,
+            {
+              coordinate: {
+                longitude: geoLocation.lng,
+                latitude: geoLocation.lat
+              },
+              key: `${id++}`
+            }
+          ]
+        });
+      },
+      error => {
+        alert(error);
+      }
+    );
+  };
+
   onRegionChange(region) {
     this.setState({ region });
   }
+
+  howFar = () => {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        alert(
+          'You are ' +
+            geolib.getDistance(position.coords, {
+              latitude: this.state.coordinate.latitude,
+              longitude: this.state.coordinate.longitude
+            }) +
+            ' meters away from the marker'
+        );
+      },
+      function() {
+        alert('Position could not be determined.');
+      },
+      {
+        enableHighAccuracy: true
+      }
+    );
+  };
 
   render() {
     return (
@@ -109,24 +129,38 @@ export default class Map extends React.Component {
           title="go"
           onPress={this.getFromLocation}
         />
-        <MapView
+        <Button style={styles.button} title="how far" onPress={this.howFar} />
+        <Picker
+          selectedValue={this.state.radius}
+          onValueChange={choice => this.setState({ radius: choice })}
+        >
+          <Picker.Item label="200" value={200} />
+          <Picker.Item label="500" value={500} />
+          <Picker.Item label="1000" value={1000} />
+        </Picker>
+
+        <MapView.Animated
           style={{ flex: 2 }}
           showsUserLocation={true}
+          // followsUserLocation={true}
+          showsCompass={true}
           region={this.state.region}
           onRegionChange={this.onRegionChange.bind(this)}
         >
-          {this.state.markers.map((marker, index) => (
+          {this.state.markers.map(marker => (
             <MapView>
               <MapView.Marker
-                key={index.key}
                 coordinate={marker.coordinate}
-                title="ByeBye"
-                draggable
+                title="Endpoint"
+                key={marker.key}
               />
-              <MapView.Circle center={marker.coordinate} radius={2000} />
+              <MapView.Circle
+                center={marker.coordinate}
+                radius={this.state.radius}
+              />
             </MapView>
           ))}
-        </MapView>
+        </MapView.Animated>
       </View>
     );
   }
