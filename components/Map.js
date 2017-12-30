@@ -106,9 +106,7 @@ export default class Map extends React.Component {
           });
           if (distance < this.state.radius) {
             console.log(true);
-            {
-              this.handleSubmit();
-            }
+            this.handleSubmit();
           }
         });
       },
