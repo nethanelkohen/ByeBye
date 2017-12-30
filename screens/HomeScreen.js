@@ -42,15 +42,20 @@ class HomeScreen extends Component {
       pageSize: 1000,
       pageOffset: 0
     });
-    // const sortedContacts = contacts.sort((a, b) => a.name > b.name);
-    // console.log(sortedContacts);
+    const obj = [...contacts.data];
+    const newContacts = obj.sort((a, b) => {
+      let nameA = a.name;
+      let nameB = b.name;
+      if (nameA < nameB) return -1;
+      // if (nameA > nameB) return 1;
+    });
     this.setState({
-      contacts: contacts
+      contacts: newContacts
     });
   }
 
   render() {
-    const newContacts = this.state.contacts;
+    const alphContacts = this.state.contacts;
     return (
       <View>
         <Button
@@ -59,9 +64,9 @@ class HomeScreen extends Component {
           onPress={this.showFirstContactAsync.bind(this)}
         />
         <TextMessage />
-        {newContacts ? (
+        {alphContacts ? (
           <FlatList
-            data={newContacts.data}
+            data={alphContacts}
             renderItem={({ item }) => <Text>{item.name}</Text>}
             keyExtractor={(item, index) => index}
           />
