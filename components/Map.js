@@ -12,6 +12,7 @@ import {
 import { MapView, Location, Permissions, Constants } from 'expo';
 import Geocoder from 'react-native-geocoding';
 import geolib from 'geolib';
+import TextMessage from './TextMessage.js';
 
 Geocoder.setApiKey('AIzaSyBakh5h7JIfXWWZmj-vm08iGO0pXUwV4Y4');
 
@@ -102,9 +103,8 @@ export default class Map extends React.Component {
             latitude: coord.coordinate.latitude,
             longitude: coord.coordinate.longitude
           });
-          console.log(distance);
-          if (distance > 100) {
-            Alert.alert(`true`);
+          if (distance < this.state.radius) {
+            console.log('true');
           }
         });
       },
