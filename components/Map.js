@@ -97,17 +97,16 @@ export default class Map extends React.Component {
     let mark = this.state.markers;
     navigator.geolocation.getCurrentPosition(
       position => {
-        mark.map(coord =>
-          Alert.alert(
-            `You are ${geolib.getDistance(position.coords, {
-              latitude: coord.coordinate.latitude,
-              longitude: coord.coordinate.longitude
-            })} meters away from the marker`
-          )
-        );
-      },
-      () => {
-        Alert.alert('Position could not be determined.');
+        mark.map(coord => {
+          const distance = geolib.getDistance(position.coords, {
+            latitude: coord.coordinate.latitude,
+            longitude: coord.coordinate.longitude
+          });
+          console.log(distance);
+          if (distance > 100) {
+            Alert.alert(`true`);
+          }
+        });
       },
       {
         enableHighAccuracy: true
