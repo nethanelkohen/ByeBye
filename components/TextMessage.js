@@ -1,7 +1,5 @@
-import Expo from 'expo';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
-import axios from 'axios';
+import { View, StyleSheet, Button, TextInput } from 'react-native';
 require('json-circular-stringify');
 
 export default class TextMessage extends Component {

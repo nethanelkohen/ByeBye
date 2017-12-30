@@ -6,7 +6,8 @@ import {
   Platform,
   TextInput,
   Button,
-  Picker
+  Picker,
+  Alert
 } from 'react-native';
 import { MapView, Location, Permissions, Constants } from 'expo';
 import Geocoder from 'react-native-geocoding';
@@ -97,7 +98,7 @@ export default class Map extends React.Component {
     navigator.geolocation.getCurrentPosition(
       position => {
         mark.map(coord =>
-          alert(
+          Alert.alert(
             `You are ${geolib.getDistance(position.coords, {
               latitude: coord.coordinate.latitude,
               longitude: coord.coordinate.longitude
@@ -106,7 +107,7 @@ export default class Map extends React.Component {
         );
       },
       () => {
-        alert('Position could not be determined.');
+        Alert.alert('Position could not be determined.');
       },
       {
         enableHighAccuracy: true

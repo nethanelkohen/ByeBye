@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import ByeByeButton from '../components/ByeByeButton.js';
+import { View, StyleSheet } from 'react-native';
 import Map from '../components/Map.js';
-import axios from 'axios';
 
 export default class MapScreen extends Component {
   constructor(props) {
