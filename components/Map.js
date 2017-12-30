@@ -12,6 +12,7 @@ import {
 import { MapView, Location, Permissions, Constants } from 'expo';
 import Geocoder from 'react-native-geocoding';
 import geolib from 'geolib';
+import TextMessage from './TextMessage.js';
 
 Geocoder.setApiKey('AIzaSyBakh5h7JIfXWWZmj-vm08iGO0pXUwV4Y4');
 
@@ -30,6 +31,7 @@ export default class Map extends React.Component {
       },
       errorMessage: null
     };
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillMount() {
@@ -97,17 +99,16 @@ export default class Map extends React.Component {
     let mark = this.state.markers;
     navigator.geolocation.getCurrentPosition(
       position => {
-        mark.map(coord =>
-          Alert.alert(
-            `You are ${geolib.getDistance(position.coords, {
-              latitude: coord.coordinate.latitude,
-              longitude: coord.coordinate.longitude
-            })} meters away from the marker`
-          )
-        );
-      },
-      () => {
-        Alert.alert('Position could not be determined.');
+        mark.map(coord => {
+          const distance = geolib.getDistance(position.coords, {
+            latitude: coord.coordinate.latitude,
+            longitude: coord.coordinate.longitude
+          });
+          if (distance < this.state.radius) {
+            console.log(true);
+            this.handleSubmit();
+          }
+        });
       },
       {
         enableHighAccuracy: true

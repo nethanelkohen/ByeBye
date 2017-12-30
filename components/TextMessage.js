@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Button, TextInput } from 'react-native';
 require('json-circular-stringify');
+import Map from './Map.js';
 
 export default class TextMessage extends Component {
   constructor(props) {
@@ -9,9 +10,11 @@ export default class TextMessage extends Component {
       contact: null,
       message: null
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
+    if (this.props.howFar) this.props.howFar();
     let contact = this.state.contact;
     let message = this.state.message;
     fetch('https://frozen-ridge-66479.herokuapp.com/message', {
@@ -29,7 +32,7 @@ export default class TextMessage extends Component {
         console.log(response);
       })
       .done();
-  }
+  };
 
   render() {
     return (
@@ -53,7 +56,7 @@ export default class TextMessage extends Component {
         <Button
           style={styles.button}
           title="Send Message"
-          onPress={this.handleSubmit.bind(this)}
+          onPress={this.handleSubmit}
         />
       </View>
     );

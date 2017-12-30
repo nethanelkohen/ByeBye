@@ -1,6 +1,16 @@
+import Expo from 'expo';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  List,
+  FlatList,
+  ListView
+} from 'react-native';
 import { Contacts } from 'expo';
+import { ListItem } from 'react-native-elements';
 
 export default class ContactsComponent extends Component {
   constructor(props) {
@@ -11,7 +21,7 @@ export default class ContactsComponent extends Component {
     };
   }
 
-  async showFirstContactAsync() {
+  showFirstContactAsync = async () => {
     // Ask for permission to query contacts.
     const permission = await Expo.Permissions.askAsync(
       Expo.Permissions.CONTACTS
@@ -35,6 +45,10 @@ export default class ContactsComponent extends Component {
     this.setState({
       contacts: newContacts
     });
+  };
+
+  componentShouldMount() {
+    this.showFirstContactAsync();
   }
 
   render() {
@@ -46,13 +60,11 @@ export default class ContactsComponent extends Component {
           title="Get Contacts"
           onPress={this.showFirstContactAsync.bind(this)}
         />
-        {alphContacts ? (
-          <FlatList
-            data={alphContacts}
-            renderItem={({ item }) => <Text>{item.name}</Text>}
-            keyExtractor={(item, index) => index}
-          />
-        ) : null}
+        <FlatList
+          data={alphContacts}
+          renderItem={({ item }) => <Text>{item.name}</Text>}
+          keyExtractor={(item, index) => index}
+        />
       </View>
     );
   }
