@@ -6,7 +6,6 @@ import {
   Platform,
   TextInput,
   Button,
-  Dimensions,
   Picker
 } from 'react-native';
 import { MapView, Location, Permissions, Constants } from 'expo';
@@ -94,18 +93,19 @@ export default class Map extends React.Component {
   }
 
   howFar = () => {
+    let mark = this.state.markers;
     navigator.geolocation.getCurrentPosition(
-      function(position) {
-        alert(
-          'You are ' +
-            geolib.getDistance(position.coords, {
-              latitude: this.state.coordinate.latitude,
-              longitude: this.state.coordinate.longitude
-            }) +
-            ' meters away from the marker'
+      position => {
+        mark.map(coord =>
+          alert(
+            `You are ${geolib.getDistance(position.coords, {
+              latitude: coord.coordinate.latitude,
+              longitude: coord.coordinate.longitude
+            })} meters away from the marker`
+          )
         );
       },
-      function() {
+      () => {
         alert('Position could not be determined.');
       },
       {

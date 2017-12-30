@@ -9,7 +9,8 @@ import {
   Image,
   ScrollView,
   TextInput,
-  Picker
+  Picker,
+  FlatList
 } from 'react-native';
 import { Contacts } from 'expo';
 import { TabNavigator } from 'react-navigation';
@@ -22,7 +23,8 @@ class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contactSearch: null
+      contactSearch: null,
+      contacts: null
     };
   }
 
@@ -37,20 +39,23 @@ class HomeScreen extends Component {
     }
     const contacts = await Expo.Contacts.getContactsAsync({
       fields: [Expo.Contacts.PHONE_NUMBERS],
-      pageSize: 100,
+      pageSize: 1000,
       pageOffset: 0
     });
-    if (contacts.total > 0) {
-      Alert.alert(
-        'Your first contact is...',
-        `Name: ${contacts.data[0].name}\n` +
-          `Phone numbers: ${JSON.stringify(contacts.data[0].phoneNumbers)}\n` +
-          `Emails: ${JSON.stringify(contacts.data[0].emails)}`
-      );
-    }
+    const obj = [...contacts.data];
+    const newContacts = obj.sort((a, b) => {
+      let nameA = a.name;
+      let nameB = b.name;
+      if (nameA < nameB) return -1;
+      // if (nameA > nameB) return 1;
+    });
+    this.setState({
+      contacts: newContacts
+    });
   }
 
   render() {
+    const alphContacts = this.state.contacts;
     return (
       <View>
         <Button
@@ -59,6 +64,13 @@ class HomeScreen extends Component {
           onPress={this.showFirstContactAsync.bind(this)}
         />
         <TextMessage />
+        {alphContacts ? (
+          <FlatList
+            data={alphContacts}
+            renderItem={({ item }) => <Text>{item.name}</Text>}
+            keyExtractor={(item, index) => index}
+          />
+        ) : null}
       </View>
     );
   }
