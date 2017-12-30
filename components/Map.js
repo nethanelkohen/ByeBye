@@ -31,6 +31,7 @@ export default class Map extends React.Component {
       },
       errorMessage: null
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillMount() {
@@ -94,6 +95,10 @@ export default class Map extends React.Component {
     this.setState({ region });
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.handleSubmit;
+  }
+
   howFar = () => {
     let mark = this.state.markers;
     navigator.geolocation.getCurrentPosition(
@@ -104,7 +109,8 @@ export default class Map extends React.Component {
             longitude: coord.coordinate.longitude
           });
           if (distance < this.state.radius) {
-            console.log('true');
+            console.log(true);
+            this.handleSubmit;
           }
         });
       },

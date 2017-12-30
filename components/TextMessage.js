@@ -10,6 +10,7 @@ export default class TextMessage extends Component {
       contact: null,
       message: null
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit = () => {
