@@ -16,7 +16,7 @@ import TextMessage from './TextMessage.js';
 
 Geocoder.setApiKey('AIzaSyBakh5h7JIfXWWZmj-vm08iGO0pXUwV4Y4');
 
-export default class Map extends React.Component {
+export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -104,8 +104,8 @@ export default class Map extends React.Component {
             latitude: coord.coordinate.latitude,
             longitude: coord.coordinate.longitude
           });
-          if (distance < this.state.radius) {
-            console.log(true);
+          if (distance > this.state.radius) {
+            Alert.alert(`You are ${distance} meters from marker`);
             this.handleSubmit();
           }
         });

@@ -5,9 +5,8 @@ import {
   Text,
   StyleSheet,
   Button,
-  List,
   FlatList,
-  ListView
+  TouchableOpacity
 } from 'react-native';
 import { Contacts } from 'expo';
 import { ListItem } from 'react-native-elements';
@@ -51,6 +50,10 @@ export default class ContactsComponent extends Component {
     this.showFirstContactAsync();
   }
 
+  onPress = () => {
+    console.log('pressed', contacts);
+  };
+
   render() {
     const alphContacts = this.state.contacts;
     return (
@@ -62,7 +65,11 @@ export default class ContactsComponent extends Component {
         />
         <FlatList
           data={alphContacts}
-          renderItem={({ item }) => <Text>{item.name}</Text>}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={this.onPress}>
+              <Text>{item.name}</Text>
+            </TouchableOpacity>
+          )}
           keyExtractor={(item, index) => index}
         />
       </View>
