@@ -149,6 +149,10 @@ export default class Map extends Component {
           region={this.state.region}
           onRegionChange={this.onRegionChange.bind(this)}
         >
+          {/* coordinate={{
+            latitude: marker.coordinate.latitude,
+            longitude: marker.coordinate.longitude
+          }}*/}
           {this.state.markers.map(marker => (
             <MapView>
               <MapView.Marker

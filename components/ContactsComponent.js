@@ -15,7 +15,6 @@ export default class ContactsComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contactSearch: null,
       contacts: null
     };
   }
@@ -51,7 +50,7 @@ export default class ContactsComponent extends Component {
   }
 
   onPress = () => {
-    console.log('pressed', contacts);
+    console.log(this.props);
   };
 
   render() {
@@ -66,8 +65,8 @@ export default class ContactsComponent extends Component {
         <FlatList
           data={alphContacts}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={this.onPress}>
-              <Text>{item.name}</Text>
+            <TouchableOpacity>
+              <Text onPress={this.onPress}>{item.name}</Text>
             </TouchableOpacity>
           )}
           keyExtractor={(item, index) => index}
