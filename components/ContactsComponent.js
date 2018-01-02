@@ -1,24 +1,18 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  FlatList,
-  TouchableOpacity
-} from 'react-native';
-import Expo, { Contacts } from 'expo';
-import { ListItem } from 'react-native-elements';
+import { View, Text, StyleSheet, Button, FlatList } from 'react-native';
+import { Contacts } from 'expo';
+import { List, ListItem } from 'react-native-elements';
 
 export default class ContactsComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      contactSearch: null,
       contacts: null
     };
   }
 
-  showFirstContactAsync = async () => {
+  async showFirstContactAsync() {
     // Ask for permission to query contacts.
     const permission = await Expo.Permissions.askAsync(
       Expo.Permissions.CONTACTS
@@ -42,17 +36,7 @@ export default class ContactsComponent extends Component {
     this.setState({
       contacts: newContacts
     });
-  };
-
-  componentShouldMount() {
-    this.showFirstContactAsync();
   }
-
-  saveContact = arg => {
-    arg.map(item => {
-      console.log(`+1${item.digits}`);
-    });
-  };
 
   render() {
     const alphContacts = this.state.contacts;
@@ -63,17 +47,13 @@ export default class ContactsComponent extends Component {
           title="Get Contacts"
           onPress={this.showFirstContactAsync.bind(this)}
         />
-        <FlatList
-          data={alphContacts}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() => this.saveContact(item.phoneNumbers)}
-            >
-              <Text>{item.name}</Text>
-            </TouchableOpacity>
-          )}
-          keyExtractor={(item, index) => index}
-        />
+        {alphContacts ? (
+          <FlatList
+            data={alphContacts}
+            renderItem={({ item }) => <ListItem title={item.name}/>}
+            keyExtractor={(item, index) => index}
+          />
+        ) : null}
       </View>
     );
   }
