@@ -105,8 +105,8 @@ export default class Map extends Component {
             longitude: coord.coordinate.longitude
           });
           if (distance > this.state.radius) {
-            Alert.alert(`You are ${distance} meters from marker`);
-            this.handleSubmit();
+            console.log('far enough');
+            TextMessage.handleSubmit();
           }
         });
       },

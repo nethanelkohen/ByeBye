@@ -14,7 +14,7 @@ export default class TextMessage extends Component {
   }
 
   handleSubmit = () => {
-    if (this.props.howFar) this.props.howFar();
+    console.log('works');
     let contact = this.state.contact;
     let message = this.state.message;
     fetch('https://frozen-ridge-66479.herokuapp.com/message', {
