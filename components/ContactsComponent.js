@@ -1,22 +1,19 @@
-import Expo from 'expo';
 import React, { Component } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Button,
-  List,
   FlatList,
-  ListView
+  TouchableOpacity
 } from 'react-native';
-import { Contacts } from 'expo';
+import Expo, { Contacts } from 'expo';
 import { ListItem } from 'react-native-elements';
 
 export default class ContactsComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contactSearch: null,
       contacts: null
     };
   }
@@ -51,6 +48,12 @@ export default class ContactsComponent extends Component {
     this.showFirstContactAsync();
   }
 
+  saveContact = arg => {
+    arg.map(item => {
+      console.log(`+1${item.digits}`);
+    });
+  };
+
   render() {
     const alphContacts = this.state.contacts;
     return (
@@ -62,7 +65,13 @@ export default class ContactsComponent extends Component {
         />
         <FlatList
           data={alphContacts}
-          renderItem={({ item }) => <Text>{item.name}</Text>}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => this.saveContact(item.phoneNumbers)}
+            >
+              <Text>{item.name}</Text>
+            </TouchableOpacity>
+          )}
           keyExtractor={(item, index) => index}
         />
       </View>
