@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, FlatList } from 'react-native';
-import { Contacts } from 'expo';
-import { List, ListItem } from 'react-native-elements';
+import React, { Component } from "react";
+import { View, Text, StyleSheet, Button, FlatList } from "react-native";
+import { Contacts } from "expo";
+import { List, ListItem } from "react-native-elements";
 
 export default class ContactsComponent extends React.PureComponent {
- //  _onPress = () => {
- //   this.props.onPressItem(this.props.id);
- // };
   constructor(props) {
     super(props);
     this.state = {
@@ -21,7 +18,7 @@ export default class ContactsComponent extends React.PureComponent {
     const permission = await Expo.Permissions.askAsync(
       Expo.Permissions.CONTACTS
     );
-    if (permission.status !== 'granted') {
+    if (permission.status !== "granted") {
       // Permission was denied...
       return;
     }
@@ -44,25 +41,25 @@ export default class ContactsComponent extends React.PureComponent {
 
   //stores the index of selected items in state.selected
   selectItem(item) {
-    let contact = this.state.contacts.findIndex((i)=>item.id == i.id)
-    let newArr = [...this.state.contacts]
-    console.log(">>>>", newArr.length, contact)
-    newArr[contact]["selected"] = true
+    let contact = this.state.contacts.findIndex(i => item.id == i.id);
+    let newArr = [...this.state.contacts];
+    // console.log(">>>>", newArr.length, contact)
+    newArr[contact]["selected"] = true;
     this.setState({
       contacts: newArr
-    })
+    });
   }
 
-  nameCheck(item){
-    if(item.selected){
-      return item.name + " ✔️"
+  nameCheck(item) {
+    if (item.selected) {
+      return item.name + " ✔️";
     } else {
-      return item.name
+      return item.name;
     }
   }
 
   render() {
-    console.log("STATE", this.state)
+    // console.log("STATE", this.state)
     const alphContacts = this.state.contacts;
     return (
       <View>
@@ -76,13 +73,11 @@ export default class ContactsComponent extends React.PureComponent {
             data={alphContacts}
             renderItem={({ item }) => (
               <ListItem
-              title={this.nameCheck(item)}
-              onPress={()=> this.selectItem(item)}
+                title={this.nameCheck(item)}
+                onPress={() => this.selectItem(item)}
               />
             )}
-        
             keyExtractor={(item, index) => index}
-
           />
         ) : null}
       </View>
