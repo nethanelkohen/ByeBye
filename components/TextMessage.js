@@ -14,24 +14,36 @@ export default class TextMessage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contact: null,
       message: null
     };
   }
 
-  displayData = async () => {
-    try {
-      this.state.contact = await AsyncStorage.getItem('contactChoice');
-      console.log(`state: ${this.state.contact}`);
-    } catch (error) {
-      Alert.alert(JSON.stringify(error));
-    }
+  ////// this may need to go into handleSubmit
+  // displayData = async () => {
+  //   try {
+  //     this.state.contact = await AsyncStorage.getItem('contactChoice');
+  //     console.log(`state: ${this.state.contact}`);
+  //   } catch (error) {
+  //     Alert.alert(JSON.stringify(error));
+  //   }
+  // };
+
+  saveMessage = () => {
+    let message = this.state.message;
+    AsyncStorage.setItem('message', message);
+    console.log(message);
   };
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
+    // try {
+    //   this.state.contact = await AsyncStorage.getItem('contactChoice');
+    //   console.log(`state: ${this.state.contact}`);
+    // } catch (error) {
+    //   Alert.alert(JSON.stringify(error));
+    // }
     console.log('works');
-    let contact = this.state.contact;
-    let message = this.state.message;
+    console.log(await AsyncStorage.getItem('contactChoice'));
+    console.log(await AsyncStorage.getItem('message'));
     fetch('https://frozen-ridge-66479.herokuapp.com/message', {
       method: 'POST',
       headers: {
@@ -39,8 +51,8 @@ export default class TextMessage extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        contact: contact,
-        message: message
+        contact: await AsyncStorage.getItem('contactChoice'),
+        message: await AsyncStorage.getItem('message')
       })
     })
       .then(response => {
@@ -54,8 +66,8 @@ export default class TextMessage extends Component {
       <View>
         <Button
           style={styles.button}
-          title="Display contact"
-          onPress={this.displayData}
+          title="save message"
+          onPress={this.saveMessage}
         />
         {/* <TextInput
           style={styles.input}
@@ -69,7 +81,6 @@ export default class TextMessage extends Component {
           style={styles.input}
           placeholder="Message"
           placeholderTextColor="#9a73ef"
-          autoCapitalize="none"
           onChangeText={text => this.setState({ message: text })}
           value={this.state.message}
         />

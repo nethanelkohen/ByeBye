@@ -16,8 +16,7 @@ export default class ContactsComponent extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      contact: null,
-      contactChoice: null
+      contact: null
       // selected: []
     };
   }
@@ -71,18 +70,17 @@ export default class ContactsComponent extends React.PureComponent {
     arg.map(item => {
       let contactChoice = item.digits;
       AsyncStorage.setItem('contactChoice', contactChoice);
-      console.log(contactChoice);
     });
   };
 
-  displayData = async () => {
-    try {
-      let choice = await AsyncStorage.getItem('contactChoice');
-      console.log(choice);
-    } catch (error) {
-      Alert.alert(JSON.stringify(error));
-    }
-  };
+  // displayData = async () => {
+  //   try {
+  //     let choice = await AsyncStorage.getItem('contactChoice');
+  //     console.log(choice);
+  //   } catch (error) {
+  //     Alert.alert(JSON.stringify(error));
+  //   }
+  // };
 
   render() {
     const alphContacts = this.state.contact;

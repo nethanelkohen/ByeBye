@@ -7,7 +7,8 @@ import {
   TextInput,
   Button,
   Picker,
-  Alert
+  Alert,
+  AsyncStorage
 } from 'react-native';
 import { MapView, Location, Permissions, Constants } from 'expo';
 import Geocoder from 'react-native-geocoding';
@@ -25,6 +26,8 @@ export default class Map extends Component {
       address: '',
       location: {},
       markers: [],
+      contact: null,
+      message: null,
       coordinate: {
         latitude: null,
         longitude: null
@@ -95,7 +98,17 @@ export default class Map extends Component {
     this.setState({ region });
   }
 
-  howFar = () => {
+  componentDidMount = async () => {
+    try {
+      this.state.contact = await AsyncStorage.getItem('contactChoice');
+      this.state.message = await AsyncStorage.getItem('message');
+      // console.log(`state: ${this.state.contact}`);
+    } catch (error) {
+      Alert.alert(JSON.stringify(error));
+    }
+  };
+
+  howFar = async () => {
     let mark = this.state.markers;
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -104,9 +117,22 @@ export default class Map extends Component {
             latitude: coord.coordinate.latitude,
             longitude: coord.coordinate.longitude
           });
-          if (distance > this.state.radius) {
-            console.log('far enough');
-            TextMessage.handleSubmit();
+          if (distance < this.state.radius) {
+            fetch('https://frozen-ridge-66479.herokuapp.com/message', {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                contact: this.state.contact,
+                message: this.state.message
+              })
+            })
+              .then(response => {
+                console.log(response);
+              })
+              .done();
           }
         });
       },
@@ -117,6 +143,7 @@ export default class Map extends Component {
   };
 
   render() {
+    // console.log(this.state.contact, this.state.message);
     return (
       <View style={styles.container}>
         <TextInput
