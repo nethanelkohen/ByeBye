@@ -34,7 +34,6 @@ export default class Map extends Component {
       },
       errorMessage: null
     };
-    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillMount() {
@@ -98,17 +97,21 @@ export default class Map extends Component {
     this.setState({ region });
   }
 
-  componentDidMount = async () => {
+  beginTracking = async () => {
     try {
-      this.state.contact = await AsyncStorage.getItem('contactChoice');
-      this.state.message = await AsyncStorage.getItem('message');
-      // console.log(`state: ${this.state.contact}`);
+      AsyncStorage.getItem('contactChoice').then(digits => {
+        this.setState({
+          contact: digits
+        });
+      });
+      AsyncStorage.getItem('message').then(userMessage => {
+        this.setState({
+          message: userMessage
+        });
+      });
     } catch (error) {
       Alert.alert(JSON.stringify(error));
     }
-  };
-
-  howFar = async () => {
     let mark = this.state.markers;
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -117,7 +120,7 @@ export default class Map extends Component {
             latitude: coord.coordinate.latitude,
             longitude: coord.coordinate.longitude
           });
-          if (distance < this.state.radius) {
+          if (distance > this.state.radius) {
             fetch('https://frozen-ridge-66479.herokuapp.com/message', {
               method: 'POST',
               headers: {
@@ -143,7 +146,7 @@ export default class Map extends Component {
   };
 
   render() {
-    // console.log(this.state.contact, this.state.message);
+    console.log(`render: ${this.state.contact} ${this.state.message}`);
     return (
       <View style={styles.container}>
         <TextInput
@@ -158,16 +161,11 @@ export default class Map extends Component {
           title="go"
           onPress={this.getFromLocation}
         />
-        <Button style={styles.button} title="how far" onPress={this.howFar} />
-        <Picker
-          selectedValue={this.state.radius}
-          onValueChange={choice => this.setState({ radius: choice })}
-        >
-          <Picker.Item label="200" value={200} />
-          <Picker.Item label="500" value={500} />
-          <Picker.Item label="1000" value={1000} />
-        </Picker>
-
+        <Button
+          style={styles.button}
+          title="Begin Tracking!"
+          onPress={this.beginTracking}
+        />
         <MapView.Animated
           style={{ flex: 2 }}
           showsUserLocation={true}
@@ -176,10 +174,6 @@ export default class Map extends Component {
           region={this.state.region}
           onRegionChange={this.onRegionChange.bind(this)}
         >
-          {/* coordinate={{
-            latitude: marker.coordinate.latitude,
-            longitude: marker.coordinate.longitude
-          }}*/}
           {this.state.markers.map(marker => (
             <MapView>
               <MapView.Marker
