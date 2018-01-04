@@ -5,16 +5,19 @@ import {
   StyleSheet,
   Button,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert,
+  AsyncStorage
 } from 'react-native';
-import Expo, { Contacts } from 'expo';
-import { ListItem } from 'react-native-elements';
+import { Contacts } from 'expo';
+import { List, ListItem } from 'react-native-elements';
 
-export default class ContactsComponent extends Component {
+export default class ContactsComponent extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      contacts: null
+      contact: null
+      // selected: []
     };
   }
 
@@ -40,40 +43,72 @@ export default class ContactsComponent extends Component {
       // if (nameA > nameB) return 1;
     });
     this.setState({
-      contacts: newContacts
+      contact: newContacts
     });
   };
 
-  componentShouldMount() {
-    this.showFirstContactAsync();
-  }
+  //stores the index of selected items in state.selected
+  // selectItem(item) {
+  //   let contact = this.state.contacts.findIndex(i => item.id == i.id);
+  //   let newArr = [...this.state.contacts];
+  //    console.log(">>>>", newArr.length, contact)
+  //   newArr[contact]['selected'] = true;
+  //   this.setState({
+  //     contacts: newArr
+  //   });
+  // }
+  //
+  // nameCheck(item) {
+  //   if (item.selected) {
+  //     return item.name + ' ✔️';
+  //   } else {
+  //     return item.name;
+  //   }
+  // }
 
   saveContact = arg => {
     arg.map(item => {
-      console.log(`+1${item.digits}`);
+      let contactChoice = item.digits;
+      AsyncStorage.setItem('contactChoice', contactChoice);
     });
   };
 
+  // displayData = async () => {
+  //   try {
+  //     let choice = await AsyncStorage.getItem('contactChoice');
+  //     console.log(choice);
+  //   } catch (error) {
+  //     Alert.alert(JSON.stringify(error));
+  //   }
+  // };
+
   render() {
-    const alphContacts = this.state.contacts;
+    const alphContacts = this.state.contact;
     return (
       <View>
+        {/* <Button
+          style={styles.button}
+          title="Display contact"
+          onPress={this.displayData}
+        /> */}
         <Button
           style={styles.button}
           title="Get Contacts"
           onPress={this.showFirstContactAsync.bind(this)}
         />
-        <FlatList
-          data={alphContacts}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() => this.saveContact(item.phoneNumbers)}
-            >
-              <Text>{item.name}</Text>
-            </TouchableOpacity>
-          )}
-          keyExtractor={(item, index) => index}
-        />
+        {alphContacts ? (
+          <FlatList
+            data={alphContacts}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() => this.saveContact(item.phoneNumbers)}
+              >
+                <Text>{item.name}</Text>
+              </TouchableOpacity>
+            )}
+            keyExtractor={(item, index) => index}
+          />
+        ) : null}
       </View>
     );
   }

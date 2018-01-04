@@ -7,7 +7,8 @@ import {
   TextInput,
   Button,
   Picker,
-  Alert
+  Alert,
+  AsyncStorage
 } from 'react-native';
 import { MapView, Location, Permissions, Constants } from 'expo';
 import Geocoder from 'react-native-geocoding';
@@ -25,13 +26,14 @@ export default class Map extends Component {
       address: '',
       location: {},
       markers: [],
+      contact: null,
+      message: null,
       coordinate: {
         latitude: null,
         longitude: null
       },
       errorMessage: null
     };
-    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillMount() {
@@ -86,7 +88,7 @@ export default class Map extends Component {
         });
       },
       error => {
-        alert(error);
+        Alert.alert(JSON.stringify(error));
       }
     );
   };
@@ -95,7 +97,21 @@ export default class Map extends Component {
     this.setState({ region });
   }
 
-  howFar = () => {
+  beginTracking = async () => {
+    try {
+      AsyncStorage.getItem('contactChoice').then(digits => {
+        this.setState({
+          contact: digits
+        });
+      });
+      AsyncStorage.getItem('message').then(userMessage => {
+        this.setState({
+          message: userMessage
+        });
+      });
+    } catch (error) {
+      Alert.alert(JSON.stringify(error));
+    }
     let mark = this.state.markers;
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -105,8 +121,21 @@ export default class Map extends Component {
             longitude: coord.coordinate.longitude
           });
           if (distance > this.state.radius) {
-            console.log('far enough');
-            TextMessage.handleSubmit();
+            fetch('https://frozen-ridge-66479.herokuapp.com/message', {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                contact: this.state.contact,
+                message: this.state.message
+              })
+            })
+              .then(response => {
+                console.log(response);
+              })
+              .done();
           }
         });
       },
@@ -116,7 +145,12 @@ export default class Map extends Component {
     );
   };
 
+  killSwitch = () => {
+    this.setState({ contact: null, message: null });
+  };
+
   render() {
+    console.log(`render: ${this.state.contact} ${this.state.message}`);
     return (
       <View style={styles.container}>
         <TextInput
@@ -128,19 +162,19 @@ export default class Map extends Component {
         />
         <Button
           style={styles.button}
-          title="go"
+          title="Search Address"
           onPress={this.getFromLocation}
         />
-        <Button style={styles.button} title="how far" onPress={this.howFar} />
-        <Picker
-          selectedValue={this.state.radius}
-          onValueChange={choice => this.setState({ radius: choice })}
-        >
-          <Picker.Item label="200" value={200} />
-          <Picker.Item label="500" value={500} />
-          <Picker.Item label="1000" value={1000} />
-        </Picker>
-
+        <Button
+          style={styles.button}
+          title="Begin Tracking!"
+          onPress={this.beginTracking}
+        />
+        <Button
+          style={styles.button}
+          title="Kill Switch"
+          onPress={this.killSwitch}
+        />
         <MapView.Animated
           style={{ flex: 2 }}
           showsUserLocation={true}
@@ -149,10 +183,6 @@ export default class Map extends Component {
           region={this.state.region}
           onRegionChange={this.onRegionChange.bind(this)}
         >
-          {/* coordinate={{
-            latitude: marker.coordinate.latitude,
-            longitude: marker.coordinate.longitude
-          }}*/}
           {this.state.markers.map(marker => (
             <MapView>
               <MapView.Marker
