@@ -81,10 +81,11 @@ export default class ContactsComponent extends React.PureComponent {
     const alphContacts = this.state.contacts;
     console.log(alphContacts);
     return (
-      <View>
+      <View style={styles.GetContactsContainer}>
         <Button
-          style={styles.button}
+          style={styles.GetContactsButton}
           title="Get Contacts"
+          color="black"
           onPress={this.showFirstContactAsync.bind(this)}
         />
         {alphContacts ? (
@@ -110,9 +111,21 @@ export default class ContactsComponent extends React.PureComponent {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-    // alignItems: 'center',
-    // justifyContent: 'center',
+  GetContactsContainer: {
+    flexDirection: "column",
+    flex: 3,
+    backgroundColor: "yellow",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    padding: 8,
+    marginBottom: 100,
+    borderRadius: 10
   }
+  // GetContactsButton: {
+  //   flexDirection: "row",
+  //   backgroundColor: "green",
+  //   padding: 8,
+  //   borderRadius: 10,
+  //   fontSize: 50
+  // }
 });
