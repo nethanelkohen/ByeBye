@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   Text,
@@ -8,25 +8,26 @@ import {
   TouchableOpacity,
   Alert,
   AsyncStorage
-} from 'react-native';
-import { Contacts } from 'expo';
-import { List, ListItem } from 'react-native-elements';
+} from "react-native";
+import { Contacts } from "expo";
+import { List, ListItem } from "react-native-elements";
 
 export default class ContactsComponent extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      contact: null
+      contactSearch: null,
+      contacts: null
       // selected: []
     };
   }
 
-  showFirstContactAsync = async () => {
+  async showFirstContactAsync() {
     // Ask for permission to query contacts.
     const permission = await Expo.Permissions.askAsync(
       Expo.Permissions.CONTACTS
     );
-    if (permission.status !== 'granted') {
+    if (permission.status !== "granted") {
       // Permission was denied...
       return;
     }
@@ -43,24 +44,25 @@ export default class ContactsComponent extends React.PureComponent {
       // if (nameA > nameB) return 1;
     });
     this.setState({
-      contact: newContacts
+      contacts: newContacts
     });
-  };
+  }
 
   //stores the index of selected items in state.selected
   // selectItem(item) {
   //   let contact = this.state.contacts.findIndex(i => item.id == i.id);
   //   let newArr = [...this.state.contacts];
-  //    console.log(">>>>", newArr.length, contact)
-  //   newArr[contact]['selected'] = true;
+  //   console.log(">>>>", newArr.length, contact)
+  //   newArr[contact]["selected"] = true;
+  //   AsyncStorage.set("contact", contact);
   //   this.setState({
   //     contacts: newArr
   //   });
   // }
-  //
+
   // nameCheck(item) {
   //   if (item.selected) {
-  //     return item.name + ' ✔️';
+  //     return item.name + " ✔️";
   //   } else {
   //     return item.name;
   //   }
@@ -69,31 +71,21 @@ export default class ContactsComponent extends React.PureComponent {
   saveContact = arg => {
     arg.map(item => {
       let contactChoice = item.digits;
-      AsyncStorage.setItem('contactChoice', contactChoice);
+      // console.log(`${item.digits}`);
     });
+    AsyncStorage.set("contactChoice", contactChoice);
   };
 
-  // displayData = async () => {
-  //   try {
-  //     let choice = await AsyncStorage.getItem('contactChoice');
-  //     console.log(choice);
-  //   } catch (error) {
-  //     Alert.alert(JSON.stringify(error));
-  //   }
-  // };
-
   render() {
-    const alphContacts = this.state.contact;
+    // console.log("STATE", this.state)
+    const alphContacts = this.state.contacts;
+    console.log(alphContacts);
     return (
-      <View>
-        {/* <Button
-          style={styles.button}
-          title="Display contact"
-          onPress={this.displayData}
-        /> */}
+      <View style={styles.GetContactsContainer}>
         <Button
-          style={styles.button}
+          style={styles.GetContactsButton}
           title="Get Contacts"
+          color="black"
           onPress={this.showFirstContactAsync.bind(this)}
         />
         {alphContacts ? (
@@ -103,7 +95,11 @@ export default class ContactsComponent extends React.PureComponent {
               <TouchableOpacity
                 onPress={() => this.saveContact(item.phoneNumbers)}
               >
-                <Text>{item.name}</Text>
+                <ListItem title={item.name} />
+                {/*  <ListItem
+                  title={this.name(item)}
+                  onPress={() => this.selectItem(item)}
+                /> */}
               </TouchableOpacity>
             )}
             keyExtractor={(item, index) => index}
@@ -115,9 +111,21 @@ export default class ContactsComponent extends React.PureComponent {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-    // alignItems: 'center',
-    // justifyContent: 'center',
+  GetContactsContainer: {
+    flexDirection: "column",
+    flex: 3,
+    backgroundColor: "yellow",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    padding: 8,
+    marginBottom: 100,
+    borderRadius: 10
   }
+  // GetContactsButton: {
+  //   flexDirection: "row",
+  //   backgroundColor: "green",
+  //   padding: 8,
+  //   borderRadius: 10,
+  //   fontSize: 50
+  // }
 });
