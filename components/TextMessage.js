@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Button,
   TextInput,
-  AsyncStorage
+  AsyncStorage,
+  Alert
 } from 'react-native';
 require('json-circular-stringify');
 import Map from './Map.js';
@@ -23,7 +24,7 @@ export default class TextMessage extends Component {
       this.state.contact = await AsyncStorage.getItem('contactChoice');
       console.log(`state: ${this.state.contact}`);
     } catch (error) {
-      alert(error);
+      Alert.alert(JSON.stringify(error));
     }
   };
 

@@ -80,7 +80,7 @@ export default class ContactsComponent extends React.PureComponent {
       let choice = await AsyncStorage.getItem('contactChoice');
       console.log(choice);
     } catch (error) {
-      alert(error);
+      Alert.alert(JSON.stringify(error));
     }
   };
 

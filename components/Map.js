@@ -86,7 +86,7 @@ export default class Map extends Component {
         });
       },
       error => {
-        alert(error);
+        Alert.alert(JSON.stringify(error));
       }
     );
   };
