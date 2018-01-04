@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Button, TextInput } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Button,
+  TextInput,
+  AsyncStorage
+} from 'react-native';
 require('json-circular-stringify');
 import Map from './Map.js';
 
@@ -34,17 +40,31 @@ export default class TextMessage extends Component {
       .done();
   };
 
+  displayData = async () => {
+    try {
+      let choice = await AsyncStorage.getItem('contactChoice');
+      console.log(choice);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   render() {
     return (
       <View>
-        <TextInput
+        <Button
+          style={styles.button}
+          title="Display contact"
+          onPress={this.displayData}
+        />
+        {/* <TextInput
           style={styles.input}
           placeholder="Contact"
           placeholderTextColor="#9a73ef"
           autoCapitalize="none"
           onChangeText={text => this.setState({ contact: text })}
           value={this.state.contact}
-        />
+        /> */}
         <TextInput
           style={styles.input}
           placeholder="Message"
