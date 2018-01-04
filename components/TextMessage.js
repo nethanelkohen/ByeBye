@@ -16,8 +16,16 @@ export default class TextMessage extends Component {
       contact: null,
       message: null
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  displayData = async () => {
+    try {
+      this.state.contact = await AsyncStorage.getItem('contactChoice');
+      console.log(`state: ${this.state.contact}`);
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   handleSubmit = () => {
     console.log('works');
@@ -38,15 +46,6 @@ export default class TextMessage extends Component {
         console.log(response);
       })
       .done();
-  };
-
-  displayData = async () => {
-    try {
-      let choice = await AsyncStorage.getItem('contactChoice');
-      console.log(choice);
-    } catch (error) {
-      alert(error);
-    }
   };
 
   render() {
