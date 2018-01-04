@@ -145,6 +145,10 @@ export default class Map extends Component {
     );
   };
 
+  killSwitch = () => {
+    this.setState({ contact: null, message: null });
+  };
+
   render() {
     console.log(`render: ${this.state.contact} ${this.state.message}`);
     return (
@@ -158,13 +162,18 @@ export default class Map extends Component {
         />
         <Button
           style={styles.button}
-          title="go"
+          title="Search Address"
           onPress={this.getFromLocation}
         />
         <Button
           style={styles.button}
           title="Begin Tracking!"
           onPress={this.beginTracking}
+        />
+        <Button
+          style={styles.button}
+          title="Kill Switch"
+          onPress={this.killSwitch}
         />
         <MapView.Animated
           style={{ flex: 2 }}
