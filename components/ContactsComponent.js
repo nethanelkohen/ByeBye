@@ -3,14 +3,14 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   FlatList,
   TouchableOpacity,
   Alert,
   AsyncStorage
 } from "react-native";
 import { Contacts } from "expo";
-import { List, ListItem } from "react-native-elements";
+import { List, Button, ListItem } from "react-native-elements";
+// import Button from "./Button.js";
 
 export default class ContactsComponent extends React.PureComponent {
   constructor(props) {
@@ -48,26 +48,6 @@ export default class ContactsComponent extends React.PureComponent {
     });
   }
 
-  //stores the index of selected items in state.selected
-  // selectItem(item) {
-  //   let contact = this.state.contacts.findIndex(i => item.id == i.id);
-  //   let newArr = [...this.state.contacts];
-  //   console.log(">>>>", newArr.length, contact)
-  //   newArr[contact]["selected"] = true;
-  //   AsyncStorage.set("contact", contact);
-  //   this.setState({
-  //     contacts: newArr
-  //   });
-  // }
-
-  // nameCheck(item) {
-  //   if (item.selected) {
-  //     return item.name + " ✔️";
-  //   } else {
-  //     return item.name;
-  //   }
-  // }
-
   saveContact = arg => {
     arg.map(item => {
       let contactChoice = item.digits;
@@ -83,8 +63,12 @@ export default class ContactsComponent extends React.PureComponent {
     return (
       <View style={styles.GetContactsContainer}>
         <Button
-          style={styles.GetContactsButton}
+          containerViewStyle={{ borderRadius: 25 }}
+          buttonStyle={{ width: 320, height: 45, borderRadius: 25 }}
+          style={styles.button}
+          raised={true}
           title="Get Contacts"
+          backgroundColor="white"
           color="black"
           onPress={this.showFirstContactAsync.bind(this)}
         />
@@ -113,19 +97,13 @@ export default class ContactsComponent extends React.PureComponent {
 const styles = StyleSheet.create({
   GetContactsContainer: {
     flexDirection: "column",
-    flex: 3,
+    flex: 4,
     backgroundColor: "yellow",
-    alignItems: "center",
     justifyContent: "flex-start",
     padding: 8,
+    marginRight: 5,
+    marginLeft: 5,
     marginBottom: 100,
     borderRadius: 10
   }
-  // GetContactsButton: {
-  //   flexDirection: "row",
-  //   backgroundColor: "green",
-  //   padding: 8,
-  //   borderRadius: 10,
-  //   fontSize: 50
-  // }
 });
