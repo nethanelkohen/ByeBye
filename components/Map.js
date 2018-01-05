@@ -161,35 +161,47 @@ export default class Map extends Component {
           onChangeText={this.handleAddress}
         />
         <View style={styles.NavBoxContainer}>
-          <Button
-            // containerViewStyle={{ borderRadius: 10 }}
-            buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
-            // raised={true}
-            backgroundColor="#4f7a89"
-            color="black"
-            style={styles.button}
-            title="Search Address"
+          <Icon
+            name="search"
+            type="feather"
+            color="#517fa4"
+            raised={true}
             onPress={this.getFromLocation}
-          />
-          <Button
             // containerViewStyle={{ borderRadius: 10 }}
-            buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
+            // buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
             // raised={true}
-            backgroundColor="#567884"
-            color="black"
-            style={styles.button}
-            title="Begin Tracking!"
+            // backgroundColor="#4f7a89"
+            // color="black"
+            // style={styles.button}
+            // title="Search Address"
+          />
+          <Icon
+            name="target"
+            type="feather"
+            color="#517fa4"
+            raised={true}
             onPress={this.beginTracking}
-          />
-          <Button
             // containerViewStyle={{ borderRadius: 10 }}
-            buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
+            // buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
             // raised={true}
-            backgroundColor="#586f77"
-            color="black"
-            style={styles.button}
-            title="Kill Switch"
+            // backgroundColor="#567884"
+            // color="black"
+            // style={styles.button}
+            // title="Begin Tracking!"
+          />
+          <Icon
+            name="cancel"
+            type="materialCommunityIcons"
+            color="#517fa4"
+            raised={true}
             onPress={this.killSwitch}
+            // containerViewStyle={{ borderRadius: 10 }}
+            // buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
+            // raised={true}
+            // backgroundColor="#586f77"
+            // color="black"
+            // style={styles.button}
+            // title="Kill Switch"
           />
         </View>
         <MapView.Animated

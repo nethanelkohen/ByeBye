@@ -16,7 +16,6 @@ export default class EventScreen extends Component {
 const styles = StyleSheet.create({
   EventScreenContainer: {
     flex: 1
-    // backgroundColor: "green"
   },
   map: {
     flex: 1,
