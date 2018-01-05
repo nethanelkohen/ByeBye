@@ -7,9 +7,10 @@ import {
   TextInput,
   Picker,
   Alert,
-  Button,
   AsyncStorage
 } from "react-native";
+import { Button } from "react-native-elements";
+
 import { MapView, Location, Permissions, Constants } from "expo";
 import Geocoder from "react-native-geocoding";
 import geolib from "geolib";
@@ -161,21 +162,38 @@ export default class Map extends Component {
           autoCapitalize="none"
           onChangeText={this.handleAddress}
         />
-        <Button
-          style={styles.button}
-          title="Search Address"
-          onPress={this.getFromLocation}
-        />
-        <Button
-          style={styles.button}
-          title="Begin Tracking!"
-          onPress={this.beginTracking}
-        />
-        <Button
-          style={styles.button}
-          title="Kill Switch"
-          onPress={this.killSwitch}
-        />
+        <View style={styles.NavBoxContainer}>
+          <Button
+            // containerViewStyle={{ borderRadius: 10 }}
+            buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
+            // raised={true}
+            backgroundColor="#4f7a89"
+            color="black"
+            style={styles.button}
+            title="Search Address"
+            onPress={this.getFromLocation}
+          />
+          <Button
+            // containerViewStyle={{ borderRadius: 10 }}
+            buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
+            // raised={true}
+            backgroundColor="#567884"
+            color="black"
+            style={styles.button}
+            title="Begin Tracking!"
+            onPress={this.beginTracking}
+          />
+          <Button
+            // containerViewStyle={{ borderRadius: 10 }}
+            buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
+            // raised={true}
+            backgroundColor="#586f77"
+            color="black"
+            style={styles.button}
+            title="Kill Switch"
+            onPress={this.killSwitch}
+          />
+        </View>
         <MapView.Animated
           style={{ flex: 6 }}
           showsUserLocation={true}
@@ -207,9 +225,15 @@ const styles = StyleSheet.create({
   MapNavContainer: {
     flex: 1,
     // flexDirection: "row",
-    justifyContent: "space-between",
+    // marginBottom: 500,
+    // justifyContent: "space-between",
     // paddingTop: Constants.statusBarHeight,
-    backgroundColor: "yellow"
+    backgroundColor: "#42c5f4"
+  },
+  NavBoxContainer: {
+    justifyContent: "space-around",
+    // flex: 1,
+    flexDirection: "row"
   },
   // paragraph: {
   //   margin: 10,
@@ -217,7 +241,7 @@ const styles = StyleSheet.create({
   //   textAlign: "center"
   // },
   AddressInput: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: "white",
     padding: 2,
     borderRadius: 10,
