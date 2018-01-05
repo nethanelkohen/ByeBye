@@ -42,13 +42,7 @@ export default class TextMessage extends Component {
           raised={true}
           backgroundColor="white"
           onPress={this.saveMessage}
-          // containerViewStyle={{ borderRadius: 25 }}
-          // buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
-          // style={styles.SaveMessageButton}
-          // color="black"
-          // title="Save Message"
         />
-        {/*  // <Text style={styles.SaveMessageButtonText}>Save Message</Text>*/}
       </View>
     );
   }
@@ -56,12 +50,10 @@ export default class TextMessage extends Component {
 
 const styles = StyleSheet.create({
   SaveMessageContainer: {
-    // flexDirection: "row",
     flex: 1,
     alignItems: "flex-start",
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "red",
     padding: 8,
     borderRadius: 10
   },
