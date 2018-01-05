@@ -35,14 +35,18 @@ export default class TextMessage extends Component {
           onChangeText={text => this.setState({ message: text })}
           value={this.state.message}
         />
-        <Button
-          containerViewStyle={{ borderRadius: 25 }}
-          buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
+        <Icon
+          name="save"
+          type="feather"
+          color="#517fa4"
+          raised={true}
           backgroundColor="white"
-          style={styles.SaveMessageButton}
-          color="black"
-          title="Save Message"
           onPress={this.saveMessage}
+          // containerViewStyle={{ borderRadius: 25 }}
+          // buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
+          // style={styles.SaveMessageButton}
+          // color="black"
+          // title="Save Message"
         />
         {/*  // <Text style={styles.SaveMessageButtonText}>Save Message</Text>*/}
       </View>
@@ -63,7 +67,7 @@ const styles = StyleSheet.create({
   },
   MessageInput: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#aec3e5",
     padding: 8,
     borderRadius: 10,
     alignSelf: "stretch"
