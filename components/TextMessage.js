@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import {
   View,
   StyleSheet,
-  Button,
   TextInput,
   Text,
   AsyncStorage,
   Alert
 } from "react-native";
+import { List, Button, ListItem, Icon } from "react-native-elements";
 require("json-circular-stringify");
 import Map from "./Map.js";
 
@@ -31,12 +31,16 @@ export default class TextMessage extends Component {
         <TextInput
           style={styles.MessageInput}
           placeholder="Enter Your Message"
-          placeholderTextColor="#9a73ef"
+          placeholderTextColor="black"
           onChangeText={text => this.setState({ message: text })}
           value={this.state.message}
         />
         <Button
+          containerViewStyle={{ borderRadius: 25 }}
+          buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
+          backgroundColor="white"
           style={styles.SaveMessageButton}
+          color="black"
           title="Save Message"
           onPress={this.saveMessage}
         />
@@ -52,24 +56,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "flex-start",
     justifyContent: "center",
+    alignItems: "center",
     // backgroundColor: "red",
     padding: 8,
     borderRadius: 10
   },
   MessageInput: {
-    flex: 2,
+    flex: 1,
     backgroundColor: "white",
     padding: 8,
     borderRadius: 10,
     alignSelf: "stretch"
   },
   SaveMessageButton: {
-    // flexDirection: "row",
-    flex: 1,
-    // backgroundColor: "green",
-    padding: 20,
-    borderRadius: 20,
-    justifyContent: "space-between",
-    alignItems: "flex-end"
+    padding: 5
   }
 });
