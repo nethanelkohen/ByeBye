@@ -68,12 +68,6 @@ export default class ContactsComponent extends React.PureComponent {
           color="#517fa4"
           raised={true}
           onPress={this.showFirstContactAsync.bind(this)}
-          // backgroundColor="white"
-          // title="Get Contacts"
-          // containerViewStyle={{ borderRadius: 25 }}
-          // buttonStyle={{ width: 320, height: 45, borderRadius: 25 }}
-          // color="black"
-          // style={styles.button}
         />
         {alphContacts ? (
           <FlatList
@@ -101,7 +95,7 @@ const styles = StyleSheet.create({
   GetContactsContainer: {
     flexDirection: "column",
     flex: 4,
-    backgroundColor: "yellow",
+    backgroundColor: "#95dcf4",
     justifyContent: "flex-start",
     padding: 8,
     marginRight: 5,

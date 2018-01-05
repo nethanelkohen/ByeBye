@@ -167,13 +167,6 @@ export default class Map extends Component {
             color="#517fa4"
             raised={true}
             onPress={this.getFromLocation}
-            // containerViewStyle={{ borderRadius: 10 }}
-            // buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
-            // raised={true}
-            // backgroundColor="#4f7a89"
-            // color="black"
-            // style={styles.button}
-            // title="Search Address"
           />
           <Icon
             name="target"
@@ -181,13 +174,6 @@ export default class Map extends Component {
             color="#517fa4"
             raised={true}
             onPress={this.beginTracking}
-            // containerViewStyle={{ borderRadius: 10 }}
-            // buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
-            // raised={true}
-            // backgroundColor="#567884"
-            // color="black"
-            // style={styles.button}
-            // title="Begin Tracking!"
           />
           <Icon
             name="cancel"
@@ -195,13 +181,6 @@ export default class Map extends Component {
             color="#517fa4"
             raised={true}
             onPress={this.killSwitch}
-            // containerViewStyle={{ borderRadius: 10 }}
-            // buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
-            // raised={true}
-            // backgroundColor="#586f77"
-            // color="black"
-            // style={styles.button}
-            // title="Kill Switch"
           />
         </View>
         <MapView.Animated
@@ -234,22 +213,13 @@ export default class Map extends Component {
 const styles = StyleSheet.create({
   MapNavContainer: {
     flex: 1,
-    // flexDirection: "row",
-    // marginBottom: 500,
-    // justifyContent: "space-between",
-    // paddingTop: Constants.statusBarHeight,
     backgroundColor: "white"
   },
   NavBoxContainer: {
     justifyContent: "space-around",
-    // flex: 1,
     flexDirection: "row"
   },
-  // paragraph: {
-  //   margin: 10,
-  //   fontSize: 10,
-  //   textAlign: "center"
-  // },
+
   AddressInput: {
     flex: 1,
     backgroundColor: "#aec3e5",

@@ -56,7 +56,7 @@ const HomeScreenTabNavigator = TabNavigator(
 const styles = StyleSheet.create({
   HomeScreenContainer: {
     flex: 1,
-    backgroundColor: "#42c5f4"
+    backgroundColor: "white"
   }
 });
 
