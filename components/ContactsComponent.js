@@ -65,11 +65,11 @@ export default class ContactsComponent extends React.PureComponent {
         <Button
           containerViewStyle={{ borderRadius: 25 }}
           buttonStyle={{ width: 320, height: 45, borderRadius: 25 }}
-          style={styles.button}
           raised={true}
-          title="Get Contacts"
           backgroundColor="white"
           color="black"
+          title="Get Contacts"
+          // style={styles.button}
           onPress={this.showFirstContactAsync.bind(this)}
         />
         {alphContacts ? (
