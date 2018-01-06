@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   Text,
@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   Alert,
   AsyncStorage
-} from 'react-native';
-import { Contacts } from 'expo';
-import { List, Button, ListItem } from 'react-native-elements';
+} from "react-native";
+import { Contacts } from "expo";
+import { List, Button, ListItem, Icon } from "react-native-elements";
 // import Button from "./Button.js";
 
 export default class ContactsComponent extends React.PureComponent {
@@ -27,7 +27,7 @@ export default class ContactsComponent extends React.PureComponent {
     const permission = await Expo.Permissions.askAsync(
       Expo.Permissions.CONTACTS
     );
-    if (permission.status !== 'granted') {
+    if (permission.status !== "granted") {
       // Permission was denied...
       return;
     }
@@ -51,8 +51,9 @@ export default class ContactsComponent extends React.PureComponent {
   saveContact = arg => {
     arg.map(item => {
       let contactChoice = item.digits;
-      AsyncStorage.set('contactChoice', contactChoice);
+      // console.log(`${item.digits}`);
     });
+    AsyncStorage.set("contactChoice", contactChoice);
   };
 
   render() {
@@ -60,14 +61,11 @@ export default class ContactsComponent extends React.PureComponent {
     console.log(alphContacts);
     return (
       <View style={styles.GetContactsContainer}>
-        <Button
-          containerViewStyle={{ borderRadius: 25 }}
-          buttonStyle={{ width: 320, height: 45, borderRadius: 25 }}
+        <Icon
+          name="users"
+          type="feather"
+          color="#517fa4"
           raised={true}
-          backgroundColor="white"
-          color="black"
-          title="Get Contacts"
-          // style={styles.button}
           onPress={this.showFirstContactAsync.bind(this)}
         />
         {alphContacts ? (
@@ -94,10 +92,10 @@ export default class ContactsComponent extends React.PureComponent {
 
 const styles = StyleSheet.create({
   GetContactsContainer: {
-    flexDirection: 'column',
+    flexDirection: "column",
     flex: 4,
-    backgroundColor: 'yellow',
-    justifyContent: 'flex-start',
+    backgroundColor: "#95dcf4",
+    justifyContent: "flex-start",
     padding: 8,
     marginRight: 5,
     marginLeft: 5,

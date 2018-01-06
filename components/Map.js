@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,14 +8,14 @@ import {
   Picker,
   Alert,
   AsyncStorage
-} from 'react-native';
-import { Button } from 'react-native-elements';
-import { MapView, Location, Permissions, Constants } from 'expo';
-import Geocoder from 'react-native-geocoding';
-import geolib from 'geolib';
-import TextMessage from './TextMessage.js';
+} from "react-native";
+import { Button, Icon } from "react-native-elements";
+import { MapView, Location, Permissions, Constants } from "expo";
+import Geocoder from "react-native-geocoding";
+import geolib from "geolib";
+import TextMessage from "./TextMessage.js";
 
-Geocoder.setApiKey('AIzaSyBakh5h7JIfXWWZmj-vm08iGO0pXUwV4Y4');
+Geocoder.setApiKey("AIzaSyBakh5h7JIfXWWZmj-vm08iGO0pXUwV4Y4");
 
 export default class Map extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ export default class Map extends Component {
     this.state = {
       center: null,
       radius: 200,
-      address: '',
+      address: "",
       location: {},
       markers: [],
       contact: null,
@@ -37,9 +37,9 @@ export default class Map extends Component {
   }
 
   componentWillMount() {
-    if (Platform.OS === 'android' && !Constants.isDevice) {
+    if (Platform.OS === "android" && !Constants.isDevice) {
       this.setState({
-        errorMessage: 'Oops, this will not work.'
+        errorMessage: "Oops, this will not work."
       });
     } else {
       this._getLocationAsync();
@@ -48,9 +48,9 @@ export default class Map extends Component {
 
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
+    if (status !== "granted") {
       this.setState({
-        errorMessage: 'Address not found'
+        errorMessage: "Address not found"
       });
     }
 
@@ -99,12 +99,12 @@ export default class Map extends Component {
 
   beginTracking = async () => {
     try {
-      AsyncStorage.getItem('contactChoice').then(digits => {
+      AsyncStorage.getItem("contactChoice").then(digits => {
         this.setState({
           contact: digits
         });
       });
-      AsyncStorage.getItem('message').then(userMessage => {
+      AsyncStorage.getItem("message").then(userMessage => {
         this.setState({
           message: userMessage
         });
@@ -121,11 +121,11 @@ export default class Map extends Component {
             longitude: coord.coordinate.longitude
           });
           if (distance > this.state.radius) {
-            fetch('https://frozen-ridge-66479.herokuapp.com/message', {
-              method: 'POST',
+            fetch("https://frozen-ridge-66479.herokuapp.com/message", {
+              method: "POST",
               headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
+                Accept: "application/json",
+                "Content-Type": "application/json"
               },
               body: JSON.stringify({
                 contact: this.state.contact,
@@ -155,40 +155,31 @@ export default class Map extends Component {
       <View style={styles.MapNavContainer}>
         <TextInput
           style={styles.AddressInput}
-          placeholder="Address"
-          placeholderTextColor="#9a73ef"
+          placeholder="Enter Address Here"
+          placeholderTextColor="black"
           autoCapitalize="none"
           onChangeText={this.handleAddress}
         />
         <View style={styles.NavBoxContainer}>
-          <Button
-            // containerViewStyle={{ borderRadius: 10 }}
-            buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
-            // raised={true}
-            backgroundColor="#4f7a89"
-            color="black"
-            style={styles.button}
-            title="Search Address"
+          <Icon
+            name="search"
+            type="feather"
+            color="#517fa4"
+            raised={true}
             onPress={this.getFromLocation}
           />
-          <Button
-            // containerViewStyle={{ borderRadius: 10 }}
-            buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
-            // raised={true}
-            backgroundColor="#567884"
-            color="black"
-            style={styles.button}
-            title="Begin Tracking!"
+          <Icon
+            name="target"
+            type="feather"
+            color="#517fa4"
+            raised={true}
             onPress={this.beginTracking}
           />
-          <Button
-            // containerViewStyle={{ borderRadius: 10 }}
-            buttonStyle={{ width: 100, height: 45, borderRadius: 10 }}
-            // raised={true}
-            backgroundColor="#586f77"
-            color="black"
-            style={styles.button}
-            title="Kill Switch"
+          <Icon
+            name="cancel"
+            type="materialCommunityIcons"
+            color="#517fa4"
+            raised={true}
             onPress={this.killSwitch}
           />
         </View>
@@ -222,28 +213,19 @@ export default class Map extends Component {
 const styles = StyleSheet.create({
   MapNavContainer: {
     flex: 1,
-    // flexDirection: "row",
-    // marginBottom: 500,
-    // justifyContent: "space-between",
-    // paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#42c5f4'
+    backgroundColor: "white"
   },
   NavBoxContainer: {
-    justifyContent: 'space-around',
-    // flex: 1,
-    flexDirection: 'row'
+    justifyContent: "space-around",
+    flexDirection: "row"
   },
-  // paragraph: {
-  //   margin: 10,
-  //   fontSize: 10,
-  //   textAlign: "center"
-  // },
+
   AddressInput: {
-    // flex: 1,
-    backgroundColor: 'white',
+    flex: 1,
+    backgroundColor: "#aec3e5",
     padding: 2,
     borderRadius: 10,
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
     marginTop: 0
   }
 });

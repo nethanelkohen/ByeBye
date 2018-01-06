@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { TabNavigator } from "react-navigation";
+import { List, Button, ListItem, Icon } from "react-native-elements";
 import TextMessage from "../components/TextMessage.js";
 import ContactsComponent from "../components/ContactsComponent.js";
 import MapScreen from "./MapScreen";
@@ -19,10 +20,32 @@ class HomeScreen extends Component {
 const HomeScreenTabNavigator = TabNavigator(
   {
     HomeScreen: {
-      screen: HomeScreen
+      screen: HomeScreen,
+      navigationOptions: {
+        tabBarLabel: "Home",
+        tabBarIcon: ({ tintColor, focused }) => (
+          <Icon
+            name={"home"}
+            type={"feather"}
+            size={26}
+            style={{ color: tintColor }}
+          />
+        )
+      }
     },
     MapScreen: {
-      screen: MapScreen
+      screen: MapScreen,
+      navigationOptions: {
+        tabBarLabel: "Map",
+        tabBarIcon: ({ tintColor, focused }) => (
+          <Icon
+            name={"map"}
+            type={"feather"}
+            size={26}
+            style={{ color: tintColor }}
+          />
+        )
+      }
     }
   },
   {
@@ -33,10 +56,7 @@ const HomeScreenTabNavigator = TabNavigator(
 const styles = StyleSheet.create({
   HomeScreenContainer: {
     flex: 1,
-    // flexDirection: "row",
-    backgroundColor: "#42c5f4"
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    backgroundColor: "white"
   }
 });
 
