@@ -56,7 +56,6 @@ export default class ContactsComponent extends React.PureComponent {
   };
 
   render() {
-    // console.log("STATE", this.state)
     const alphContacts = this.state.contacts;
     console.log(alphContacts);
     return (
