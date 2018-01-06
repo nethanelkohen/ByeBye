@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,24 +8,24 @@ import {
   Picker,
   Alert,
   AsyncStorage
-} from "react-native";
-import { Button, Icon } from "react-native-elements";
-import { MapView, Location, Permissions, Constants } from "expo";
-import Geocoder from "react-native-geocoding";
-import geolib from "geolib";
-import TextMessage from "./TextMessage.js";
+} from 'react-native';
+import { Button, Icon } from 'react-native-elements';
+import { MapView, Location, Permissions, Constants } from 'expo';
+import Geocoder from 'react-native-geocoding';
+import geolib from 'geolib';
+import TextMessage from './TextMessage.js';
 
-Geocoder.setApiKey("AIzaSyBakh5h7JIfXWWZmj-vm08iGO0pXUwV4Y4");
+Geocoder.setApiKey('AIzaSyBakh5h7JIfXWWZmj-vm08iGO0pXUwV4Y4');
 
 export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      center: null,
-      radius: 200,
-      address: "",
+      // center: null,
+      address: '',
       location: {},
-      markers: [],
+      markers: {},
+      // radius: 200,
       contact: null,
       message: null,
       coordinate: {
@@ -37,9 +37,9 @@ export default class Map extends Component {
   }
 
   componentWillMount() {
-    if (Platform.OS === "android" && !Constants.isDevice) {
+    if (Platform.OS === 'android' && !Constants.isDevice) {
       this.setState({
-        errorMessage: "Oops, this will not work."
+        errorMessage: 'Oops, this will not work.'
       });
     } else {
       this._getLocationAsync();
@@ -48,9 +48,9 @@ export default class Map extends Component {
 
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== "granted") {
+    if (status !== 'granted') {
       this.setState({
-        errorMessage: "Address not found"
+        errorMessage: 'Address not found'
       });
     }
 
@@ -75,16 +75,10 @@ export default class Map extends Component {
         const geoLocation = json.results[0].geometry.location;
         let id = 0;
         this.setState({
-          markers: [
-            ...this.state.markers,
-            {
-              coordinate: {
-                longitude: geoLocation.lng,
-                latitude: geoLocation.lat
-              },
-              key: `${id++}`
-            }
-          ]
+          markers: {
+            longitude: geoLocation.lng,
+            latitude: geoLocation.lat
+          }
         });
       },
       error => {
@@ -99,12 +93,12 @@ export default class Map extends Component {
 
   beginTracking = async () => {
     try {
-      AsyncStorage.getItem("contactChoice").then(digits => {
+      AsyncStorage.getItem('contactChoice').then(digits => {
         this.setState({
           contact: digits
         });
       });
-      AsyncStorage.getItem("message").then(userMessage => {
+      AsyncStorage.getItem('message').then(userMessage => {
         this.setState({
           message: userMessage
         });
@@ -113,31 +107,30 @@ export default class Map extends Component {
       Alert.alert(JSON.stringify(error));
     }
     let mark = this.state.markers;
+    let radius = 100;
     navigator.geolocation.getCurrentPosition(
       position => {
-        mark.map(coord => {
-          const distance = geolib.getDistance(position.coords, {
-            latitude: coord.coordinate.latitude,
-            longitude: coord.coordinate.longitude
-          });
-          if (distance > this.state.radius) {
-            fetch("https://frozen-ridge-66479.herokuapp.com/message", {
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                contact: this.state.contact,
-                message: this.state.message
-              })
-            })
-              .then(response => {
-                console.log(response);
-              })
-              .done();
-          }
+        const distance = geolib.getDistance(position.coords, {
+          latitude: mark.latitude,
+          longitude: mark.longitude
         });
+        if (distance < radius) {
+          fetch('https://frozen-ridge-66479.herokuapp.com/message', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              contact: this.state.contact,
+              message: this.state.message
+            })
+          })
+            .then(response => {
+              console.log(response);
+            })
+            .done();
+        }
       },
       {
         enableHighAccuracy: true
@@ -150,7 +143,7 @@ export default class Map extends Component {
   };
 
   render() {
-    console.log(`render: ${this.state.contact} ${this.state.message}`);
+    console.log(this.state.contact, this.state.message);
     return (
       <View style={styles.MapNavContainer}>
         <TextInput
@@ -191,19 +184,14 @@ export default class Map extends Component {
           region={this.state.region}
           onRegionChange={this.onRegionChange.bind(this)}
         >
-          {this.state.markers.map(marker => (
-            <MapView>
-              <MapView.Marker
-                coordinate={marker.coordinate}
-                title="Endpoint"
-                key={marker.key}
-              />
-              <MapView.Circle
-                center={marker.coordinate}
-                radius={this.state.radius}
-              />
-            </MapView>
-          ))}
+          <MapView.Marker coordinate={this.state.markers} title="Endpoint" />
+          {/* <MapView.Circle
+            center={{
+              latitude: this.state.markers.latitude,
+              longitude: this.state.markers.longitude
+            }}
+            radius="100"
+          /> */}
         </MapView.Animated>
       </View>
     );
@@ -213,19 +201,19 @@ export default class Map extends Component {
 const styles = StyleSheet.create({
   MapNavContainer: {
     flex: 1,
-    backgroundColor: "white"
+    backgroundColor: 'white'
   },
   NavBoxContainer: {
-    justifyContent: "space-around",
-    flexDirection: "row"
+    justifyContent: 'space-around',
+    flexDirection: 'row'
   },
 
   AddressInput: {
     flex: 1,
-    backgroundColor: "#aec3e5",
+    backgroundColor: '#aec3e5',
     padding: 2,
     borderRadius: 10,
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
     marginTop: 0
   }
 });
