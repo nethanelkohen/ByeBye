@@ -52,13 +52,12 @@ export default class ContactsComponent extends React.PureComponent {
     arg.map(item => {
       let contactChoice = item.digits;
       // console.log(`${item.digits}`);
-      AsyncStorage.set('contactChoice', contactChoice);
+      AsyncStorage.setItem('contactChoice', contactChoice);
     });
   };
 
   render() {
     const alphContacts = this.state.contacts;
-    console.log(alphContacts);
     return (
       <View style={styles.GetContactsContainer}>
         <Icon
