@@ -120,7 +120,7 @@ export default class Map extends Component {
             latitude: coord.coordinate.latitude,
             longitude: coord.coordinate.longitude
           });
-          if (distance > this.state.radius) {
+          if (distance < this.state.radius) {
             fetch("https://frozen-ridge-66479.herokuapp.com/message", {
               method: "POST",
               headers: {
