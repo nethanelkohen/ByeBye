@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   Alert,
   AsyncStorage
-} from "react-native";
-import { Contacts } from "expo";
-import { List, Button, ListItem, Icon } from "react-native-elements";
+} from 'react-native';
+import { Contacts } from 'expo';
+import { List, Button, ListItem, Icon } from 'react-native-elements';
 // import Button from "./Button.js";
 
 export default class ContactsComponent extends React.PureComponent {
@@ -27,7 +27,7 @@ export default class ContactsComponent extends React.PureComponent {
     const permission = await Expo.Permissions.askAsync(
       Expo.Permissions.CONTACTS
     );
-    if (permission.status !== "granted") {
+    if (permission.status !== 'granted') {
       // Permission was denied...
       return;
     }
@@ -52,8 +52,8 @@ export default class ContactsComponent extends React.PureComponent {
     arg.map(item => {
       let contactChoice = item.digits;
       // console.log(`${item.digits}`);
+      AsyncStorage.set('contactChoice', contactChoice);
     });
-    AsyncStorage.set("contactChoice", contactChoice);
   };
 
   render() {
@@ -92,10 +92,10 @@ export default class ContactsComponent extends React.PureComponent {
 
 const styles = StyleSheet.create({
   GetContactsContainer: {
-    flexDirection: "column",
+    flexDirection: 'column',
     flex: 4,
-    backgroundColor: "#95dcf4",
-    justifyContent: "flex-start",
+    backgroundColor: '#95dcf4',
+    justifyContent: 'flex-start',
     padding: 8,
     marginRight: 5,
     marginLeft: 5,
