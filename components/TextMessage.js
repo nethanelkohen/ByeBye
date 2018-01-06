@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
@@ -6,10 +6,10 @@ import {
   Text,
   AsyncStorage,
   Alert
-} from "react-native";
-import { List, Button, ListItem, Icon } from "react-native-elements";
-require("json-circular-stringify");
-import Map from "./Map.js";
+} from 'react-native';
+import { List, Button, ListItem, Icon } from 'react-native-elements';
+require('json-circular-stringify');
+import Map from './Map.js';
 
 export default class TextMessage extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ export default class TextMessage extends Component {
 
   saveMessage = () => {
     let message = this.state.message;
-    AsyncStorage.setItem("message", message);
+    AsyncStorage.setItem('message', message);
     console.log(message);
   };
 
@@ -51,18 +51,18 @@ export default class TextMessage extends Component {
 const styles = StyleSheet.create({
   SaveMessageContainer: {
     flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "center",
-    alignItems: "center",
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 8,
     borderRadius: 10
   },
   MessageInput: {
     flex: 1,
-    backgroundColor: "#aec3e5",
+    backgroundColor: '#aec3e5',
     padding: 8,
     borderRadius: 10,
-    alignSelf: "stretch"
+    alignSelf: 'stretch'
   },
   SaveMessageButton: {
     padding: 5
