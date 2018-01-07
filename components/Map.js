@@ -113,6 +113,24 @@ export default class Map extends Component {
         const distance = geolib.getDistance(position.coords, {
           latitude: mark.latitude,
           longitude: mark.longitude
+          });
+          if (distance < this.state.radius) {
+            fetch("https://frozen-ridge-66479.herokuapp.com/message", {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                contact: this.state.contact,
+                message: this.state.message
+              })
+            })
+              .then(response => {
+                console.log(response);
+              })
+              .done();
+          }
         });
         if (distance < radius) {
           fetch('https://frozen-ridge-66479.herokuapp.com/message', {
