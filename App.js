@@ -5,7 +5,6 @@ import { StackNavigator } from 'react-navigation';
 import Map from './components/Map.js';
 import HomeScreen from './screens/HomeScreen.js';
 import MapScreen from './screens/MapScreen.js';
-import ByeByeButton from './components/ByeByeButton.js';
 import { FormLabel, FormInput } from 'react-native-elements';
 
 export default class App extends Component {

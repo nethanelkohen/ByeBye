@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
-import { TabNavigator } from "react-navigation";
-import { List, Button, ListItem, Icon } from "react-native-elements";
-import TextMessage from "../components/TextMessage.js";
-import ContactsComponent from "../components/ContactsComponent.js";
-import MapScreen from "./MapScreen";
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { TabNavigator } from 'react-navigation';
+import { List, Button, ListItem, Icon } from 'react-native-elements';
+import TextMessage from '../components/TextMessage.js';
+import ContactsComponent from '../components/ContactsComponent.js';
+import MapScreen from './MapScreen';
 
 class HomeScreen extends Component {
   render() {
@@ -22,11 +22,11 @@ const HomeScreenTabNavigator = TabNavigator(
     HomeScreen: {
       screen: HomeScreen,
       navigationOptions: {
-        tabBarLabel: "Home",
+        tabBarLabel: 'Home',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
-            name={"home"}
-            type={"feather"}
+            name={'home'}
+            type={'feather'}
             size={26}
             style={{ color: tintColor }}
           />
@@ -36,11 +36,11 @@ const HomeScreenTabNavigator = TabNavigator(
     MapScreen: {
       screen: MapScreen,
       navigationOptions: {
-        tabBarLabel: "Map",
+        tabBarLabel: 'Map',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
-            name={"map"}
-            type={"feather"}
+            name={'map'}
+            type={'feather'}
             size={26}
             style={{ color: tintColor }}
           />
@@ -56,7 +56,7 @@ const HomeScreenTabNavigator = TabNavigator(
 const styles = StyleSheet.create({
   HomeScreenContainer: {
     flex: 1,
-    backgroundColor: "white"
+    backgroundColor: 'white'
   }
 });
 
