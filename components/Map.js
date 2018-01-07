@@ -21,11 +21,9 @@ export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // center: null,
       address: '',
       location: {},
       markers: {},
-      // radius: 200,
       contact: null,
       message: null,
       coordinate: {

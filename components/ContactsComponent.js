@@ -16,7 +16,6 @@ export default class ContactsComponent extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      contactSearch: null,
       contacts: null
       // selected: []
     };
