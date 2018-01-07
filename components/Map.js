@@ -107,30 +107,12 @@ export default class Map extends Component {
       Alert.alert(JSON.stringify(error));
     }
     let mark = this.state.markers;
-    let radius = 100;
+    let radius = 50;
     navigator.geolocation.getCurrentPosition(
       position => {
         const distance = geolib.getDistance(position.coords, {
           latitude: mark.latitude,
           longitude: mark.longitude
-          });
-          if (distance < this.state.radius) {
-            fetch("https://frozen-ridge-66479.herokuapp.com/message", {
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                contact: this.state.contact,
-                message: this.state.message
-              })
-            })
-              .then(response => {
-                console.log(response);
-              })
-              .done();
-          }
         });
         if (distance < radius) {
           fetch('https://frozen-ridge-66479.herokuapp.com/message', {
