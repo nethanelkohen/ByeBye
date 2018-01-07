@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import Map from '../components/Map.js';
+import React, { Component } from "react";
+import { View, StyleSheet } from "react-native";
+import Map from "../components/Map.js";
 
 export default class MapScreen extends Component {
   constructor(props) {
@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
