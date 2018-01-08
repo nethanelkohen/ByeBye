@@ -50,7 +50,7 @@ export default class TextMessage extends Component {
 
 const styles = StyleSheet.create({
   SaveMessageContainer: {
-    flex: 1,
+    flex: 2,
     alignItems: 'flex-start',
     justifyContent: 'center',
     alignItems: 'center',
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   MessageInput: {
-    flex: 1,
+    flex: 2,
     backgroundColor: '#aec3e5',
     padding: 8,
     borderRadius: 10,
