@@ -7,8 +7,8 @@
     "icon": "./assets/images/bye.png",
     "facebookScheme": "fb134927923842970",
     "splash": {
-      "image": "./assets/images/bye.png",
-      "backgroundColor": "#FEF9B0"
+      "image": "./assets/images/bye.jpg",
+      "backgroundColor": "black"
     }
   }
 }
