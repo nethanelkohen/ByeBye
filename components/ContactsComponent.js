@@ -5,7 +5,8 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  AsyncStorage
+  AsyncStorage,
+  KeyboardAvoidingView
 } from 'react-native';
 import { Contacts } from 'expo';
 import { List, Button, ListItem, Icon } from 'react-native-elements';
@@ -62,6 +63,7 @@ export default class ContactsComponent extends React.PureComponent {
           raised={true}
           onPress={this.showFirstContactAsync.bind(this)}
         />
+        {/* <KeyboardAvoidingView behavior="padding" style={styles.keyboard}> */}
         {alphContacts ? (
           <FlatList
             data={alphContacts}
@@ -70,15 +72,12 @@ export default class ContactsComponent extends React.PureComponent {
                 onPress={() => this.saveContact(item.phoneNumbers)}
               >
                 <ListItem title={item.name} />
-                {/*  <ListItem
-                  title={this.name(item)}
-                  onPress={() => this.selectItem(item)}
-                /> */}
               </TouchableOpacity>
             )}
             keyExtractor={(item, index) => index}
           />
         ) : null}
+        {/* </KeyboardAvoidingView> */}
       </View>
     );
   }
@@ -95,5 +94,9 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginBottom: 100,
     borderRadius: 10
+  },
+  keyboard: {
+    flex: 1,
+    justifyContent: 'space-between'
   }
 });

@@ -34,8 +34,10 @@ export default class TextMessage extends Component {
       <View style={styles.SaveMessageContainer}>
         <TextInput
           style={styles.MessageInput}
+          // multiline={true}
           placeholder="Enter Your Message"
           placeholderTextColor="black"
+          returnKeyType="done"
           onChangeText={text => this.setState({ message: text })}
           value={this.state.message}
         />
@@ -66,6 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#aec3e5',
     padding: 8,
     borderRadius: 10,
+    fontSize: 20,
     alignSelf: 'stretch'
   },
   SaveMessageButton: {

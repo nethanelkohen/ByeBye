@@ -6,7 +6,8 @@ import {
   Platform,
   TextInput,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+  KeyboardAvoidingView
 } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { MapView, Location, Permissions, Constants } from 'expo';
@@ -79,7 +80,7 @@ export default class Map extends Component {
         });
       },
       error => {
-        Alert.alert(JSON.stringify(error));
+        Alert.alert('There was an error.');
       }
     );
   };
@@ -148,6 +149,7 @@ export default class Map extends Component {
           placeholder="Enter Address Here"
           placeholderTextColor="black"
           autoCapitalize="none"
+          returnKeyType="done"
           onChangeText={this.handleAddress}
         />
         <View style={styles.NavBoxContainer}>
@@ -173,23 +175,18 @@ export default class Map extends Component {
             onPress={this.killSwitch}
           />
         </View>
+        {/* <KeyboardAvoidingView behavior="padding" style={styles.keyboard}> */}
         <MapView.Animated
           style={{ flex: 6 }}
           showsUserLocation={true}
-          // followsUserLocation={true}
+          followsUserLocation={true}
           showsCompass={true}
           region={this.state.region}
           onRegionChange={this.onRegionChange.bind(this)}
         >
           <MapView.Marker coordinate={this.state.markers} title="Endpoint" />
-          {/* <MapView.Circle
-            center={{
-              latitude: this.state.markers.latitude,
-              longitude: this.state.markers.longitude
-            }}
-            radius="100"
-          /> */}
         </MapView.Animated>
+        {/* </KeyboardAvoidingView> */}
       </View>
     );
   }
@@ -209,8 +206,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#aec3e5',
     padding: 2,
+    fontSize: 18,
     borderRadius: 10,
     alignSelf: 'stretch',
     marginTop: 0
+  },
+  keyboard: {
+    flex: 1,
+    justifyContent: 'space-between'
   }
 });
