@@ -15,7 +15,7 @@ export default class ContactsComponent extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      toggle: true,
+      toggle: false,
       contacts: null
       // selected: []
     };
@@ -65,9 +65,9 @@ export default class ContactsComponent extends React.PureComponent {
           <Icon name="users" type="feather" color="#517fa4" raised={true} />
           <Text>Contacts</Text>
         </TouchableOpacity>
-       
+
         {/* <KeyboardAvoidingView behavior="padding" style={styles.keyboard}> */}
-        {alphContacts ? (
+        {toggle ? (
           <FlatList
             data={alphContacts}
             renderItem={({ item }) => (

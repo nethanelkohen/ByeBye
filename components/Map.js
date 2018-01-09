@@ -76,6 +76,10 @@ export default class Map extends Component {
           markers: {
             longitude: geoLocation.lng,
             latitude: geoLocation.lat
+          },
+          region: {
+            longitude: geoLocation.lng,
+            latitude: geoLocation.lat
           }
         });
       },
@@ -198,7 +202,7 @@ export default class Map extends Component {
         <MapView.Animated
           style={{ flex: 6 }}
           showsUserLocation={true}
-          followsUserLocation={true}
+          followsUserLocation={false}
           showsCompass={true}
           region={this.state.region}
           onRegionChange={this.onRegionChange.bind(this)}
