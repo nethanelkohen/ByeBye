@@ -12,15 +12,19 @@
 
 ```
 ├── Daddys_Watching    # Source code
-│   ├── App.js         ### Begins navigation
-│   ├──app.json        ### Handles Expo render data
-│   ├── assets         ### Static assets
-│   │   └── images     ##### Images (png)
-│   ├── components     ### Any shared components
+│   ├── App.js         ## Begins navigation
+│   ├──app.json        ## Handles Expo render data
+│   ├── assets         ## Static assets
+│   │   └── images     ### Images (png)
+│   ├── components     ## Any shared components
+│   │   └── ContactsComponent.js     ### Renders user contact and saves to storage
+│   │   └── Map.js     ### Renders map, location tracking and makes Twilio API call
+│   │   └── TextMessage.js     ### Renders user message and saves to storage
 │   ├── screens        ### Any shared components
-├── util               # Where API call is held
-├── dist               # Any built files are here, not checked in
-└── webpack.config.js  # Webpack configuration for dev _and_ production
+│   │   └── HomeScreen.js     ### Navigates to contact/message screen
+│   │   └── MapScreen.js      ### Navigates to map
+│   │
+└── Daddys_Watching Server # Handles Twilio post API call
 ```
 
 ## What's Inside
@@ -45,7 +49,7 @@ Add to our project! Please read the [contribution guidelines](CONTRIBUTING.md) f
 
 ## Attribute
 
-* This app was built using [Create-React-Native-App](https://github.com/react-community/create-react-native-app). Big shout-out to the [Expo](https://github.com/expo) team for all the work they do.
+This app was built using [Create-React-Native-App](https://github.com/react-community/create-react-native-app). Big shout-out to the [Expo](https://github.com/expo) team for all the work they do.
 
 ## License
 
