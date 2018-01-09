@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
-import { Constants, Audio } from 'expo';
+import { Constants } from 'expo';
 import { StackNavigator } from 'react-navigation';
 import Map from './components/Map.js';
 import HomeScreen from './screens/HomeScreen.js';

@@ -5,7 +5,8 @@ import {
   TextInput,
   Text,
   AsyncStorage,
-  Alert
+  Alert,
+  Keyboard
 } from 'react-native';
 import { List, Button, ListItem, Icon } from 'react-native-elements';
 require('json-circular-stringify');
@@ -22,10 +23,17 @@ export default class TextMessage extends Component {
   saveMessage = () => {
     let message = this.state.message;
     if (!message) {
-      Alert.alert(JSON.stringify('enter a message'));
+      Alert.alert('Enter a message');
     } else {
       AsyncStorage.setItem('message', message);
       console.log(message);
+    }
+  };
+
+  onKeyPress = ({ nativeEvent }) => {
+    console.log(nativeEvent);
+    if (nativeEvent.key === 'Enter') {
+      Keyboard.dismiss();
     }
   };
 
@@ -34,10 +42,13 @@ export default class TextMessage extends Component {
       <View style={styles.SaveMessageContainer}>
         <TextInput
           style={styles.MessageInput}
+          multiline={true}
           placeholder="Enter Your Message"
           placeholderTextColor="black"
+          returnKeyType="go"
           onChangeText={text => this.setState({ message: text })}
           value={this.state.message}
+          onKeyPress={this.onKeyPress}
         />
         <Icon
           name="save"
@@ -68,6 +79,7 @@ const styles = StyleSheet.create({
     padding: 8,
     fontSize: 20,
     borderRadius: 10,
+    fontSize: 20,
     alignSelf: 'stretch'
   },
   SaveMessageButton: {

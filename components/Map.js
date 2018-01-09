@@ -5,9 +5,9 @@ import {
   View,
   Platform,
   TextInput,
-  Picker,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+  KeyboardAvoidingView
 } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { MapView, Location, Permissions, Constants } from 'expo';
@@ -80,7 +80,7 @@ export default class Map extends Component {
         });
       },
       error => {
-        Alert.alert(JSON.stringify(error));
+        Alert.alert('There was an error.');
       }
     );
   };
@@ -125,7 +125,7 @@ export default class Map extends Component {
             })
           })
             .then(response => {
-              console.log(response);
+              Alert.alert('Message was sent!');
             })
             .done();
         }
@@ -140,6 +140,15 @@ export default class Map extends Component {
     this.setState({ contact: null, message: null });
   };
 
+  //not working right now
+  onSearch = ({ nativeEvent }) => {
+    console.log(nativeEvent);
+    if (nativeEvent.key === 'Enter') {
+      this.getFromLocation();
+      console.log('works');
+    }
+  };
+
   render() {
     console.log(this.state.contact, this.state.message);
     return (
@@ -147,9 +156,13 @@ export default class Map extends Component {
         <TextInput
           style={styles.AddressInput}
           placeholder="Enter Address Here"
+          controlled={true}
+          multiline={false}
           placeholderTextColor="black"
           autoCapitalize="none"
+          returnKeyType="search"
           onChangeText={this.handleAddress}
+          onKeyPress={this.onSearch}
         />
         <View style={styles.IconTextBar}>
           <Text style={styles.IconText}>Search</Text>
@@ -181,23 +194,18 @@ export default class Map extends Component {
             onPress={this.killSwitch}
           />
         </View>
+        {/* <KeyboardAvoidingView behavior="padding" style={styles.keyboard}> */}
         <MapView.Animated
           style={{ flex: 6 }}
           showsUserLocation={true}
-          // followsUserLocation={true}
+          followsUserLocation={true}
           showsCompass={true}
           region={this.state.region}
           onRegionChange={this.onRegionChange.bind(this)}
         >
           <MapView.Marker coordinate={this.state.markers} title="Endpoint" />
-          {/* <MapView.Circle
-            center={{
-              latitude: this.state.markers.latitude,
-              longitude: this.state.markers.longitude
-            }}
-            radius="100"
-          /> */}
         </MapView.Animated>
+        {/* </KeyboardAvoidingView> */}
       </View>
     );
   }
@@ -228,11 +236,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     padding: 2,
+    fontSize: 18,
     borderRadius: 10,
     fontSize: 20,
     alignSelf: 'stretch',
     marginTop: 0,
     borderWidth: 0.5
-    // borderBottomColor: 'black'
+  },
+  keyboard: {
+    flex: 1,
+    justifyContent: 'space-between'
   }
 });
