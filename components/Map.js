@@ -156,61 +156,61 @@ export default class Map extends Component {
   render() {
     console.log(this.state.contact, this.state.message);
     return (
-      <View style={styles.MapNavContainer}>
-        <TextInput
-          style={styles.AddressInput}
-          placeholder="Enter Address Here"
-          controlled={true}
-          multiline={false}
-          placeholderTextColor="black"
-          autoCapitalize="none"
-          returnKeyType="search"
-          onChangeText={this.handleAddress}
-          onKeyPress={this.onSearch}
-        />
-        <View style={styles.IconTextBar}>
-          <Text style={styles.IconText}>Search</Text>
-          <Text style={styles.IconText}>Track</Text>
-          <Text style={styles.IconText}>Cancel</Text>
-        </View>
-        <View style={styles.NavBoxContainer}>
-          <Icon
-            name="search"
-            type="feather"
-            color="#517fa4"
-            raised={true}
-            onPress={this.getFromLocation}
+      <KeyboardAvoidingView behavior="padding" style={styles.keyboard}>
+        <View style={styles.MapNavContainer}>
+          <TextInput
+            style={styles.AddressInput}
+            placeholder="Enter Address Here"
+            controlled={true}
+            multiline={false}
+            placeholderTextColor="black"
+            autoCapitalize="none"
+            returnKeyType="search"
+            onChangeText={this.handleAddress}
+            onKeyPress={this.onSearch}
           />
+          <View style={styles.IconTextBar}>
+            <Text style={styles.IconText}>Search</Text>
+            <Text style={styles.IconText}>Track</Text>
+            <Text style={styles.IconText}>Cancel</Text>
+          </View>
+          <View style={styles.NavBoxContainer}>
+            <Icon
+              name="search"
+              type="feather"
+              color="#517fa4"
+              raised={true}
+              onPress={this.getFromLocation}
+            />
 
-          <Icon
-            name="target"
-            type="feather"
-            color="#517fa4"
-            raised={true}
-            onPress={this.beginTracking}
-          />
+            <Icon
+              name="target"
+              type="feather"
+              color="#517fa4"
+              raised={true}
+              onPress={this.beginTracking}
+            />
 
-          <Icon
-            name="cancel"
-            type="materialCommunityIcons"
-            color="#517fa4"
-            raised={true}
-            onPress={this.killSwitch}
-          />
+            <Icon
+              name="cancel"
+              type="materialCommunityIcons"
+              color="#517fa4"
+              raised={true}
+              onPress={this.killSwitch}
+            />
+          </View>
+          <MapView.Animated
+            style={{ flex: 6 }}
+            showsUserLocation={true}
+            followsUserLocation={false}
+            showsCompass={true}
+            region={this.state.region}
+            onRegionChange={this.onRegionChange.bind(this)}
+          >
+            <MapView.Marker coordinate={this.state.markers} title="Endpoint" />
+          </MapView.Animated>
         </View>
-        {/* <KeyboardAvoidingView behavior="padding" style={styles.keyboard}> */}
-        <MapView.Animated
-          style={{ flex: 6 }}
-          showsUserLocation={true}
-          followsUserLocation={false}
-          showsCompass={true}
-          region={this.state.region}
-          onRegionChange={this.onRegionChange.bind(this)}
-        >
-          <MapView.Marker coordinate={this.state.markers} title="Endpoint" />
-        </MapView.Animated>
-        {/* </KeyboardAvoidingView> */}
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
