@@ -5,7 +5,6 @@ import {
   View,
   Platform,
   TextInput,
-  Picker,
   Alert,
   AsyncStorage
 } from 'react-native';
@@ -80,7 +79,7 @@ export default class Map extends Component {
         });
       },
       error => {
-        Alert.alert(error);
+        Alert.alert(JSON.stringify(error));
       }
     );
   };
@@ -102,7 +101,7 @@ export default class Map extends Component {
         });
       });
     } catch (error) {
-      Alert.alert(error);
+      Alert.alert(JSON.stringify(error));
     }
     let mark = this.state.markers;
     let radius = 50;
@@ -125,8 +124,7 @@ export default class Map extends Component {
             })
           })
             .then(response => {
-              console.log(response);
-              Alert.alert('Your message was sent.');
+              Alert.alert('Message was sent!');
             })
             .done();
         }

@@ -4,27 +4,26 @@
 
  <br>
 
-### *Make Sure That One Friend Gets Home Okay*
+### _Make Sure That One Friend Gets Home Okay_
 
 <br>
 
 ## What's Inside
+
 <img src="./assets/images/react-native.png" align= "center" width="50" height="50" />
 
 [React-Native](https://facebook.github.io/react-native/)
 
-<img src="https://avatars2.githubusercontent.com/u/1335026?s=200&v=4" align= "center" width="50" height="50" />
+<img src="./assets/images/expo.png" align= "center" width="50" height="50" />
 
-[Firebase](https://firebase.google.com/)
-
-<img src="./assets/images/styled-components.png" align= "center" width="50" height="50" />
-
-[Styled-Components](https://www.styled-components.com/)
+[Expo](https://expo.io/)
 
 <br>
 
 ## Contribute
+
 Add to our project! Please read the [contribution guidelines](CONTRIBUTING.md) first.
 
 ## License
+
 This React-Native app is under the [MIT License](https://github.com/nethanelkohen/ByeBye/blob/master/LICENSE).
