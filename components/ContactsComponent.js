@@ -15,6 +15,7 @@ export default class ContactsComponent extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      toggle: true,
       contacts: null
       // selected: []
     };
@@ -43,6 +44,9 @@ export default class ContactsComponent extends React.PureComponent {
     this.setState({
       contacts: newContacts
     });
+    const newState = !this.state.toggle;
+    this.setState({ toggle: newState });
+    console.log(newState);
   }
 
   saveContact = arg => {
@@ -53,16 +57,15 @@ export default class ContactsComponent extends React.PureComponent {
   };
 
   render() {
+    const { toggle } = this.state;
     const alphContacts = this.state.contacts;
     return (
       <View style={styles.GetContactsContainer}>
-        <Icon
-          name="users"
-          type="feather"
-          color="#517fa4"
-          raised={true}
-          onPress={this.showFirstContactAsync.bind(this)}
-        />
+        <TouchableOpacity onPress={this.showFirstContactAsync.bind(this)}>
+          <Icon name="users" type="feather" color="#517fa4" raised={true} />
+          <Text>Contacts</Text>
+        </TouchableOpacity>
+       
         {/* <KeyboardAvoidingView behavior="padding" style={styles.keyboard}> */}
         {alphContacts ? (
           <FlatList

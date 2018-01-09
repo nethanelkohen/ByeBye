@@ -58,6 +58,7 @@ export default class TextMessage extends Component {
           backgroundColor="white"
           onPress={this.saveMessage}
         />
+        <Text>Save Message</Text>
       </View>
     );
   }
@@ -74,8 +75,9 @@ const styles = StyleSheet.create({
   },
   MessageInput: {
     flex: 2,
-    backgroundColor: '#aec3e5',
+    backgroundColor: '#95dcf4',
     padding: 8,
+    fontSize: 20,
     borderRadius: 10,
     fontSize: 20,
     alignSelf: 'stretch'
