@@ -5,7 +5,8 @@ import {
   TextInput,
   Text,
   AsyncStorage,
-  Alert
+  Alert,
+  Keyboard
 } from 'react-native';
 import { List, Button, ListItem, Icon } from 'react-native-elements';
 require('json-circular-stringify');
@@ -29,17 +30,25 @@ export default class TextMessage extends Component {
     }
   };
 
+  onKeyPress = ({ nativeEvent }) => {
+    console.log(nativeEvent);
+    if (nativeEvent.key === 'Enter') {
+      Keyboard.dismiss();
+    }
+  };
+
   render() {
     return (
       <View style={styles.SaveMessageContainer}>
         <TextInput
           style={styles.MessageInput}
-          // multiline={true}
+          multiline={true}
           placeholder="Enter Your Message"
           placeholderTextColor="black"
-          returnKeyType="done"
+          returnKeyType="go"
           onChangeText={text => this.setState({ message: text })}
           value={this.state.message}
+          onKeyPress={this.onKeyPress}
         />
         <Icon
           name="save"

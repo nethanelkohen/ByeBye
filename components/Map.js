@@ -140,6 +140,15 @@ export default class Map extends Component {
     this.setState({ contact: null, message: null });
   };
 
+  //not working right now
+  onSearch = ({ nativeEvent }) => {
+    console.log(nativeEvent);
+    if (nativeEvent.key === 'Enter') {
+      this.getFromLocation();
+      console.log('works');
+    }
+  };
+
   render() {
     console.log(this.state.contact, this.state.message);
     return (
@@ -147,10 +156,13 @@ export default class Map extends Component {
         <TextInput
           style={styles.AddressInput}
           placeholder="Enter Address Here"
+          controlled={true}
+          multiline={false}
           placeholderTextColor="black"
           autoCapitalize="none"
-          returnKeyType="done"
+          returnKeyType="search"
           onChangeText={this.handleAddress}
+          onKeyPress={this.onSearch}
         />
         <View style={styles.NavBoxContainer}>
           <Icon
