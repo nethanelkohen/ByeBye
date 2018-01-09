@@ -21,8 +21,12 @@ export default class TextMessage extends Component {
 
   saveMessage = () => {
     let message = this.state.message;
-    AsyncStorage.setItem('message', message);
-    console.log(message);
+    if (!message) {
+      Alert.alert(JSON.stringify('enter a message'));
+    } else {
+      AsyncStorage.setItem('message', message);
+      console.log(message);
+    }
   };
 
   render() {
