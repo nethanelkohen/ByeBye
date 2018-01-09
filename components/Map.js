@@ -208,9 +208,10 @@ const styles = StyleSheet.create({
 
   AddressInput: {
     flex: 1,
-    backgroundColor: '#aec3e5',
+    backgroundColor: '#95dcf4',
     padding: 2,
     borderRadius: 10,
+    fontSize: 20,
     alignSelf: 'stretch',
     marginTop: 0
   }

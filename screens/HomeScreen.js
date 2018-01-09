@@ -27,7 +27,8 @@ const HomeScreenTabNavigator = TabNavigator(
           <Icon
             name={'home'}
             type={'feather'}
-            size={26}
+            size={30}
+            color="#517fa4"
             style={{ color: tintColor }}
           />
         )
@@ -41,7 +42,8 @@ const HomeScreenTabNavigator = TabNavigator(
           <Icon
             name={'map'}
             type={'feather'}
-            size={26}
+            size={30}
+            color="#517fa4"
             style={{ color: tintColor }}
           />
         )
