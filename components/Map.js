@@ -151,6 +151,11 @@ export default class Map extends Component {
           autoCapitalize="none"
           onChangeText={this.handleAddress}
         />
+        <View style={styles.IconTextBar}>
+          <Text style={styles.IconText}>Search</Text>
+          <Text style={styles.IconText}>Track</Text>
+          <Text style={styles.IconText}>Cancel</Text>
+        </View>
         <View style={styles.NavBoxContainer}>
           <Icon
             name="search"
@@ -159,6 +164,7 @@ export default class Map extends Component {
             raised={true}
             onPress={this.getFromLocation}
           />
+
           <Icon
             name="target"
             type="feather"
@@ -166,6 +172,7 @@ export default class Map extends Component {
             raised={true}
             onPress={this.beginTracking}
           />
+
           <Icon
             name="cancel"
             type="materialCommunityIcons"
@@ -201,18 +208,31 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white'
   },
+  IconText: {
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    marginTop: 0
+  },
+  IconTextBar: {
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    marginTop: 0
+  },
   NavBoxContainer: {
+    flex: 1,
     justifyContent: 'space-around',
     flexDirection: 'row'
   },
 
   AddressInput: {
     flex: 1,
-    backgroundColor: '#95dcf4',
+    backgroundColor: 'white',
     padding: 2,
     borderRadius: 10,
     fontSize: 20,
     alignSelf: 'stretch',
-    marginTop: 0
+    marginTop: 0,
+    borderWidth: 0.5
+    // borderBottomColor: 'black'
   }
 });

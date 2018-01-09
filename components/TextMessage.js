@@ -47,6 +47,7 @@ export default class TextMessage extends Component {
           backgroundColor="white"
           onPress={this.saveMessage}
         />
+        <Text>Save Message</Text>
       </View>
     );
   }
