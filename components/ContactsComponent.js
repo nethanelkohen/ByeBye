@@ -47,7 +47,6 @@ export default class ContactsComponent extends React.PureComponent {
   saveContact = arg => {
     arg.map(item => {
       let contactChoice = item.digits;
-      // console.log(`${item.digits}`);
       AsyncStorage.setItem('contactChoice', contactChoice);
     });
   };
