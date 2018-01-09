@@ -5,12 +5,10 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  Alert,
   AsyncStorage
 } from 'react-native';
 import { Contacts } from 'expo';
 import { List, Button, ListItem, Icon } from 'react-native-elements';
-// import Button from "./Button.js";
 
 export default class ContactsComponent extends React.PureComponent {
   constructor(props) {
@@ -40,7 +38,6 @@ export default class ContactsComponent extends React.PureComponent {
       let nameA = a.name;
       let nameB = b.name;
       if (nameA < nameB) return -1;
-      // if (nameA > nameB) return 1;
     });
     this.setState({
       contacts: newContacts

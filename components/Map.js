@@ -80,7 +80,7 @@ export default class Map extends Component {
         });
       },
       error => {
-        Alert.alert(JSON.stringify(error));
+        Alert.alert(error);
       }
     );
   };
@@ -102,7 +102,7 @@ export default class Map extends Component {
         });
       });
     } catch (error) {
-      Alert.alert(JSON.stringify(error));
+      Alert.alert(error);
     }
     let mark = this.state.markers;
     let radius = 50;
@@ -126,6 +126,7 @@ export default class Map extends Component {
           })
             .then(response => {
               console.log(response);
+              Alert.alert('Your message was sent.');
             })
             .done();
         }
