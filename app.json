@@ -1,11 +1,10 @@
 {
   "expo": {
-    "name": "ByeBye",
-    "slug": "byebye",
+    "name": "Daddy's Watching",
+    "slug": "Daddys_Watching",
     "sdkVersion": "23.0.0",
     "privacy": "public",
     "icon": "./assets/images/bye.png",
-    "facebookScheme": "fb134927923842970",
     "splash": {
       "image": "./assets/images/bye.png",
       "backgroundColor": "#000000"
