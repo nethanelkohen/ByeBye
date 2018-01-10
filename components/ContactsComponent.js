@@ -46,7 +46,6 @@ export default class ContactsComponent extends React.PureComponent {
     });
     const newState = !this.state.toggle;
     this.setState({ toggle: newState });
-    console.log(newState);
   }
 
   saveContact = arg => {

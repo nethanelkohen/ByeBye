@@ -26,12 +26,10 @@ export default class TextMessage extends Component {
       Alert.alert('Enter a message');
     } else {
       AsyncStorage.setItem('message', message);
-      console.log(message);
     }
   };
 
   onKeyPress = ({ nativeEvent }) => {
-    console.log(nativeEvent);
     if (nativeEvent.key === 'Enter') {
       Keyboard.dismiss();
     }

@@ -125,7 +125,7 @@ export default class Map extends Component {
             },
             body: JSON.stringify({
               contact: this.state.contact,
-              message: this.state.message
+              message: `From Daddy's Watching: ${this.state.message}`
             })
           })
             .then(response => {
@@ -144,15 +144,6 @@ export default class Map extends Component {
     this.setState({ contact: null, message: null });
   };
 
-  //not working right now
-  onSearch = ({ nativeEvent }) => {
-    console.log(nativeEvent);
-    if (nativeEvent.key === 'Enter') {
-      this.getFromLocation();
-      console.log('works');
-    }
-  };
-
   render() {
     console.log(this.state.contact, this.state.message);
     return (
@@ -167,7 +158,6 @@ export default class Map extends Component {
             autoCapitalize="none"
             returnKeyType="search"
             onChangeText={this.handleAddress}
-            onKeyPress={this.onSearch}
           />
           <View style={styles.IconTextBar}>
             <Text style={styles.IconText}>Search</Text>
