@@ -160,9 +160,9 @@ export default class Map extends Component {
             onChangeText={this.handleAddress}
           />
           <View style={styles.IconTextBar}>
-            <Text style={styles.IconText}>Search</Text>
-            <Text style={styles.IconText}>Track</Text>
-            <Text style={styles.IconText}>Cancel</Text>
+            <Text style={styles.IconText}>Enter Destination</Text>
+            <Text style={styles.IconText}>Track Me</Text>
+            <Text style={styles.IconText}>Cancel Track</Text>
           </View>
           <View style={styles.NavBoxContainer}>
             <Icon

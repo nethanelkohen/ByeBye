@@ -5,6 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import Map from './components/Map.js';
 import HomeScreen from './screens/HomeScreen.js';
 import MapScreen from './screens/MapScreen.js';
+import OnBoarding from './screens/OnBoarding.js';
 import { FormLabel, FormInput } from 'react-native-elements';
 
 export default class App extends Component {
@@ -14,6 +15,7 @@ export default class App extends Component {
 }
 
 const AppNavigator = StackNavigator({
+  OnBoarding: { screen: OnBoarding },
   HomeScreen: { screen: HomeScreen },
   MapScreen: { screen: MapScreen }
 });
