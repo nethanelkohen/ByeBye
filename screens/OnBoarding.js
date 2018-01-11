@@ -8,8 +8,9 @@ export default class OnBoarding extends Component {
     const { navigate } = this.props.navigation;
     return (
       <Onboarding
-        showDone={false}
+        showDone={true}
         onSkip={() => navigate('HomeScreen')}
+        onDone={() => navigate('HomeScreen')}
         pages={[
           {
             title: `Daddy's Watching`,
@@ -65,17 +66,17 @@ export default class OnBoarding extends Component {
             )
           },
           {
-            title: ``,
-            subtitle: (
-              <Button
-                title={'Let Daddy Watch'}
-                containerViewStyle={{ marginTop: 20 }}
-                backgroundColor={'white'}
-                borderRadius={5}
-                textStyle={{ color: '#003c8f' }}
-                onPress={() => navigate('HomeScreen')}
-              />
-            ),
+            title: `Let Daddy Watch`,
+            // subtitle: (
+            //   <Button
+            //     title={'Let Daddy Watch'}
+            //     containerViewStyle={{ marginTop: 20 }}
+            //     backgroundColor={'white'}
+            //     borderRadius={5}
+            //     textStyle={{ color: '#003c8f' }}
+            //     onPress={() => navigate('HomeScreen')}
+            //   />
+            // ),
             backgroundColor: '#003c8f',
             image: (
               <Icon
