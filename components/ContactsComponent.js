@@ -86,15 +86,18 @@ export default class ContactsComponent extends React.PureComponent {
 }
 
 const styles = StyleSheet.create({
+  Header: {
+    backgroundColor: 'green'
+  },
   GetContactsContainer: {
     flexDirection: 'column',
-    flex: 4,
+    flex: 1,
     backgroundColor: '#95dcf4',
     justifyContent: 'flex-start',
     padding: 8,
     marginRight: 5,
     marginLeft: 5,
-    marginBottom: 100,
+    // marginBottom: 100,
     borderRadius: 10
   },
   keyboard: {
