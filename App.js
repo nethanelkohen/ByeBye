@@ -15,7 +15,12 @@ export default class App extends Component {
 }
 
 const AppNavigator = StackNavigator({
-  OnBoarding: { screen: OnBoarding },
+  OnBoarding: {
+    screen: OnBoarding,
+    navigationOptions: {
+      header: null
+    }
+  },
   HomeScreen: {
     screen: HomeScreen,
     navigationOptions: {
@@ -38,21 +43,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
-
-// const MainStack = StackNavigator({
-//   HomeScreen: {
-//     screen: HomeScreen,
-//     navigationOptions: {
-//       header: {
-//         visible: false,
-//       },
-//     },
-//   },
-//   MapScreen: {
-//     screen: MapScreen,
-//     navigationOptions: {
-//       header: {
-//         left: null,
-//       }
-//     },
-//   },
