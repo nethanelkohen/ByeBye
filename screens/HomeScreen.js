@@ -10,8 +10,8 @@ class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.HomeScreenContainer}>
-        <TextMessage />
         <ContactsComponent />
+        <TextMessage />
       </View>
     );
   }
