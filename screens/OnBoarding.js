@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Alert, StatusBar, Image } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { Image } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import Onboarding from 'react-native-onboarding-swiper';
 
 export default class OnBoarding extends Component {
+  static navigationOptions = { header: null };
+
   render() {
     const { navigate } = this.props.navigation;
     return (

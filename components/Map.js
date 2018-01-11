@@ -172,7 +172,6 @@ export default class Map extends Component {
               raised={true}
               onPress={this.getFromLocation}
             />
-
             <Icon
               name="target"
               type="feather"
