@@ -8,9 +8,8 @@ import {
   Alert,
   Keyboard
 } from 'react-native';
-import { List, Button, ListItem, Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 require('json-circular-stringify');
-import Map from './Map.js';
 
 export default class TextMessage extends Component {
   constructor(props) {

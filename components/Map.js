@@ -9,11 +9,10 @@ import {
   AsyncStorage,
   KeyboardAvoidingView
 } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import { MapView, Location, Permissions, Constants } from 'expo';
 import Geocoder from 'react-native-geocoding';
 import geolib from 'geolib';
-import TextMessage from './TextMessage.js';
 
 Geocoder.setApiKey('AIzaSyBakh5h7JIfXWWZmj-vm08iGO0pXUwV4Y4');
 

@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import { Contacts } from 'expo';
-import { List, Button, ListItem, Icon } from 'react-native-elements';
+import { ListItem, Icon } from 'react-native-elements';
 
 export default class ContactsComponent extends React.PureComponent {
   constructor(props) {

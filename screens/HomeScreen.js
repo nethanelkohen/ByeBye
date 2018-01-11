@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-import { List, Button, ListItem, Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import TextMessage from '../components/TextMessage.js';
 import ContactsComponent from '../components/ContactsComponent.js';
 import MapScreen from './MapScreen';
-import OnBoarding from './OnBoarding';
 
 class HomeScreen extends Component {
   render() {
