@@ -67,16 +67,16 @@ export default class OnBoarding extends Component {
           },
           {
             title: `Let Daddy Watch`,
-            // subtitle: (
-            //   <Button
-            //     title={'Let Daddy Watch'}
-            //     containerViewStyle={{ marginTop: 20 }}
-            //     backgroundColor={'white'}
-            //     borderRadius={5}
-            //     textStyle={{ color: '#003c8f' }}
-            //     onPress={() => navigate('HomeScreen')}
-            //   />
-            // ),
+            subtitle: (
+              <Button
+                title={'Let Daddy Watch'}
+                containerViewStyle={{ marginTop: 20 }}
+                backgroundColor={'white'}
+                borderRadius={5}
+                textStyle={{ color: '#003c8f' }}
+                onPress={() => navigate('HomeScreen')}
+              />
+            ),
             backgroundColor: '#003c8f',
             image: (
               <Icon

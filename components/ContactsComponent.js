@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import { Contacts } from 'expo';
 import { ListItem, Icon } from 'react-native-elements';
-import { header } from 'native-base';
 
 export default class ContactsComponent extends React.PureComponent {
   constructor(props) {
