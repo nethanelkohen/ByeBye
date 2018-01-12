@@ -6,7 +6,7 @@
 
 ### _Give Your Sober Friends Peace of Mind_
 
-A web app created by [Nethanel Kohen](https://github.com/nethanelkohen) and [Martin Pham](https://github.com/martinliempham) that lets friends stay connected after their night out.
+A mobile app created by [Nethanel Kohen](https://github.com/nethanelkohen) and [Martin Pham](https://github.com/martinliempham) that lets friends stay connected after their night out.
 
 <br>
 

@@ -5,6 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import HomeScreen from './screens/HomeScreen.js';
 import MapScreen from './screens/MapScreen.js';
 import OnBoarding from './screens/OnBoarding.js';
+import MessageScreen from './screens/MessageScreen.js';
 
 export default class App extends Component {
   render() {
@@ -21,6 +22,12 @@ const AppNavigator = StackNavigator({
   },
   HomeScreen: {
     screen: HomeScreen,
+    navigationOptions: {
+      headerLeft: null
+    }
+  },
+  MessageScreen: {
+    screen: MessageScreen,
     navigationOptions: {
       headerLeft: null
     }

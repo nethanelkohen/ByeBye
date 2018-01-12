@@ -16,7 +16,7 @@ import geolib from 'geolib';
 
 Geocoder.setApiKey('AIzaSyBakh5h7JIfXWWZmj-vm08iGO0pXUwV4Y4');
 
-export default class Map extends Component {
+class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -150,7 +150,7 @@ export default class Map extends Component {
         <View style={styles.MapNavContainer}>
           <TextInput
             style={styles.AddressInput}
-            placeholder="Enter Address Here"
+            placeholder="Where are you going?"
             controlled={true}
             multiline={false}
             placeholderTextColor="black"
@@ -240,3 +240,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   }
 });
+
+export default Map;
