@@ -27,6 +27,10 @@ class ContactsComponent extends Component {
     };
   }
 
+  componentDidMount() {
+    this.showFirstContactAsync();
+  }
+
   async showFirstContactAsync() {
     // Ask for permission to query contacts.
     const permission = await Expo.Permissions.askAsync(
@@ -119,25 +123,25 @@ class ContactsComponent extends Component {
   };
 
   render() {
-    const { toggle } = this.state;
+    // const { toggle } = this.state;
     const alphContacts = this.state.contacts;
     const { navigate } = this.props.navigation;
+    console.log(AsyncStorage.getItem('contactChoice'));
     return (
       <View style={styles.GetContactsContainer}>
-        <TouchableOpacity onPress={this.showFirstContactAsync.bind(this)}>
+        {/* <TouchableOpacity onPress={this.showFirstContactAsync.bind(this)}>
           <Icon name="users" type="feather" color="#517fa4" raised={true} />
           <Text>Contacts</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
-        {/* <KeyboardAvoidingView behavior="padding" style={styles.keyboard}> */}
-        {toggle ? (
+        {alphContacts ? (
           <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
             <FlatList
               data={alphContacts}
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() => this.saveContact(item.phoneNumbers)}
-                  onPress={() => navigate('MessageScreen')}
+                  // onPress={this.goToNextPage()}
                 >
                   <ListItem
                     roundAvatar
@@ -157,7 +161,6 @@ class ContactsComponent extends Component {
             />
           </List>
         ) : null}
-        {/* </KeyboardAvoidingView> */}
       </View>
     );
   }
