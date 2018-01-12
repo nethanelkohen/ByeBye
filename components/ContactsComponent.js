@@ -141,7 +141,7 @@ class ContactsComponent extends Component {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() => this.saveContact(item.phoneNumbers)}
-                  // onPress={this.goToNextPage()}
+                  // onPress={() => navigate('MessageScreen')}
                 >
                   <ListItem
                     roundAvatar
