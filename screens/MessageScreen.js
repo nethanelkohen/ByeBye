@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import Map from '../components/Map.js';
+import TextMessage from '../components/TextMessage.js';
+import { StackNavigator } from 'react-navigation';
 
-class MapScreen extends Component {
+class MessageScreen extends Component {
+  // static navigationOptions = {
+  //   title: 'MessageScreen'
+  // };
   constructor(props) {
     super(props);
   }
@@ -10,7 +14,7 @@ class MapScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Map style={styles.map} />
+        <TextMessage navigation={this.props.navigation} />
       </View>
     );
   }
@@ -28,4 +32,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MapScreen;
+export default MessageScreen;

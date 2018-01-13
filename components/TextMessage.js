@@ -12,7 +12,7 @@ import {
 import { Icon } from 'react-native-elements';
 require('json-circular-stringify');
 
-export default class TextMessage extends Component {
+class TextMessage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,6 +26,8 @@ export default class TextMessage extends Component {
       Alert.alert('Enter a message');
     } else {
       AsyncStorage.setItem('message', message);
+      this.props.navigation.navigate('MapScreen');
+      Keyboard.dismiss();
     }
   };
 
@@ -36,6 +38,7 @@ export default class TextMessage extends Component {
   };
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.keyboard}>
         <View style={styles.SaveMessageContainer}>
@@ -56,6 +59,7 @@ export default class TextMessage extends Component {
             raised={true}
             backgroundColor="white"
             onPress={this.saveMessage}
+            // onPress={() => navigate('MapScreen')}
           />
           <Text>Save Message</Text>
         </View>
@@ -89,3 +93,5 @@ const styles = StyleSheet.create({
     padding: 5
   }
 });
+
+export default TextMessage;
