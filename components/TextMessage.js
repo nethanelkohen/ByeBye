@@ -26,6 +26,8 @@ class TextMessage extends Component {
       Alert.alert('Enter a message');
     } else {
       AsyncStorage.setItem('message', message);
+      this.props.navigation.navigate('MapScreen');
+      Keyboard.dismiss();
     }
   };
 
@@ -57,7 +59,7 @@ class TextMessage extends Component {
             raised={true}
             backgroundColor="white"
             onPress={this.saveMessage}
-            onPress={() => navigate('MapScreen')}
+            // onPress={() => navigate('MapScreen')}
           />
           <Text>Save Message</Text>
         </View>

@@ -63,6 +63,7 @@ class ContactsComponent extends Component {
       let contactChoice = item.digits;
       AsyncStorage.setItem('contactChoice', contactChoice);
     });
+    this.props.navigation.navigate('MessageScreen');
   };
 
   // handleRefresh = () => {
@@ -125,7 +126,7 @@ class ContactsComponent extends Component {
   render() {
     // const { toggle } = this.state;
     const alphContacts = this.state.contacts;
-    const { navigate } = this.props.navigation;
+    // const { navigate } = this.props.navigation;
     console.log(AsyncStorage.getItem('contactChoice'));
     return (
       <View style={styles.GetContactsContainer}>
@@ -133,7 +134,13 @@ class ContactsComponent extends Component {
           <Icon name="users" type="feather" color="#517fa4" raised={true} />
           <Text>Contacts</Text>
         </TouchableOpacity> */}
-
+        <Icon
+          name="users"
+          type="feather"
+          color="#517fa4"
+          raised={true}
+          onPress={() => console.log(AsyncStorage.getItem('contactChoice'))}
+        />
         {alphContacts ? (
           <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
             <FlatList
@@ -141,7 +148,6 @@ class ContactsComponent extends Component {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() => this.saveContact(item.phoneNumbers)}
-                  // onPress={() => navigate('MessageScreen')}
                 >
                   <ListItem
                     roundAvatar

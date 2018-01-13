@@ -7,7 +7,8 @@ import {
   TextInput,
   Alert,
   AsyncStorage,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Keyboard
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { MapView, Location, Permissions, Constants } from 'expo';
@@ -67,6 +68,7 @@ class Map extends Component {
   };
 
   getFromLocation = () => {
+    Keyboard.dismiss();
     Geocoder.getFromLocation(this.state.address).then(
       json => {
         const geoLocation = json.results[0].geometry.location;
@@ -145,6 +147,7 @@ class Map extends Component {
 
   render() {
     console.log(this.state.contact, this.state.message);
+    console.log(AsyncStorage.getItem('contactChoice'));
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.keyboard}>
         <View style={styles.MapNavContainer}>
