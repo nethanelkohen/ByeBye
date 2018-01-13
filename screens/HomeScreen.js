@@ -9,9 +9,9 @@ import MessageScreen from './MessageScreen';
 import MapScreen from './MapScreen';
 
 class HomeScreen extends Component {
-  // static navigationOptions = {
-  //   title: 'HomeScreen'
-  // };
+  // static navigationOptions = ({ navigation }) => ({
+  //   title: `Message`
+  // });
 
   render() {
     return (
@@ -27,6 +27,7 @@ const HomeScreenTabNavigator = TabNavigator(
     HomeScreen: {
       screen: HomeScreen,
       navigationOptions: {
+        title: `Daddy's Watching`,
         tabBarLabel: 'Contacts',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
@@ -42,6 +43,7 @@ const HomeScreenTabNavigator = TabNavigator(
     MessageScreen: {
       screen: MessageScreen,
       navigationOptions: {
+        title: `Daddy's Watching`,
         tabBarLabel: 'Message',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
@@ -57,6 +59,7 @@ const HomeScreenTabNavigator = TabNavigator(
     MapScreen: {
       screen: MapScreen,
       navigationOptions: {
+        title: `Daddy's Watching`,
         tabBarLabel: 'Map',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
