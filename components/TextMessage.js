@@ -77,72 +77,70 @@ class TextMessage extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.SaveMessageContainer}>
-        <ScrollView style={styles.ScrollView}>
-          <TextInput
-            style={styles.MessageInput}
-            multiline={true}
-            placeholder="Enter Your Message"
-            placeholderTextColor="black"
-            returnKeyType="go"
-            onChangeText={text => this.setState({ message: text })}
-            value={this.state.message}
-            onKeyPress={this.onKeyPress}
-          />
-          <Icon
-            name="save"
-            type="feather"
-            color="#517fa4"
-            raised={true}
-            backgroundColor="white"
-            onPress={this.saveMessage}
-          />
-          <Text>Save Message</Text>
-          <Icon
-            name="save"
-            type="feather"
-            color="#517fa4"
-            raised={true}
-            backgroundColor="white"
-            onPress={this.oneText}
-          />
-          <TextOne />
-          <Icon
-            name="save"
-            type="feather"
-            color="#517fa4"
-            raised={true}
-            backgroundColor="white"
-            onPress={this.twoText}
-          />
-          <TextTwo />
-          <Icon
-            name="save"
+        <TextInput
+          style={styles.MessageInput}
+          multiline={true}
+          placeholder="Enter Your Message"
+          placeholderTextColor="black"
+          returnKeyType="go"
+          onChangeText={text => this.setState({ message: text })}
+          value={this.state.message}
+          onKeyPress={this.onKeyPress}
+        />
+        <Icon
+          name="save"
+          type="feather"
+          color="#517fa4"
+          raised={true}
+          backgroundColor="white"
+          onPress={this.saveMessage}
+        />
+        <Text>Save Message</Text>
+        <Icon
+          name="arrow-right"
+          type="feather"
+          color="#517fa4"
+          raised={true}
+          backgroundColor="white"
+          onPress={this.oneText}
+        />
+        <TextOne />
+        <Icon
+          name="arrow-right"
+          type="feather"
+          color="#517fa4"
+          raised={true}
+          backgroundColor="white"
+          onPress={this.twoText}
+        />
+        <TextTwo />
+        {/* <Icon
+            name="arrow-right"
             type="feather"
             color="#517fa4"
             raised={true}
             backgroundColor="white"
             onPress={this.threeText}
           />
-          <TextThree />
-          <Icon
-            name="save"
-            type="feather"
-            color="#517fa4"
-            raised={true}
-            backgroundColor="white"
-            onPress={this.fourText}
-          />
-          <TextFour />
-          <Icon
-            name="save"
-            type="feather"
-            color="#517fa4"
-            raised={true}
-            backgroundColor="white"
-            onPress={this.fiveText}
-          />
-          <TextFive />
-        </ScrollView>
+          <TextThree /> */}
+        <Icon
+          name="arrow-right"
+          type="feather"
+          color="#517fa4"
+          raised={true}
+          backgroundColor="white"
+          onPress={this.fourText}
+        />
+        <TextFour />
+        <Icon
+          name="arrow-right"
+          type="feather"
+          color="#517fa4"
+          raised={true}
+          backgroundColor="white"
+          onPress={this.fiveText}
+        />
+        <TextFive />
       </View>
     );
   }
@@ -152,19 +150,13 @@ const styles = StyleSheet.create({
   SaveMessageContainer: {
     flex: 1,
     alignItems: 'flex-start',
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 8,
     // marginBottom: 30,
     backgroundColor: 'white',
     // borderRadius: 10,
     fontSize: 15
-  },
-  ScrollView: {
-    alignItems: 'center',
-    justifyContent: 'center'
-    // flex: 1,
-    // width: 100
   },
   MessageInput: {
     // flex: 1,

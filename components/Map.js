@@ -161,12 +161,13 @@ class Map extends Component {
             onChangeText={this.handleAddress}
           />
           <View style={styles.IconTextBar}>
-            <Text style={styles.IconText}>Enter Destination</Text>
+            <Text style={styles.IconText}>Destination</Text>
             <Text style={styles.IconText}>Track Me</Text>
-            <Text style={styles.IconText}>Cancel Track</Text>
+            <Text style={styles.IconText}>Cancel</Text>
           </View>
           <View style={styles.NavBoxContainer}>
             <Icon
+              style={styles.Icon}
               name="search"
               type="feather"
               color="#517fa4"
@@ -174,14 +175,15 @@ class Map extends Component {
               onPress={this.getFromLocation}
             />
             <Icon
+              style={styles.Icon}
               name="target"
               type="feather"
               color="#517fa4"
               raised={true}
               onPress={this.beginTracking}
             />
-
             <Icon
+              style={styles.Icon}
               name="cancel"
               type="materialCommunityIcons"
               color="#517fa4"
@@ -214,7 +216,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'row',
     marginTop: 0,
-    fontSize: '15'
+    fontSize: 17
+  },
+  Icon: {
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    marginTop: 0
   },
   IconTextBar: {
     justifyContent: 'space-around',
