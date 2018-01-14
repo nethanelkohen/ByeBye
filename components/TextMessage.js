@@ -38,31 +38,31 @@ class TextMessage extends Component {
   };
 
   oneText = () => {
-    let textOne = `text one`;
+    let textOne = `I am alive. I got home.`;
     AsyncStorage.setItem('message', textOne);
     this.props.navigation.navigate('MapScreen');
   };
 
   twoText = () => {
-    let textTwo = `text two`;
+    let textTwo = `I made it home, but I can't keep living like this. I need to make changes.`;
     AsyncStorage.setItem('message', textTwo);
     this.props.navigation.navigate('MapScreen');
   };
 
   threeText = () => {
-    let textThree = `text three`;
+    let textThree = `I'M HOME`;
     AsyncStorage.setItem('message', textThree);
     this.props.navigation.navigate('MapScreen');
   };
 
   fourText = () => {
-    let textFour = `text four`;
+    let textFour = `I made it home safe and sound. In your face.`;
     AsyncStorage.setItem('message', textFour);
     this.props.navigation.navigate('MapScreen');
   };
 
   fiveText = () => {
-    let textFive = `text five`;
+    let textFive = `To all the haters who thought I'd never make it home, who thought my alcoholism was an issue, this one's for you: I am home safe and sound.`;
     AsyncStorage.setItem('message', textFive);
     this.props.navigation.navigate('MapScreen');
   };
@@ -151,15 +151,18 @@ class TextMessage extends Component {
 const styles = StyleSheet.create({
   SaveMessageContainer: {
     flex: 1,
-    // alignItems: 'flex-start',
+    alignItems: 'flex-start',
     // justifyContent: 'center',
     // alignItems: 'center',
     padding: 8,
     // marginBottom: 30,
-    backgroundColor: 'white'
-    // borderRadius: 10
+    backgroundColor: 'white',
+    // borderRadius: 10,
+    fontSize: 15
   },
   ScrollView: {
+    alignItems: 'center',
+    justifyContent: 'center'
     // flex: 1,
     // width: 100
   },
