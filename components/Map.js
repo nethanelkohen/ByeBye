@@ -147,7 +147,6 @@ class Map extends Component {
 
   render() {
     console.log(this.state.contact, this.state.message);
-    console.log(AsyncStorage.getItem('contactChoice'));
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.keyboard}>
         <View style={styles.MapNavContainer}>

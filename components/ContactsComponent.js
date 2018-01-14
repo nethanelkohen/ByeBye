@@ -27,7 +27,7 @@ class ContactsComponent extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.showFirstContactAsync();
   }
 
@@ -54,6 +54,11 @@ class ContactsComponent extends Component {
     this.setState({
       contacts: newContacts
     });
+    // if (this.state.contactSearch === this.state.contacts.name) {
+    //   this.setState({
+    //     contacts
+    //   });
+    // }
     const newState = !this.state.toggle;
     this.setState({ toggle: newState });
   }
@@ -104,7 +109,19 @@ class ContactsComponent extends Component {
   };
 
   renderHeader = () => {
-    return <SearchBar placeholder="Type Here..." lightTheme round />;
+    return (
+      <SearchBar
+        placeholder="Search"
+        lightTheme
+        round
+        returnKeyType="go"
+        onChangeText={this.handleSearch}
+      />
+    );
+  };
+
+  handleSearch = text => {
+    this.setState({ contactSearch: text });
   };
 
   renderFooter = () => {
@@ -126,7 +143,8 @@ class ContactsComponent extends Component {
   render() {
     // const { toggle } = this.state;
     const alphContacts = this.state.contacts;
-    // const { navigate } = this.props.navigation;
+    const contactSearch = this.state.contactSearch;
+
     return (
       <View style={styles.GetContactsContainer}>
         {/* <TouchableOpacity onPress={this.showFirstContactAsync.bind(this)}>
@@ -143,7 +161,13 @@ class ContactsComponent extends Component {
         {alphContacts ? (
           <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
             <FlatList
-              data={alphContacts}
+              data={
+                !contactSearch
+                  ? alphContacts
+                  : alphContacts.filter(item =>
+                      item.name.includes(this.state.contactSearch)
+                    )
+              }
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() => this.saveContact(item.phoneNumbers)}
@@ -159,7 +183,6 @@ class ContactsComponent extends Component {
               ItemSeparatorComponent={this.renderSeparator}
               ListHeaderComponent={this.renderHeader}
               ListFooterComponent={this.renderFooter}
-              // onRefresh={this.handleRefresh}
               // refreshing={this.state.refreshing}
               // onEndReached={this.handleLoadMore}
               // onEndReachedThreshold={50}
@@ -175,17 +198,17 @@ const styles = StyleSheet.create({
   Header: {
     backgroundColor: 'green'
   },
-  // GetContactsContainer: {
-  //   flexDirection: 'column',
-  //   flex: 1,
-  //   backgroundColor: '#95dcf4',
-  //   justifyContent: 'flex-start',
-  //   padding: 8,
-  //   marginRight: 5,
-  //   marginLeft: 5,
-  //   // marginBottom: 100,
-  //   borderRadius: 10
-  // },
+  GetContactsContainer: {
+    flexDirection: 'column',
+    flex: 1
+    // backgroundColor: '#95dcf4',
+    // justifyContent: 'flex-start',
+    // padding: 8,
+    // marginRight: 5,
+    // marginLeft: 5,
+    // marginBottom: 100,
+    // borderRadius: 10
+  },
   keyboard: {
     flex: 1,
     justifyContent: 'space-between'
