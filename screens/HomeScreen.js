@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import { StackNavigator } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+import { Icon, Text } from 'react-native-elements';
+import Emoji from '@ardentlabs/react-native-emoji';
 import TextMessage from '../components/TextMessage.js';
 import ContactsComponent from '../components/ContactsComponent.js';
 import MessageScreen from './MessageScreen';
@@ -23,12 +24,11 @@ const HomeScreenTabNavigator = TabNavigator(
     HomeScreen: {
       screen: HomeScreen,
       navigationOptions: {
-        title: `Daddy's Watching`,
-        headerStyle: {
-          fontFamily: 'Arial',
-          fontSize: '20'
-          // backgroundColor: 'red'
-        },
+        title: (
+          <Text style={{ fontFamily: 'Courier-Bold' }}>
+            Daddy's <Emoji name=":man:" /> Watching
+          </Text>
+        ),
         tabBarLabel: 'Contacts',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
@@ -44,7 +44,11 @@ const HomeScreenTabNavigator = TabNavigator(
     MessageScreen: {
       screen: MessageScreen,
       navigationOptions: {
-        title: `Daddy's Watching`,
+        title: (
+          <Text style={{ fontFamily: 'Courier-Bold' }}>
+            Daddy's <Emoji name=":man:" /> Watching
+          </Text>
+        ),
         tabBarLabel: 'Message',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
@@ -60,7 +64,11 @@ const HomeScreenTabNavigator = TabNavigator(
     MapScreen: {
       screen: MapScreen,
       navigationOptions: {
-        title: `Daddy's Watching`,
+        title: (
+          <Text style={{ fontFamily: 'Courier-Bold' }}>
+            Daddy's <Emoji name=":man:" /> Watching
+          </Text>
+        ),
         tabBarLabel: 'Map',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
