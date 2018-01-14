@@ -8,9 +8,9 @@ class OnBoarding extends Component {
     const { navigate } = this.props.navigation;
     return (
       <Onboarding
-        showDone={true}
+        // showDone={true}
         onSkip={() => navigate('HomeScreen')}
-        onDone={() => navigate('HomeScreen')}
+        // onDone={() => navigate('HomeScreen')}
         pages={[
           {
             title: `Daddy's Watching`,

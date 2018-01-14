@@ -152,11 +152,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
     alignItems: 'center',
+    textAlign: 'center',
     padding: 8,
-    // marginBottom: 30,
     backgroundColor: 'white',
     // borderRadius: 10,
-    fontSize: 15
+    fontSize: 15,
+    fontWeight: 400
   },
   MessageInput: {
     // flex: 1,
