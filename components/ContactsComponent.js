@@ -6,7 +6,8 @@ import {
   FlatList,
   TouchableOpacity,
   AsyncStorage,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  ActivityIndicator
 } from 'react-native';
 import { Contacts } from 'expo';
 import { List, ListItem, Icon, SearchBar } from 'react-native-elements';
@@ -15,7 +16,6 @@ class ContactsComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      toggle: false,
       contacts: null,
       contactSearch: null,
       loading: false,
@@ -27,7 +27,7 @@ class ContactsComponent extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.showFirstContactAsync();
   }
 
@@ -54,13 +54,6 @@ class ContactsComponent extends Component {
     this.setState({
       contacts: newContacts
     });
-    // if (this.state.contactSearch === this.state.contacts.name) {
-    //   this.setState({
-    //     contacts
-    //   });
-    // }
-    const newState = !this.state.toggle;
-    this.setState({ toggle: newState });
   }
 
   saveContact = arg => {
@@ -126,7 +119,6 @@ class ContactsComponent extends Component {
 
   renderFooter = () => {
     if (!this.state.loading) return null;
-
     return (
       <View
         style={{
@@ -144,7 +136,6 @@ class ContactsComponent extends Component {
     // const { toggle } = this.state;
     const alphContacts = this.state.contacts;
     const contactSearch = this.state.contactSearch;
-
     return (
       <View style={styles.GetContactsContainer}>
         {/* <TouchableOpacity onPress={this.showFirstContactAsync.bind(this)}>
@@ -180,12 +171,12 @@ class ContactsComponent extends Component {
                 </TouchableOpacity>
               )}
               keyExtractor={(item, index) => index}
-              ItemSeparatorComponent={this.renderSeparator}
               ListHeaderComponent={this.renderHeader}
+              ItemSeparatorComponent={this.renderSeparator}
               ListFooterComponent={this.renderFooter}
-              // refreshing={this.state.refreshing}
-              // onEndReached={this.handleLoadMore}
-              // onEndReachedThreshold={50}
+              refreshing={this.state.refreshing}
+              onEndReached={this.handleLoadMore}
+              onEndReachedThreshold={50}
             />
           </List>
         ) : null}

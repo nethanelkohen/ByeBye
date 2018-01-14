@@ -7,9 +7,15 @@ import {
   AsyncStorage,
   Alert,
   KeyboardAvoidingView,
-  Keyboard
+  Keyboard,
+  ScrollView
 } from 'react-native';
 import { Icon } from 'react-native-elements';
+import TextOne from './messages/TextOne.js';
+import TextTwo from './messages/TextTwo.js';
+import TextThree from './messages/TextThree.js';
+import TextFour from './messages/TextFour.js';
+import TextFive from './messages/TextFive.js';
 require('json-circular-stringify');
 
 class TextMessage extends Component {
@@ -31,6 +37,36 @@ class TextMessage extends Component {
     }
   };
 
+  oneText = () => {
+    let textOne = `text one`;
+    AsyncStorage.setItem('message', textOne);
+    this.props.navigation.navigate('MapScreen');
+  };
+
+  twoText = () => {
+    let textTwo = `text two`;
+    AsyncStorage.setItem('message', textTwo);
+    this.props.navigation.navigate('MapScreen');
+  };
+
+  threeText = () => {
+    let textThree = `text three`;
+    AsyncStorage.setItem('message', textThree);
+    this.props.navigation.navigate('MapScreen');
+  };
+
+  fourText = () => {
+    let textFour = `text four`;
+    AsyncStorage.setItem('message', textFour);
+    this.props.navigation.navigate('MapScreen');
+  };
+
+  fiveText = () => {
+    let textFive = `text five`;
+    AsyncStorage.setItem('message', textFive);
+    this.props.navigation.navigate('MapScreen');
+  };
+
   onKeyPress = ({ nativeEvent }) => {
     if (nativeEvent.key === 'Enter') {
       Keyboard.dismiss();
@@ -40,8 +76,8 @@ class TextMessage extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.keyboard}>
-        <View style={styles.SaveMessageContainer}>
+      <View style={styles.SaveMessageContainer}>
+        <ScrollView style={styles.ScrollView}>
           <TextInput
             style={styles.MessageInput}
             multiline={true}
@@ -59,25 +95,73 @@ class TextMessage extends Component {
             raised={true}
             backgroundColor="white"
             onPress={this.saveMessage}
-            // onPress={() => navigate('MapScreen')}
           />
           <Text>Save Message</Text>
-        </View>
-      </KeyboardAvoidingView>
+          <Icon
+            name="save"
+            type="feather"
+            color="#517fa4"
+            raised={true}
+            backgroundColor="white"
+            onPress={this.oneText}
+          />
+          <TextOne />
+          <Icon
+            name="save"
+            type="feather"
+            color="#517fa4"
+            raised={true}
+            backgroundColor="white"
+            onPress={this.twoText}
+          />
+          <TextTwo />
+          <Icon
+            name="save"
+            type="feather"
+            color="#517fa4"
+            raised={true}
+            backgroundColor="white"
+            onPress={this.threeText}
+          />
+          <TextThree />
+          <Icon
+            name="save"
+            type="feather"
+            color="#517fa4"
+            raised={true}
+            backgroundColor="white"
+            onPress={this.fourText}
+          />
+          <TextFour />
+          <Icon
+            name="save"
+            type="feather"
+            color="#517fa4"
+            raised={true}
+            backgroundColor="white"
+            onPress={this.fiveText}
+          />
+          <TextFive />
+        </ScrollView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   SaveMessageContainer: {
-    // flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 1,
+    // alignItems: 'flex-start',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     padding: 8,
-    marginBottom: 20,
-    backgroundColor: 'white',
-    borderRadius: 10
+    // marginBottom: 30,
+    backgroundColor: 'white'
+    // borderRadius: 10
+  },
+  ScrollView: {
+    // flex: 1,
+    // width: 100
   },
   MessageInput: {
     // flex: 1,
