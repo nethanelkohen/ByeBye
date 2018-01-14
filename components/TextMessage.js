@@ -41,30 +41,35 @@ class TextMessage extends Component {
     let textOne = `I am alive. I got home.`;
     AsyncStorage.setItem('message', textOne);
     this.props.navigation.navigate('MapScreen');
+    Keyboard.dismiss();
   };
 
   twoText = () => {
     let textTwo = `I made it home, but I can't keep living like this. I need to make changes.`;
     AsyncStorage.setItem('message', textTwo);
     this.props.navigation.navigate('MapScreen');
+    Keyboard.dismiss();
   };
 
-  threeText = () => {
-    let textThree = `I'M HOME`;
-    AsyncStorage.setItem('message', textThree);
-    this.props.navigation.navigate('MapScreen');
-  };
+  // threeText = () => {
+  //   let textThree = `I'M HOME`;
+  //   AsyncStorage.setItem('message', textThree);
+  //   this.props.navigation.navigate('MapScreen');
+  //   Keyboard.dismiss();
+  // };
 
   fourText = () => {
     let textFour = `I made it home safe and sound. In your face.`;
     AsyncStorage.setItem('message', textFour);
     this.props.navigation.navigate('MapScreen');
+    Keyboard.dismiss();
   };
 
   fiveText = () => {
     let textFive = `To all the haters who thought I'd never make it home, who thought my alcoholism was an issue, this one's for you: I am home safe and sound.`;
     AsyncStorage.setItem('message', textFive);
     this.props.navigation.navigate('MapScreen');
+    Keyboard.dismiss();
   };
 
   onKeyPress = ({ nativeEvent }) => {
