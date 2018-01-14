@@ -214,7 +214,8 @@ const styles = StyleSheet.create({
   IconText: {
     justifyContent: 'flex-start',
     flexDirection: 'row',
-    marginTop: 0
+    marginTop: 0,
+    fontSize: '15'
   },
   IconTextBar: {
     justifyContent: 'space-around',

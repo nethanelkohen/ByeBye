@@ -21,13 +21,13 @@ class ContactsComponent extends Component {
       loading: false,
       page: 1,
       seed: 1,
-      error: null
-      // refreshing: false
+      error: null,
+      refreshing: false
       // selected: []
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.showFirstContactAsync();
   }
 
@@ -66,18 +66,18 @@ class ContactsComponent extends Component {
     this.props.navigation.navigate('MessageScreen');
   };
 
-  // handleRefresh = () => {
-  //   this.setState(
-  //     {
-  //       page: 1,
-  //       seed: this.state.seed + 1,
-  //       refreshing: true
-  //     },
-  //     () => {
-  //       this.showFirstContactAsync();
-  //     }
-  //   );
-  // };
+  handleRefresh = () => {
+    this.setState(
+      {
+        page: 1,
+        seed: this.state.seed + 1,
+        refreshing: true
+      },
+      () => {
+        this.showFirstContactAsync();
+      }
+    );
+  };
 
   handleLoadMore = () => {
     this.setState(
@@ -95,9 +95,9 @@ class ContactsComponent extends Component {
       <View
         style={{
           height: 1,
-          width: '86%',
-          backgroundColor: '#CED0CE',
-          marginLeft: '14%'
+          width: '100%',
+          backgroundColor: '#CED0CE'
+          // marginLeft: '14%'
         }}
       />
     );
@@ -127,20 +127,19 @@ class ContactsComponent extends Component {
     // const { toggle } = this.state;
     const alphContacts = this.state.contacts;
     // const { navigate } = this.props.navigation;
-    console.log(AsyncStorage.getItem('contactChoice'));
     return (
       <View style={styles.GetContactsContainer}>
         {/* <TouchableOpacity onPress={this.showFirstContactAsync.bind(this)}>
           <Icon name="users" type="feather" color="#517fa4" raised={true} />
           <Text>Contacts</Text>
         </TouchableOpacity> */}
-        <Icon
+        {/* <Icon
           name="users"
           type="feather"
           color="#517fa4"
           raised={true}
           onPress={() => console.log(AsyncStorage.getItem('contactChoice'))}
-        />
+        /> */}
         {alphContacts ? (
           <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
             <FlatList
@@ -162,8 +161,8 @@ class ContactsComponent extends Component {
               ListFooterComponent={this.renderFooter}
               // onRefresh={this.handleRefresh}
               // refreshing={this.state.refreshing}
-              onEndReached={this.handleLoadMore}
-              onEndReachedThreshold={50}
+              // onEndReached={this.handleLoadMore}
+              // onEndReachedThreshold={50}
             />
           </List>
         ) : null}
@@ -176,17 +175,17 @@ const styles = StyleSheet.create({
   Header: {
     backgroundColor: 'green'
   },
-  GetContactsContainer: {
-    flexDirection: 'column',
-    flex: 1,
-    backgroundColor: '#95dcf4',
-    justifyContent: 'flex-start',
-    padding: 8,
-    marginRight: 5,
-    marginLeft: 5,
-    // marginBottom: 100,
-    borderRadius: 10
-  },
+  // GetContactsContainer: {
+  //   flexDirection: 'column',
+  //   flex: 1,
+  //   backgroundColor: '#95dcf4',
+  //   justifyContent: 'flex-start',
+  //   padding: 8,
+  //   marginRight: 5,
+  //   marginLeft: 5,
+  //   // marginBottom: 100,
+  //   borderRadius: 10
+  // },
   keyboard: {
     flex: 1,
     justifyContent: 'space-between'

@@ -7,7 +7,7 @@ import MapScreen from './screens/MapScreen.js';
 import OnBoarding from './screens/OnBoarding.js';
 import MessageScreen from './screens/MessageScreen.js';
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return <AppNavigator />;
   }
@@ -48,3 +48,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
+export default App;

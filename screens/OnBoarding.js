@@ -14,7 +14,7 @@ class OnBoarding extends Component {
         pages={[
           {
             title: `Daddy's Watching`,
-            subtitle: `If you're a drunk piece of shit that gets wasted regularly, give your friends piece of mind by letting them know you made it home.`,
+            subtitle: `If you're a drunk piece of shit who gets wasted regularly, give your friends piece of mind by letting them know you made it home.`,
             backgroundColor: '#003c8f',
             image: (
               <Icon

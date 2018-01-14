@@ -9,10 +9,6 @@ import MessageScreen from './MessageScreen';
 import MapScreen from './MapScreen';
 
 class HomeScreen extends Component {
-  // static navigationOptions = ({ navigation }) => ({
-  //   title: `Message`
-  // });
-
   render() {
     return (
       <View style={styles.HomeScreenContainer}>
@@ -28,6 +24,11 @@ const HomeScreenTabNavigator = TabNavigator(
       screen: HomeScreen,
       navigationOptions: {
         title: `Daddy's Watching`,
+        headerStyle: {
+          fontFamily: 'Arial',
+          fontSize: '20'
+          // backgroundColor: 'red'
+        },
         tabBarLabel: 'Contacts',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
