@@ -8,13 +8,13 @@ class OnBoarding extends Component {
     const { navigate } = this.props.navigation;
     return (
       <Onboarding
-        showDone={true}
+        showDone={false}
         onSkip={() => navigate('HomeScreen')}
-        onDone={() => navigate('HomeScreen')}
+        // onDone={() => navigate('HomeScreen')}
         pages={[
           {
             title: `Daddy's Watching`,
-            subtitle: `If you're a drunk piece of shit that gets wasted regularly, give your friends piece of mind by letting them know you made it home.`,
+            subtitle: `If you're a drunk piece of shit who gets wasted regularly, give your friends piece of mind by letting them know you made it home.`,
             backgroundColor: '#003c8f',
             image: (
               <Icon
@@ -41,7 +41,7 @@ class OnBoarding extends Component {
           {
             title: 'Write a Message',
             subtitle:
-              'Type your drunken nonsense message in the text field. It will be sent to your contact choice.',
+              'Type your drunken nonsense message in the text field or choose one of ours. It will be sent to your contact choice.',
             backgroundColor: '#1565c0',
             image: (
               <Icon

@@ -7,9 +7,15 @@ import {
   AsyncStorage,
   Alert,
   KeyboardAvoidingView,
-  Keyboard
+  Keyboard,
+  ScrollView
 } from 'react-native';
 import { Icon } from 'react-native-elements';
+import TextOne from './messages/TextOne.js';
+import TextTwo from './messages/TextTwo.js';
+import TextThree from './messages/TextThree.js';
+import TextFour from './messages/TextFour.js';
+import TextFive from './messages/TextFive.js';
 require('json-circular-stringify');
 
 class TextMessage extends Component {
@@ -31,6 +37,41 @@ class TextMessage extends Component {
     }
   };
 
+  oneText = () => {
+    let textOne = `I am alive. I got home.`;
+    AsyncStorage.setItem('message', textOne);
+    this.props.navigation.navigate('MapScreen');
+    Keyboard.dismiss();
+  };
+
+  twoText = () => {
+    let textTwo = `I made it home, but I can't keep living like this. I need to make changes.`;
+    AsyncStorage.setItem('message', textTwo);
+    this.props.navigation.navigate('MapScreen');
+    Keyboard.dismiss();
+  };
+
+  // threeText = () => {
+  //   let textThree = `I'M HOME`;
+  //   AsyncStorage.setItem('message', textThree);
+  //   this.props.navigation.navigate('MapScreen');
+  //   Keyboard.dismiss();
+  // };
+
+  fourText = () => {
+    let textFour = `I made it home safe and sound. In your face.`;
+    AsyncStorage.setItem('message', textFour);
+    this.props.navigation.navigate('MapScreen');
+    Keyboard.dismiss();
+  };
+
+  fiveText = () => {
+    let textFive = `To all the haters who thought I'd never make it home, who thought my alcoholism was an issue, this one's for you: I am home safe and sound.`;
+    AsyncStorage.setItem('message', textFive);
+    this.props.navigation.navigate('MapScreen');
+    Keyboard.dismiss();
+  };
+
   onKeyPress = ({ nativeEvent }) => {
     if (nativeEvent.key === 'Enter') {
       Keyboard.dismiss();
@@ -40,44 +81,88 @@ class TextMessage extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.keyboard}>
-        <View style={styles.SaveMessageContainer}>
-          <TextInput
-            style={styles.MessageInput}
-            multiline={true}
-            placeholder="Enter Your Message"
-            placeholderTextColor="black"
-            returnKeyType="go"
-            onChangeText={text => this.setState({ message: text })}
-            value={this.state.message}
-            onKeyPress={this.onKeyPress}
-          />
-          <Icon
-            name="save"
+      <View style={styles.SaveMessageContainer}>
+        <TextInput
+          style={styles.MessageInput}
+          multiline={true}
+          placeholder="Enter Your Message"
+          placeholderTextColor="black"
+          returnKeyType="go"
+          onChangeText={text => this.setState({ message: text })}
+          value={this.state.message}
+          onKeyPress={this.onKeyPress}
+        />
+        <Icon
+          name="save"
+          type="feather"
+          color="#517fa4"
+          raised={true}
+          backgroundColor="white"
+          onPress={this.saveMessage}
+        />
+        <Text>Save Message</Text>
+        <Icon
+          name="arrow-right"
+          type="feather"
+          color="#517fa4"
+          raised={true}
+          backgroundColor="white"
+          onPress={this.oneText}
+        />
+        <TextOne />
+        <Icon
+          name="arrow-right"
+          type="feather"
+          color="#517fa4"
+          raised={true}
+          backgroundColor="white"
+          onPress={this.twoText}
+        />
+        <TextTwo />
+        {/* <Icon
+            name="arrow-right"
             type="feather"
             color="#517fa4"
             raised={true}
             backgroundColor="white"
-            onPress={this.saveMessage}
-            // onPress={() => navigate('MapScreen')}
+            onPress={this.threeText}
           />
-          <Text>Save Message</Text>
-        </View>
-      </KeyboardAvoidingView>
+          <TextThree /> */}
+        <Icon
+          name="arrow-right"
+          type="feather"
+          color="#517fa4"
+          raised={true}
+          backgroundColor="white"
+          onPress={this.fourText}
+        />
+        <TextFour />
+        <Icon
+          name="arrow-right"
+          type="feather"
+          color="#517fa4"
+          raised={true}
+          backgroundColor="white"
+          onPress={this.fiveText}
+        />
+        <TextFive />
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   SaveMessageContainer: {
-    // flex: 1,
+    flex: 1,
     alignItems: 'flex-start',
     justifyContent: 'center',
     alignItems: 'center',
+    textAlign: 'center',
     padding: 8,
-    marginBottom: 20,
     backgroundColor: 'white',
-    borderRadius: 10
+    // borderRadius: 10,
+    fontSize: 15,
+    fontWeight: 400
   },
   MessageInput: {
     // flex: 1,

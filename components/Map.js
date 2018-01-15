@@ -30,7 +30,8 @@ class Map extends Component {
         latitude: null,
         longitude: null
       },
-      errorMessage: null
+      errorMessage: null,
+      press: false
     };
   }
 
@@ -85,7 +86,7 @@ class Map extends Component {
         });
       },
       error => {
-        Alert.alert('There was an error.');
+        Alert.alert('Type in an address.');
       }
     );
   };
@@ -95,6 +96,9 @@ class Map extends Component {
   }
 
   beginTracking = async () => {
+    this.setState({
+      press: true
+    });
     try {
       AsyncStorage.getItem('contactChoice').then(digits => {
         this.setState({
@@ -142,12 +146,11 @@ class Map extends Component {
   };
 
   killSwitch = () => {
-    this.setState({ contact: null, message: null });
+    this.setState({ contact: null, message: null, press: false });
   };
 
   render() {
     console.log(this.state.contact, this.state.message);
-    console.log(AsyncStorage.getItem('contactChoice'));
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.keyboard}>
         <View style={styles.MapNavContainer}>
@@ -162,12 +165,13 @@ class Map extends Component {
             onChangeText={this.handleAddress}
           />
           <View style={styles.IconTextBar}>
-            <Text style={styles.IconText}>Enter Destination</Text>
+            <Text style={styles.IconText}>Search</Text>
             <Text style={styles.IconText}>Track Me</Text>
-            <Text style={styles.IconText}>Cancel Track</Text>
+            <Text style={styles.IconText}>Cancel</Text>
           </View>
           <View style={styles.NavBoxContainer}>
             <Icon
+              style={styles.Icon}
               name="search"
               type="feather"
               color="#517fa4"
@@ -175,14 +179,15 @@ class Map extends Component {
               onPress={this.getFromLocation}
             />
             <Icon
+              style={styles.Icon}
               name="target"
               type="feather"
-              color="#517fa4"
+              color={!this.state.press ? '#517fa4' : '#a45156'}
               raised={true}
               onPress={this.beginTracking}
             />
-
             <Icon
+              style={styles.Icon}
               name="cancel"
               type="materialCommunityIcons"
               color="#517fa4"
@@ -212,6 +217,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   IconText: {
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    marginTop: 0,
+    fontSize: 17
+  },
+  Icon: {
     justifyContent: 'flex-start',
     flexDirection: 'row',
     marginTop: 0

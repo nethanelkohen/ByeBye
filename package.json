@@ -27,6 +27,7 @@
     "react": "16.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
     "react-native-elements": "^0.18.5",
+    "@ardentlabs/react-native-emoji": "^1.2.1",
     "react-native-geocoding": "^0.2.0",
     "react-native-maps": "^0.19.0",
     "react-native-onboarding-swiper": "^0.3.1",
