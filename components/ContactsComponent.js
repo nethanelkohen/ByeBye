@@ -6,7 +6,8 @@ import {
   FlatList,
   TouchableOpacity,
   AsyncStorage,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  ActivityIndicator
 } from 'react-native';
 import { Contacts } from 'expo';
 import { List, ListItem, Icon, SearchBar } from 'react-native-elements';
@@ -15,19 +16,18 @@ class ContactsComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      toggle: false,
       contacts: null,
       contactSearch: null,
       loading: false,
       page: 1,
       seed: 1,
-      error: null
-      // refreshing: false
+      error: null,
+      refreshing: false
       // selected: []
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.showFirstContactAsync();
   }
 
@@ -54,8 +54,6 @@ class ContactsComponent extends Component {
     this.setState({
       contacts: newContacts
     });
-    const newState = !this.state.toggle;
-    this.setState({ toggle: newState });
   }
 
   saveContact = arg => {
@@ -66,18 +64,18 @@ class ContactsComponent extends Component {
     this.props.navigation.navigate('MessageScreen');
   };
 
-  // handleRefresh = () => {
-  //   this.setState(
-  //     {
-  //       page: 1,
-  //       seed: this.state.seed + 1,
-  //       refreshing: true
-  //     },
-  //     () => {
-  //       this.showFirstContactAsync();
-  //     }
-  //   );
-  // };
+  handleRefresh = () => {
+    this.setState(
+      {
+        page: 1,
+        seed: this.state.seed + 1,
+        refreshing: true
+      },
+      () => {
+        this.showFirstContactAsync();
+      }
+    );
+  };
 
   handleLoadMore = () => {
     this.setState(
@@ -95,21 +93,32 @@ class ContactsComponent extends Component {
       <View
         style={{
           height: 1,
-          width: '86%',
-          backgroundColor: '#CED0CE',
-          marginLeft: '14%'
+          width: '100%',
+          backgroundColor: '#CED0CE'
+          // marginLeft: '14%'
         }}
       />
     );
   };
 
   renderHeader = () => {
-    return <SearchBar placeholder="Type Here..." lightTheme round />;
+    return (
+      <SearchBar
+        placeholder="Search"
+        lightTheme
+        round
+        returnKeyType="go"
+        onChangeText={this.handleSearch}
+      />
+    );
+  };
+
+  handleSearch = text => {
+    this.setState({ contactSearch: text });
   };
 
   renderFooter = () => {
     if (!this.state.loading) return null;
-
     return (
       <View
         style={{
@@ -126,25 +135,30 @@ class ContactsComponent extends Component {
   render() {
     // const { toggle } = this.state;
     const alphContacts = this.state.contacts;
-    // const { navigate } = this.props.navigation;
-    console.log(AsyncStorage.getItem('contactChoice'));
+    const contactSearch = this.state.contactSearch;
     return (
       <View style={styles.GetContactsContainer}>
         {/* <TouchableOpacity onPress={this.showFirstContactAsync.bind(this)}>
           <Icon name="users" type="feather" color="#517fa4" raised={true} />
           <Text>Contacts</Text>
         </TouchableOpacity> */}
-        <Icon
+        {/* <Icon
           name="users"
           type="feather"
           color="#517fa4"
           raised={true}
           onPress={() => console.log(AsyncStorage.getItem('contactChoice'))}
-        />
+        /> */}
         {alphContacts ? (
           <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
             <FlatList
-              data={alphContacts}
+              data={
+                !contactSearch
+                  ? alphContacts
+                  : alphContacts.filter(item =>
+                      item.name.includes(this.state.contactSearch)
+                    )
+              }
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() => this.saveContact(item.phoneNumbers)}
@@ -157,11 +171,10 @@ class ContactsComponent extends Component {
                 </TouchableOpacity>
               )}
               keyExtractor={(item, index) => index}
-              ItemSeparatorComponent={this.renderSeparator}
               ListHeaderComponent={this.renderHeader}
+              ItemSeparatorComponent={this.renderSeparator}
               ListFooterComponent={this.renderFooter}
-              // onRefresh={this.handleRefresh}
-              // refreshing={this.state.refreshing}
+              refreshing={this.state.refreshing}
               onEndReached={this.handleLoadMore}
               onEndReachedThreshold={50}
             />
@@ -178,14 +191,14 @@ const styles = StyleSheet.create({
   },
   GetContactsContainer: {
     flexDirection: 'column',
-    flex: 1,
-    backgroundColor: '#95dcf4',
-    justifyContent: 'flex-start',
-    padding: 8,
-    marginRight: 5,
-    marginLeft: 5,
+    flex: 1
+    // backgroundColor: '#95dcf4',
+    // justifyContent: 'flex-start',
+    // padding: 8,
+    // marginRight: 5,
+    // marginLeft: 5,
     // marginBottom: 100,
-    borderRadius: 10
+    // borderRadius: 10
   },
   keyboard: {
     flex: 1,

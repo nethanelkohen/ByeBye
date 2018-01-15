@@ -14,7 +14,7 @@ class OnBoarding extends Component {
         pages={[
           {
             title: `Daddy's Watching`,
-            subtitle: `If you're a drunk piece of shit that gets wasted regularly, give your friends piece of mind by letting them know you made it home.`,
+            subtitle: `If you're a drunk piece of shit who gets wasted regularly, give your friends piece of mind by letting them know you made it home.`,
             backgroundColor: '#003c8f',
             image: (
               <Icon
@@ -41,7 +41,7 @@ class OnBoarding extends Component {
           {
             title: 'Write a Message',
             subtitle:
-              'Type your drunken nonsense message in the text field. It will be sent to your contact choice.',
+              'Type your drunken nonsense message in the text field or choose one of ours. It will be sent to your contact choice.',
             backgroundColor: '#1565c0',
             image: (
               <Icon
@@ -67,16 +67,6 @@ class OnBoarding extends Component {
           },
           {
             title: `Let Daddy Watch`,
-            subtitle: (
-              <Button
-                title={'Let Daddy Watch'}
-                containerViewStyle={{ marginTop: 20 }}
-                backgroundColor={'white'}
-                borderRadius={5}
-                textStyle={{ color: '#003c8f' }}
-                onPress={() => navigate('HomeScreen')}
-              />
-            ),
             backgroundColor: '#003c8f',
             image: (
               <Icon name="eye" type="font-awesome" size={100} color="white" />
