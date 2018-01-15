@@ -12,7 +12,7 @@ import {
 import { Contacts } from 'expo';
 import { List, ListItem, Icon, SearchBar } from 'react-native-elements';
 
-class ContactsComponent extends Component {
+class ContactsComponent extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,16 +22,17 @@ class ContactsComponent extends Component {
       page: 1,
       seed: 1,
       error: null,
-      refreshing: false
+      refreshing: false,
+      noData: false
       // selected: []
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.showFirstContactAsync();
   }
 
-  async showFirstContactAsync() {
+  showFirstContactAsync = async () => {
     // Ask for permission to query contacts.
     const permission = await Expo.Permissions.askAsync(
       Expo.Permissions.CONTACTS
@@ -54,14 +55,6 @@ class ContactsComponent extends Component {
     this.setState({
       contacts: newContacts
     });
-  }
-
-  saveContact = arg => {
-    arg.map(item => {
-      let contactChoice = item.digits;
-      AsyncStorage.setItem('contactChoice', contactChoice);
-    });
-    this.props.navigation.navigate('MessageScreen');
   };
 
   handleRefresh = () => {
@@ -108,13 +101,11 @@ class ContactsComponent extends Component {
         lightTheme
         round
         returnKeyType="go"
-        onChangeText={this.handleSearch}
+        // ref="search"
+        textInputRef="searchText"
+        onChangeText={this.handleSearch.bind(this)}
       />
     );
-  };
-
-  handleSearch = text => {
-    this.setState({ contactSearch: text });
   };
 
   renderFooter = () => {
@@ -132,10 +123,37 @@ class ContactsComponent extends Component {
     );
   };
 
+  saveContact = arg => {
+    arg.map(item => {
+      let contactChoice = item.digits;
+      AsyncStorage.setItem('contactChoice', contactChoice);
+    });
+    this.props.navigation.navigate('MessageScreen');
+  };
+
+  handleSearch = text => {
+    this.setState({ contactSearch: text });
+  };
+
+  // handleSearch = e => {
+  //   let text = e.toLowerCase();
+  //   let contacts = this.state.contacts;
+  //   let filteredName = contacts.filter(contact => {
+  //     return contact.firstName.toLowerCase().match(text);
+  //   });
+  //   if (Array.isArray(filteredName)) {
+  //     this.setState({
+  //       noData: false,
+  //       contacts: filteredName
+  //     });
+  //   }
+  // };
+
   render() {
     // const { toggle } = this.state;
     const alphContacts = this.state.contacts;
     const contactSearch = this.state.contactSearch;
+
     return (
       <View style={styles.GetContactsContainer}>
         {/* <TouchableOpacity onPress={this.showFirstContactAsync.bind(this)}>
@@ -156,9 +174,10 @@ class ContactsComponent extends Component {
                 !contactSearch
                   ? alphContacts
                   : alphContacts.filter(item =>
-                      item.name.includes(this.state.contactSearch)
+                      item.firstName.includes(this.state.contactSearch)
                     )
               }
+              // data={alphContacts}
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() => this.saveContact(item.phoneNumbers)}
@@ -173,10 +192,10 @@ class ContactsComponent extends Component {
               keyExtractor={(item, index) => index}
               ListHeaderComponent={this.renderHeader}
               ItemSeparatorComponent={this.renderSeparator}
-              ListFooterComponent={this.renderFooter}
-              refreshing={this.state.refreshing}
-              onEndReached={this.handleLoadMore}
-              onEndReachedThreshold={50}
+              // ListFooterComponent={this.renderFooter}
+              // refreshing={this.state.refreshing}
+              // onEndReached={this.handleLoadMore}
+              // onEndReachedThreshold={50}
             />
           </List>
         ) : null}
