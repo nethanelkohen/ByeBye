@@ -27,7 +27,7 @@ const HomeScreenTabNavigator = TabNavigator(
     HomeScreen: {
       screen: HomeScreen,
       navigationOptions: {
-        title: `Daddy's Watching`,
+        title: `Daddy's 👓 Watching`,
         tabBarLabel: 'Contacts',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
