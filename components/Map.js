@@ -96,9 +96,17 @@ class Map extends Component {
   }
 
   beginTracking = async () => {
-    this.setState({
-      press: true
-    });
+    if (!this.state.address) {
+      Alert.alert('Enter an address first.');
+      this.setState({
+        press: false
+      });
+    }
+    if (this.state.address) {
+      this.setState({
+        press: true
+      });
+    }
     try {
       AsyncStorage.getItem('contactChoice').then(digits => {
         this.setState({

@@ -28,7 +28,7 @@ class OnBoarding extends Component {
           {
             title: 'Choose a Contact',
             subtitle: `Select a friend (or your partner, mother, etc) on the contacts screen.`,
-            backgroundColor: '#5e92f3',
+            backgroundColor: '#003c8f',
             image: (
               <Icon
                 name="optin-monster"
@@ -42,7 +42,7 @@ class OnBoarding extends Component {
             title: 'Write a Message',
             subtitle:
               'Type your drunken nonsense message in the text field or choose one of ours. It will be sent to your contact choice.',
-            backgroundColor: '#1565c0',
+            backgroundColor: '#003c8f',
             image: (
               <Icon
                 name="clipboard"
@@ -55,7 +55,7 @@ class OnBoarding extends Component {
           {
             title: 'Enter Your Destination',
             subtitle: `Whether you're going home or to your ex's house, search for it on the map screen and click the marker button. Once you're within 50 meters of the destination, your message will automatically send and your friend will rest easy knowing you survived another drunken night.`,
-            backgroundColor: '#1565c0',
+            backgroundColor: '#003c8f',
             image: (
               <Icon
                 name="compass"
