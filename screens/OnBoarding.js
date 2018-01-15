@@ -18,7 +18,7 @@ class OnBoarding extends Component {
             backgroundColor: '#003c8f',
             image: (
               <Icon
-                name="hand-peace-o"
+                name="user-secret"
                 type="font-awesome"
                 size={100}
                 color="white"
@@ -31,7 +31,7 @@ class OnBoarding extends Component {
             backgroundColor: '#5e92f3',
             image: (
               <Icon
-                name="paper-plane-o"
+                name="optin-monster"
                 type="font-awesome"
                 size={100}
                 color="white"
@@ -45,7 +45,7 @@ class OnBoarding extends Component {
             backgroundColor: '#1565c0',
             image: (
               <Icon
-                name="bell-o"
+                name="clipboard"
                 type="font-awesome"
                 size={100}
                 color="white"
@@ -58,7 +58,7 @@ class OnBoarding extends Component {
             backgroundColor: '#1565c0',
             image: (
               <Icon
-                name="bell-o"
+                name="compass"
                 type="font-awesome"
                 size={100}
                 color="white"
@@ -69,12 +69,7 @@ class OnBoarding extends Component {
             title: `Let Daddy Watch`,
             backgroundColor: '#003c8f',
             image: (
-              <Icon
-                name="rocket"
-                type="font-awesome"
-                size={100}
-                color="white"
-              />
+              <Icon name="eye" type="font-awesome" size={100} color="white" />
             )
           }
         ]}
