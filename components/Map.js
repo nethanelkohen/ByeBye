@@ -30,7 +30,8 @@ class Map extends Component {
         latitude: null,
         longitude: null
       },
-      errorMessage: null
+      errorMessage: null,
+      press: false
     };
   }
 
@@ -85,7 +86,7 @@ class Map extends Component {
         });
       },
       error => {
-        Alert.alert('There was an error.');
+        Alert.alert('Type in an address.');
       }
     );
   };
@@ -95,6 +96,9 @@ class Map extends Component {
   }
 
   beginTracking = async () => {
+    this.setState({
+      press: true
+    });
     try {
       AsyncStorage.getItem('contactChoice').then(digits => {
         this.setState({
@@ -142,7 +146,7 @@ class Map extends Component {
   };
 
   killSwitch = () => {
-    this.setState({ contact: null, message: null });
+    this.setState({ contact: null, message: null, press: false });
   };
 
   render() {
@@ -161,7 +165,7 @@ class Map extends Component {
             onChangeText={this.handleAddress}
           />
           <View style={styles.IconTextBar}>
-            <Text style={styles.IconText}>Destination</Text>
+            <Text style={styles.IconText}>Search</Text>
             <Text style={styles.IconText}>Track Me</Text>
             <Text style={styles.IconText}>Cancel</Text>
           </View>
@@ -178,7 +182,7 @@ class Map extends Component {
               style={styles.Icon}
               name="target"
               type="feather"
-              color="#517fa4"
+              color={!this.state.press ? '#517fa4' : '#a45156'}
               raised={true}
               onPress={this.beginTracking}
             />
