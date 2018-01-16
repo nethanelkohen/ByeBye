@@ -130,27 +130,31 @@ class Map extends Component {
           longitude: mark.longitude
         });
         if (distance < radius) {
-          fetch('https://frozen-ridge-66479.herokuapp.com/message', {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              contact: this.state.contact,
-              message: `From Daddy's Watching: ${this.state.message}`
-            })
-          })
-            .then(response => {
-              Alert.alert('Message was sent!');
-            })
-            .done();
+          this.sendMessage();
         }
       },
       {
         enableHighAccuracy: true
       }
     );
+  };
+
+  sendMessage = () => {
+    fetch('https://frozen-ridge-66479.herokuapp.com/message', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        contact: this.state.contact,
+        message: `From Daddy's Watching: ${this.state.message}`
+      })
+    })
+      .then(response => {
+        Alert.alert('Message was sent!');
+      })
+      .done();
   };
 
   killSwitch = () => {
