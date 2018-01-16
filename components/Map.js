@@ -15,6 +15,8 @@ import { MapView, Location, Permissions, Constants } from 'expo';
 import Geocoder from 'react-native-geocoding';
 import geolib from 'geolib';
 
+const BASE_URL = 'https://frozen-ridge-66479.herokuapp.com';
+
 Geocoder.setApiKey('AIzaSyBakh5h7JIfXWWZmj-vm08iGO0pXUwV4Y4');
 
 class Map extends Component {
@@ -139,22 +141,39 @@ class Map extends Component {
     );
   };
 
-  sendMessage = () => {
-    fetch('https://frozen-ridge-66479.herokuapp.com/message', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        contact: this.state.contact,
-        message: `From Daddy's Watching: ${this.state.message}`
-      })
-    })
-      .then(response => {
-        Alert.alert('Message was sent!');
-      })
-      .done();
+  sendMessage = async () => {
+    // fetch('https://frozen-ridge-66479.herokuapp.com/message', {
+    //   method: 'POST',
+    //   headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     contact: this.state.contact,
+    //     message: `From Daddy's Watching: ${this.state.message}`
+    //   })
+    // })
+    //   .then(response => {
+    //     Alert.alert('Message was sent!');
+    //   })
+    //   .done();
+    try {
+      await fetch(`${BASE_URL}/message`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          contact: this.state.contact,
+          message: `From Daddy's Watching: ${this.state.message}`
+        })
+      });
+    } catch (e) {
+      Alert.alert('Error, sorry! :(');
+    } finally {
+      Alert.alert('Message was sent!');
+    }
   };
 
   killSwitch = () => {
