@@ -28,6 +28,7 @@ class Map extends Component {
       markers: {},
       contact: null,
       message: null,
+      radius: 200,
       coordinate: {
         latitude: null,
         longitude: null
@@ -124,14 +125,16 @@ class Map extends Component {
       Alert.alert(JSON.stringify(error));
     }
     let mark = this.state.markers;
-    let radius = 50;
+    // let radius = 50;
     navigator.geolocation.getCurrentPosition(
       position => {
         const distance = geolib.getDistance(position.coords, {
           latitude: mark.latitude,
           longitude: mark.longitude
         });
-        if (distance < radius) {
+
+        if (distance < this.state.radius) {
+          console.log('This should only console.log once');
           this.sendMessage();
         }
       },
@@ -166,11 +169,11 @@ class Map extends Component {
         },
         body: JSON.stringify({
           contact: this.state.contact,
-          message: `From Daddy's Watching: ${this.state.message}`
+          message: this.state.message
         })
       });
     } catch (e) {
-      Alert.alert('Error, sorry! :(');
+      console.log(e);
     } finally {
       Alert.alert('Message was sent!');
     }
@@ -235,6 +238,10 @@ class Map extends Component {
             onRegionChange={this.onRegionChange.bind(this)}
           >
             <MapView.Marker coordinate={this.state.markers} title="Endpoint" />
+            <MapView.Circle
+              // center={marker.coordinate}
+              radius={this.state.radius}
+            />
           </MapView.Animated>
         </View>
       </KeyboardAvoidingView>
