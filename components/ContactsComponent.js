@@ -1,4 +1,6 @@
+// Import react and component from react library.
 import React, { Component } from 'react';
+// Import react native components.
 import {
   View,
   Text,
@@ -6,81 +8,95 @@ import {
   FlatList,
   TouchableOpacity,
   AsyncStorage,
-  KeyboardAvoidingView,
+  Alert,
   ActivityIndicator
 } from 'react-native';
+// Import contacts components from Expo.
 import { Contacts } from 'expo';
+// Import UI components from react-native-elements.
 import { List, ListItem, Icon, SearchBar } from 'react-native-elements';
 
+// Create Contacts component.
 class ContactsComponent extends React.PureComponent {
+  // Create constructor and gain access to props and functions from parent.
   constructor(props) {
     super(props);
+    // Create state.
     this.state = {
       contacts: null,
       contactSearch: null,
-      loading: false,
-      page: 1,
-      seed: 1,
-      error: null,
-      refreshing: false,
-      noData: false
+      loading: false
+      // page: 1,
+      // seed: 1,
+      // refreshing: false,
       // selected: []
     };
   }
 
+  // Run showFirstContactAsync when app loads.
   componentDidMount() {
     this.showFirstContactAsync();
   }
 
+  // Async func that aks user permission to query contacts.
   showFirstContactAsync = async () => {
-    // Ask for permission to query contacts.
+    // Gain permission.
     const permission = await Expo.Permissions.askAsync(
       Expo.Permissions.CONTACTS
     );
+    // If permssion was denied, alert user.
     if (permission.status !== 'granted') {
-      // Permission was denied...
-      return;
+      Alert.alert('Access denied.');
     }
+    // Store contacts with phone number field and page size of 1000 contacts.
     const contacts = await Expo.Contacts.getContactsAsync({
       fields: [Expo.Contacts.PHONE_NUMBERS],
       pageSize: 1000,
       pageOffset: 0
     });
+    // Gain access to contacts.data array.
     const obj = [...contacts.data];
+    // Sort through contacts to alphabetize user's contacts.
     const newContacts = obj.sort((a, b) => {
       let nameA = a.name;
       let nameB = b.name;
       if (nameA < nameB) return -1;
     });
+    // Set state with alphabetized contacts array.
     this.setState({
       contacts: newContacts
     });
   };
 
-  handleRefresh = () => {
-    this.setState(
-      {
-        page: 1,
-        seed: this.state.seed + 1,
-        refreshing: true
-      },
-      () => {
-        this.showFirstContactAsync();
-      }
-    );
-  };
+  // Refresh handler for contacts list -- not being used since FlatList has built
+  // refreshing capability.
+  // handleRefresh = () => {
+  //   this.setState(
+  //     {
+  //       page: 1,
+  //       seed: this.state.seed + 1,
+  //       refreshing: true
+  //     },
+  //     () => {
+  //       this.showFirstContactAsync();
+  //     }
+  //   );
+  // };
 
-  handleLoadMore = () => {
-    this.setState(
-      {
-        page: this.state.page + 1
-      },
-      () => {
-        this.showFirstContactAsync();
-      }
-    );
-  };
+  // Loading handler for contacts list -- not being used since FlatList has built
+  // loading capability.
+  // handleLoadMore = () => {
+  //   this.setState(
+  //     {
+  //       page: this.state.page + 1
+  //     },
+  //     () => {
+  //       this.showFirstContactAsync();
+  //     }
+  //   );
+  // };
 
+  // Creates a border for each contact in list.
   renderSeparator = () => {
     return (
       <View
@@ -94,8 +110,10 @@ class ContactsComponent extends React.PureComponent {
     );
   };
 
+  // Creates a header for contact list.
   renderHeader = () => {
     return (
+      //Renders search bar component from react-native-elements.
       <SearchBar
         placeholder="Search"
         lightTheme
@@ -103,12 +121,15 @@ class ContactsComponent extends React.PureComponent {
         returnKeyType="go"
         // ref="search"
         textInputRef="searchText"
+        //Searches contacts when new letter is typed in search bar.
         onChangeText={this.handleSearch.bind(this)}
       />
     );
   };
 
+  // Creates a footer for contact list.
   renderFooter = () => {
+    // Do not render footer if contact list is still loading.
     if (!this.state.loading) return null;
     return (
       <View
@@ -123,34 +144,25 @@ class ContactsComponent extends React.PureComponent {
     );
   };
 
+  // Takes in phone number digits from user's contact choice from list and sets
+  // it to async storage as contactChoice for user's text message.
   saveContact = arg => {
     arg.map(item => {
       let contactChoice = item.digits;
       AsyncStorage.setItem('contactChoice', contactChoice);
     });
+    // Navigates to message screen after choice is stored.
     this.props.navigation.navigate('MessageScreen');
   };
 
+  // Searches through contact list, takes in user's search and stores it to state
+  // for contact list search.
   handleSearch = text => {
     this.setState({ contactSearch: text });
   };
 
-  // handleSearch = e => {
-  //   let text = e.toLowerCase();
-  //   let contacts = this.state.contacts;
-  //   let filteredName = contacts.filter(contact => {
-  //     return contact.firstName.toLowerCase().match(text);
-  //   });
-  //   if (Array.isArray(filteredName)) {
-  //     this.setState({
-  //       noData: false,
-  //       contacts: filteredName
-  //     });
-  //   }
-  // };
-
   render() {
-    // const { toggle } = this.state;
+    // Cache contacts and contactSearch state for readability.
     const alphContacts = this.state.contacts;
     const contactSearch = this.state.contactSearch;
 
@@ -167,35 +179,38 @@ class ContactsComponent extends React.PureComponent {
           raised={true}
           onPress={() => console.log(AsyncStorage.getItem('contactChoice'))}
         /> */}
+        {/* Conditional statement: if contacts state exists, then create list with
+          contactSearch state as data. */}
         {alphContacts ? (
           <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
             <FlatList
               data={
+                // If contactSearch state is empty then render contact state as
+                // normal.
                 !contactSearch
                   ? alphContacts
-                  : alphContacts.filter(item =>
+                  : // Otherwise, take in what user typed and filter through by first name.
+                    alphContacts.filter(item =>
                       item.firstName.includes(this.state.contactSearch)
                     )
               }
-              // data={alphContacts}
+              // Render items for FlatList.
               renderItem={({ item }) => (
+                // Saves contact with phone number digits as arg.
                 <TouchableOpacity
                   onPress={() => this.saveContact(item.phoneNumbers)}
                 >
+                  {/* Renders contact's full name as item in FlatList. */}
                   <ListItem
-                    roundAvatar
                     title={item.name}
                     containerStyle={{ borderBottomWidth: 0 }}
                   />
                 </TouchableOpacity>
               )}
+              // Renders index for FlatList and calls header and seperator funcs.
               keyExtractor={(item, index) => index}
               ListHeaderComponent={this.renderHeader}
               ItemSeparatorComponent={this.renderSeparator}
-              // ListFooterComponent={this.renderFooter}
-              // refreshing={this.state.refreshing}
-              // onEndReached={this.handleLoadMore}
-              // onEndReachedThreshold={50}
             />
           </List>
         ) : null}

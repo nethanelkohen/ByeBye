@@ -20,6 +20,7 @@ import { MapView, Location, Permissions, Constants } from 'expo';
 import Geocoder from 'react-native-geocoding';
 // Import geolib for distance calculation.
 import geolib from 'geolib';
+// Import api key form secure config file.
 import config from '../config/config.json';
 
 // Store base url globally for API server call.
