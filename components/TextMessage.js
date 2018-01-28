@@ -10,7 +10,7 @@ import {
   Alert,
   Keyboard
 } from 'react-native';
-// Import icon for ui display.
+// Import icon for UI display.
 import { Icon } from 'react-native-elements';
 // Import texts from messages components.
 import TextOne from './messages/TextOne.js';
