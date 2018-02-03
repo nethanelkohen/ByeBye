@@ -26,7 +26,7 @@ class HomeScreen extends Component {
     return (
       <View style={styles.HomeScreenContainer}>
         {/* Render ContactsComponent which handles user's contact functionality
-           with navigation props for Onclick */}
+           with navigation props for OnClick. */}
         <ContactsComponent navigation={this.props.navigation} />
       </View>
     );
