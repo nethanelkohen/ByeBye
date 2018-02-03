@@ -1,16 +1,25 @@
+// Import react and component from react library.
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+// Import components for UI display.
 import { Button, Icon } from 'react-native-elements';
+// Import Onboarding componet from react-native-onboarding-swiper package.
 import Onboarding from 'react-native-onboarding-swiper';
 
+// Create OnBoarding component.
 class OnBoarding extends Component {
+  // Render React elements to device.
   render() {
+    // Bring in navigation props.
     const { navigate } = this.props.navigation;
     return (
+      // Render Onboarding component, which creates onboarding segment of app.
       <Onboarding
         showDone={true}
+        // If user clicks onSkip, app navigates to HomeScreen.
         onSkip={() => navigate('HomeScreen')}
+        // If user clicks onDone, app navigates to HomeScreen.
         onDone={() => navigate('HomeScreen')}
+        // Pages to display in OnBoarding screen.
         pages={[
           {
             title: `Daddy's Watching`,
