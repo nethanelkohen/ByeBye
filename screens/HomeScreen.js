@@ -1,26 +1,43 @@
+// Import react and component from react library.
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+// Import react native components.
+import { View, StyleSheet, Text } from 'react-native';
+// Import TabNavigator for tab navigation.
 import { TabNavigator } from 'react-navigation';
+// Import StackNavigator.
 import { StackNavigator } from 'react-navigation';
-import { Icon, Text } from 'react-native-elements';
+// Import Icon for UI display.
+import { Icon } from 'react-native-elements';
+// Import Emoji for header.
 import Emoji from '@ardentlabs/react-native-emoji';
+// Import TextMessage for navigation purposes.
 import TextMessage from '../components/TextMessage.js';
+// Import ContactsComponent for navigation purposes.
 import ContactsComponent from '../components/ContactsComponent.js';
+// Import MessageScreen for navigation purposes.
 import MessageScreen from './MessageScreen';
+// Import MapScreen for navigation purposes.
 import MapScreen from './MapScreen';
 
+// Create HomeScreen component.
 class HomeScreen extends Component {
+  // Render React elements to device.
   render() {
     return (
       <View style={styles.HomeScreenContainer}>
+        {/* Render ContactsComponent which handles user's contact functionality
+           with navigation props for Onclick */}
         <ContactsComponent navigation={this.props.navigation} />
       </View>
     );
   }
 }
 
+// Set TabNavigator, which creates three tabs at the bottom of the device to
+// handle navigation.
 const HomeScreenTabNavigator = TabNavigator(
   {
+    // Create HomeScreen tab navigation.
     HomeScreen: {
       screen: HomeScreen,
       navigationOptions: {
@@ -41,6 +58,7 @@ const HomeScreenTabNavigator = TabNavigator(
         )
       }
     },
+    // Create MessageScreen tab navigation.
     MessageScreen: {
       screen: MessageScreen,
       navigationOptions: {
@@ -61,6 +79,7 @@ const HomeScreenTabNavigator = TabNavigator(
         )
       }
     },
+    // Create MapScreen tab navigation.
     MapScreen: {
       screen: MapScreen,
       navigationOptions: {
@@ -82,6 +101,7 @@ const HomeScreenTabNavigator = TabNavigator(
       }
     }
   },
+  // Smoother animation/transition between screens.
   {
     animationEnabled: true
   }
