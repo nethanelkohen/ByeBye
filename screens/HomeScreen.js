@@ -39,14 +39,18 @@ const HomeScreenTabNavigator = TabNavigator(
   {
     // Create HomeScreen tab navigation.
     HomeScreen: {
+      // Sets HomeScreen to HomeScreen Component.
       screen: HomeScreen,
       navigationOptions: {
+        // Set header title.
         title: (
           <Text style={{ fontFamily: 'Courier-Bold' }}>
             Daddy's <Emoji name=":man:" /> Watching
           </Text>
         ),
+        // Sets tab label as Contacts.
         tabBarLabel: 'Contacts',
+        // Sets tab display.
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
             name={'phone'}
@@ -60,14 +64,18 @@ const HomeScreenTabNavigator = TabNavigator(
     },
     // Create MessageScreen tab navigation.
     MessageScreen: {
+      // Sets MessageScreen to MessageScreen.js.
       screen: MessageScreen,
       navigationOptions: {
+        // Set header title.
         title: (
           <Text style={{ fontFamily: 'Courier-Bold' }}>
             Daddy's <Emoji name=":man:" /> Watching
           </Text>
         ),
+        // Sets tab label as Message.
         tabBarLabel: 'Message',
+        // Sets tab display.
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
             name={'message-square'}
@@ -81,14 +89,18 @@ const HomeScreenTabNavigator = TabNavigator(
     },
     // Create MapScreen tab navigation.
     MapScreen: {
+      // Sets MapScreen to MapScreen.js.
       screen: MapScreen,
       navigationOptions: {
         title: (
+          // Set header title.
           <Text style={{ fontFamily: 'Courier-Bold' }}>
             Daddy's <Emoji name=":man:" /> Watching
           </Text>
         ),
+        // Sets tab label as Map.
         tabBarLabel: 'Map',
+        // Sets tab display.
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
             name={'map'}
