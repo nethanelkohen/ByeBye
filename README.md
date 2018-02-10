@@ -1,6 +1,6 @@
-<img src="https://www.thewrap.com/wp-content/uploads/2014/08/nathan-for-you-daddys-watching.jpg.jpg" width="150" height="150" align="right">
+<img src="https://www.thewrap.com/wp-content/uploads/2014/08/nathan-for-you-Mommys-watching.jpg.jpg" width="150" height="150" align="right">
 
-# Daddy's Watching
+# Mommy's Watching
 
  <br>
 
@@ -20,14 +20,14 @@ Then, scan the QR code below:
 
 <img src="./assets/images/qr_code.png" align= "center" width="100" height="100" />
 
-or go to our [project](https://expo.io/@nethanelkohen/Daddys-Watching) on Expo.
+or go to our [project](https://expo.io/@nethanelkohen/Mommys-Watching) on Expo.
 
 On the home screen, type in your desired message in the text input and choose a friend from your contacts list. Press the save icon to save your message and the contact you will send that message to and navigate to the map screen to search for a location. When you are ready to go home or leave for the night, click the bullseye to begin tracking your location! Once you are within 50 meters of your endpoint, your friend will receive your message from a Twilio number ((210)-508-0050). If you'd like to cancel your message, simply click the X to turn everything off.
 
 ## Project Structure
 
 ```
-├── Daddys_Watching    # Source code
+├── Mommys_Watching    # Source code
 │   ├── App.js         ## Begins navigation
 │   ├──app.json        ## Handles Expo render data
 │   ├── assets         ## Static assets
@@ -40,7 +40,7 @@ On the home screen, type in your desired message in the text input and choose a 
 │       └── HomeScreen.js     ### Navigates to contact/message screen
 │       └── MapScreen.js      ### Navigates to map
 │
-└── Daddys_Watching Server # Handles Twilio post API call
+└── Mommys_Watching Server # Handles Twilio post API call
 ```
 
 ## What's Inside

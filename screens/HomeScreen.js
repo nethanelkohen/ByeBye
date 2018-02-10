@@ -45,7 +45,7 @@ const HomeScreenTabNavigator = TabNavigator(
         // Set header title.
         title: (
           <Text style={{ fontFamily: 'Courier-Bold' }}>
-            Daddy's <Emoji name=":man:" /> Watching
+            Mommy's <Emoji name=":woman:" /> Watching
           </Text>
         ),
         // Sets tab label as Contacts.
@@ -70,7 +70,7 @@ const HomeScreenTabNavigator = TabNavigator(
         // Set header title.
         title: (
           <Text style={{ fontFamily: 'Courier-Bold' }}>
-            Daddy's <Emoji name=":man:" /> Watching
+            Mommy's <Emoji name=":woman:" /> Watching
           </Text>
         ),
         // Sets tab label as Message.
@@ -95,7 +95,7 @@ const HomeScreenTabNavigator = TabNavigator(
         title: (
           // Set header title.
           <Text style={{ fontFamily: 'Courier-Bold' }}>
-            Daddy's <Emoji name=":man:" /> Watching
+            Mommy's <Emoji name=":woman:" /> Watching
           </Text>
         ),
         // Sets tab label as Map.
