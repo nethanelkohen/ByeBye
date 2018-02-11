@@ -32,7 +32,6 @@ On the home screen, type in your desired message in the text input and choose a 
 ## Project Structure
 
 ```
-├── Mommys_Watching    # Source code
 │   ├── App.js         ## Begins navigation
 │   ├──app.json        ## Handles Expo render data
 │   ├── assets         ## Static assets
