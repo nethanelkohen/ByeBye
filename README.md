@@ -1,4 +1,9 @@
-<img src="https://www.thewrap.com/wp-content/uploads/2014/08/nathan-for-you-Mommys-watching.jpg.jpg" width="150" height="150" align="right">
+[![GitHub top language](https://img.shields.io/github/languages/top/nethanelkohen/Mommys_Watching.svg?colorB=EFDF70&style=plastic)](https://github.com/nethanelkohen/Mommys_Watching)
+[![GitHub issues](https://img.shields.io/github/issues/nethanelkohen/Mommys_Watching.svg?&colorB=ff0000&style=plastic)](https://github.com/nethanelkohen/Mommys_Watching/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/nethanelkohen/Mommys_Watching.svg?colorB=1FBF14&style=plastic)](https://github.com/nethanelkohen/Mommys_Watching/pulls)
+[![License (3-Clause BSD)](https://img.shields.io/github/license/mashape/apistatus.svg?style=plastic)](https://github.com/nethanelkohen/Mommys_Watching/blob/master/LICENSE)
+
+<img src="./assets/images/bye.png" width="150" height="150" align="right">
 
 # Mommy's Watching
 
