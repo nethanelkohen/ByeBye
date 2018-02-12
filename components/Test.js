@@ -41,7 +41,7 @@ class Map extends Component {
       markers: {},
       contact: null,
       message: null,
-      radius: 100,
+      radius: 200,
       coordinate: {
         latitude: null,
         longitude: null
@@ -77,42 +77,18 @@ class Map extends Component {
     }
 
     // Stores location with user's current location.
-    let location = await Location.watchPositionAsync(
-      {
-        enableHighAccuracy: false,
-        distanceInterval: 2000,
-        timeInterval: 2000
-      },
-      location =>
-        this.setState({
-          location,
-          region: {
-            ...location.coords,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
-          }
-        })
-    );
+    let location = await Location.getCurrentPositionAsync({});
+    // Sets state for user location with user's region (what is displayed on the map)
+    // and location coordinates. latitudeDelta and longitudeDelta sets map zoom.
+    this.setState({
+      location,
+      region: {
+        ...location.coords,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
+      }
+    });
   };
-
-  //   let { location } = await Location.watchPositionAsync(
-  //     { timeInterval: 1000 },
-  //     function(location) {
-  //       console.log('Location = ' + JSON.stringify(location));
-  //       that.setState({ location: location });
-  //     }
-  //   );
-  //   // Sets state for user location with user's region (what is displayed on the map)
-  //   // and location coordinates. latitudeDelta and longitudeDelta sets map zoom.
-  //   this.setState({
-  //     location,
-  //     region: {
-  //       ...location.coords,
-  //       latitudeDelta: 0.0922,
-  //       longitudeDelta: 0.0421
-  //     }
-  //   });
-  // };
 
   // Takes in user's address search from TextInput and sets state for address
   // for Geocoder API call.
@@ -223,7 +199,7 @@ class Map extends Component {
       await fetch(`${BASE_URL}/message`, {
         method: 'POST',
         headers: {
-          Accept: 'application/x-www-form-urlencoded',
+          Accept: 'application/json',
           'Content-Type': 'application/json'
         },
         // Body of post request takes in user's contact choice and message.
@@ -239,24 +215,6 @@ class Map extends Component {
     } finally {
       Alert.alert('Message was sent!');
     }
-    // try {
-    //   // Fetch post request to app's server.
-    //   await fetch(`https://requestb.in/rer4yxre`, {
-    //     method: 'POST',
-    //     headers: {
-    //       Accept: 'application/x-www-form-urlencoded',
-    //       'Content-Type': 'application/json'
-    //     },
-    //     // Body of post request takes in user's contact choice and message.
-    //     body: this.state.message
-    //   });
-    //   // Catches error.
-    // } catch (e) {
-    //   console.log(e);
-    //   // Sends message to user to confirm that their message was delivered.
-    // } finally {
-    //   Alert.alert('Message was sent!');
-    // }
   };
 
   // Kills all functionality if user wants to cancel message.
@@ -371,6 +329,7 @@ const styles = StyleSheet.create({
     padding: 2,
     fontSize: 18,
     borderRadius: 10,
+    fontSize: 20,
     alignSelf: 'stretch',
     marginTop: 0,
     borderWidth: 0.5

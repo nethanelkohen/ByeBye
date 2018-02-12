@@ -2,7 +2,7 @@
   "expo": {
     "name": "Mommy's Watching",
     "slug": "Mommys-Watching",
-    "sdkVersion": "23.0.0",
+    "sdkVersion": "25.0.0",
     "privacy": "public",
     "icon": "./assets/images/bye.png",
     "splash": {

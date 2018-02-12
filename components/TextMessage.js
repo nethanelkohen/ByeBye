@@ -207,7 +207,6 @@ const styles = StyleSheet.create({
     padding: 8,
     fontSize: 20,
     borderRadius: 10,
-    fontSize: 20,
     alignSelf: 'stretch'
   },
   SaveMessageButton: {
