@@ -266,6 +266,8 @@ class Map extends Component {
 
   // Render React elements to device.
   render() {
+    console.log(this.state.location);
+
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.keyboard}>
         <View style={styles.MapNavContainer}>

@@ -22,7 +22,7 @@ class OnBoarding extends Component {
         // Pages to display in OnBoarding screen.
         pages={[
           {
-            title: `Mommy's Watching`,
+            title: `Guardians`,
             subtitle: `If you're a drunk piece of shit who gets wasted regularly, give your friends piece of mind by letting them know you made it home.`,
             backgroundColor: '#003c8f',
             image: (
@@ -75,7 +75,7 @@ class OnBoarding extends Component {
             )
           },
           {
-            title: `Let Mommy Watch`,
+            title: `Guard Yourself`,
             backgroundColor: '#003c8f',
             image: (
               <Icon name="eye" type="font-awesome" size={100} color="white" />

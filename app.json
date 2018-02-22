@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Mommy's Watching",
-    "slug": "Mommys-Watching",
+    "name": "Guardians",
+    "slug": "Guardians",
     "sdkVersion": "25.0.0",
     "privacy": "public",
     "icon": "./assets/images/bye.png",
