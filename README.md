@@ -1,11 +1,11 @@
-[![GitHub top language](https://img.shields.io/github/languages/top/nethanelkohen/Guardians.svg?colorB=EFDF70&style=plastic)](https://github.com/nethanelkohen/Guardians)
-[![GitHub issues](https://img.shields.io/github/issues/nethanelkohen/Guardians.svg?&colorB=ff0000&style=plastic)](https://github.com/nethanelkohen/Guardians/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/nethanelkohen/Guardians.svg?colorB=1FBF14&style=plastic)](https://github.com/nethanelkohen/Guardians/pulls)
-[![License (3-Clause BSD)](https://img.shields.io/github/license/mashape/apistatus.svg?style=plastic)](https://github.com/nethanelkohen/Guardians/blob/master/LICENSE)
+[![GitHub top language](https://img.shields.io/github/languages/top/nethanelkohen/ByeBye.svg?colorB=EFDF70&style=plastic)](https://github.com/nethanelkohen/ByeBye)
+[![GitHub issues](https://img.shields.io/github/issues/nethanelkohen/ByeBye.svg?&colorB=ff0000&style=plastic)](https://github.com/nethanelkohen/ByeBye/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/nethanelkohen/ByeBye.svg?colorB=1FBF14&style=plastic)](https://github.com/nethanelkohen/ByeBye/pulls)
+[![License (3-Clause BSD)](https://img.shields.io/github/license/mashape/apistatus.svg?style=plastic)](https://github.com/nethanelkohen/ByeBye/blob/master/LICENSE)
 
 <img src="./assets/images/bye.png" width="150" height="150" align="right">
 
-# Guardians
+# ByeBye
 
  <br>
 
@@ -25,7 +25,7 @@ Then, scan the QR code below:
 
 <img src="./assets/images/qr_code.png" align= "center" width="100" height="100" />
 
-or go to our [project](https://expo.io/@nethanelkohen/Guardians) on Expo.
+or go to our [project](https://expo.io/@nethanelkohen/ByeBye) on Expo.
 
 On the home screen, type in your desired message in the text input and choose a friend from your contacts list. Press the save icon to save your message and the contact you will send that message to and navigate to the map screen to search for a location. When you are ready to go home or leave for the night, click the bullseye to begin tracking your location! Once you are within 50 meters of your endpoint, your friend will receive your message from a Twilio number ((210)-508-0050). If you'd like to cancel your message, simply click the X to turn everything off.
 
@@ -44,7 +44,7 @@ On the home screen, type in your desired message in the text input and choose a 
 │       └── HomeScreen.js     ### Navigates to contact/message screen
 │       └── MapScreen.js      ### Navigates to map
 │
-└── Guardians Server # Handles Twilio post API call
+└── ByeBye Server # Handles Twilio post API call
 ```
 
 ## What's Inside
