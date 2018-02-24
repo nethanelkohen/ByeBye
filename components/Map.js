@@ -26,6 +26,12 @@ import config from '../config/config.json';
 // Store base url globally for API server call.
 const BASE_URL = 'https://frozen-ridge-66479.herokuapp.com';
 
+const GEOLOCATION_OPTIONS = {
+  enableHighAccuracy: true,
+  timeout: 20000,
+  maximumAge: 1000
+};
+
 // Set Geocoder API key from config file for address search API call.
 Geocoder.setApiKey(config.GEOCODER_API);
 
@@ -37,7 +43,7 @@ class Map extends Component {
     // Create state.
     this.state = {
       address: '',
-      location: {},
+      location: { coords: { latitude: 0, longitude: 0 } },
       markers: {},
       contact: null,
       message: null,
@@ -78,41 +84,10 @@ class Map extends Component {
 
     // Stores location with user's current location.
     let location = await Location.watchPositionAsync(
-      {
-        enableHighAccuracy: false,
-        distanceInterval: 2000,
-        timeInterval: 2000
-      },
-      location =>
-        this.setState({
-          location,
-          region: {
-            ...location.coords,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
-          }
-        })
+      GEOLOCATION_OPTIONS,
+      this.locationChanged
     );
   };
-
-  //   let { location } = await Location.watchPositionAsync(
-  //     { timeInterval: 1000 },
-  //     function(location) {
-  //       console.log('Location = ' + JSON.stringify(location));
-  //       that.setState({ location: location });
-  //     }
-  //   );
-  //   // Sets state for user location with user's region (what is displayed on the map)
-  //   // and location coordinates. latitudeDelta and longitudeDelta sets map zoom.
-  //   this.setState({
-  //     location,
-  //     region: {
-  //       ...location.coords,
-  //       latitudeDelta: 0.0922,
-  //       longitudeDelta: 0.0421
-  //     }
-  //   });
-  // };
 
   // Takes in user's address search from TextInput and sets state for address
   // for Geocoder API call.
@@ -149,11 +124,17 @@ class Map extends Component {
     );
   };
 
-  // Handles region change on map, ie if user moves to a different point on map screen.
-  onRegionChange(region) {
-    // Sets new region state.
-    this.setState({ region });
-  }
+  // Handles location change.
+  locationChanged = location => {
+    region = {
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+      latitudeDelta: 0.1,
+      longitudeDelta: 0.05
+    };
+
+    this.setState({ location, region });
+  };
 
   // Handles tracking function.
   beginTracking = async () => {
@@ -197,16 +178,19 @@ class Map extends Component {
     navigator.geolocation.getCurrentPosition(
       position => {
         // Stores distance in meters to distance variable.
+
         const distance = geolib.getDistance(position.coords, {
           latitude: mark.latitude,
           longitude: mark.longitude
         });
+
         // If distance variable is less than the radius (200 meters), then
         // mesage will be sent. ie, if user is within 200 meters of their endpoint
         // then message is sent.
-        if (distance < this.state.radius) {
-          this.sendMessage();
-          console.log('once');
+        {
+          distance < this.state.radius
+            ? this.sendMessage()
+            : console.log(distance);
         }
       },
       // enableHighAccuracy for higher accuracy with geolib package.
@@ -239,24 +223,6 @@ class Map extends Component {
     } finally {
       Alert.alert('Message was sent!');
     }
-    // try {
-    //   // Fetch post request to app's server.
-    //   await fetch(`https://requestb.in/rer4yxre`, {
-    //     method: 'POST',
-    //     headers: {
-    //       Accept: 'application/x-www-form-urlencoded',
-    //       'Content-Type': 'application/json'
-    //     },
-    //     // Body of post request takes in user's contact choice and message.
-    //     body: this.state.message
-    //   });
-    //   // Catches error.
-    // } catch (e) {
-    //   console.log(e);
-    //   // Sends message to user to confirm that their message was delivered.
-    // } finally {
-    //   Alert.alert('Message was sent!');
-    // }
   };
 
   // Kills all functionality if user wants to cancel message.
@@ -266,8 +232,6 @@ class Map extends Component {
 
   // Render React elements to device.
   render() {
-    console.log(this.state.location);
-
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.keyboard}>
         <View style={styles.MapNavContainer}>
@@ -324,7 +288,7 @@ class Map extends Component {
             followsUserLocation={false}
             showsCompass={true}
             region={this.state.region}
-            onRegionChange={this.onRegionChange.bind(this)}
+            // onRegionChange={this.onRegionChange.bind(this)}
           >
             {/* Renders markers on map. */}
             <MapView.Marker coordinate={this.state.markers} title="Endpoint" />
