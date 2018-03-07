@@ -15,6 +15,7 @@ import MapScreen from './screens/MapScreen.js';
 import OnBoarding from './screens/OnBoarding.js';
 // Import message screen for navigation.
 import MessageScreen from './screens/MessageScreen.js';
+console.disableYellowBox = true;
 
 // Set stack navigator as AppNavigator from react-navigation, which
 // creates navigator for reach screen on app.

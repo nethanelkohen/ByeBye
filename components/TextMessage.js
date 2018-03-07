@@ -108,7 +108,7 @@ class TextMessage extends Component {
           style={styles.MessageInput}
           multiline={true}
           placeholder="Enter Your Message"
-          placeholderTextColor="black"
+          placeholderTextColor="#000000"
           returnKeyType="go"
           // Sets text message (state) to whatever user types.
           onChangeText={text => this.setState({ message: text })}
@@ -123,7 +123,7 @@ class TextMessage extends Component {
           type="feather"
           color="#517fa4"
           raised={true}
-          backgroundColor="white"
+          backgroundColor="#ffffff"
           // Saves message on icon press.
           onPress={this.saveMessage}
         />
@@ -133,7 +133,7 @@ class TextMessage extends Component {
           type="feather"
           color="#517fa4"
           raised={true}
-          backgroundColor="white"
+          backgroundColor="#ffffff"
           // Saves user text message to textOne on icon press.
           onPress={this.oneText}
         />
@@ -144,7 +144,7 @@ class TextMessage extends Component {
           type="feather"
           color="#517fa4"
           raised={true}
-          backgroundColor="white"
+          backgroundColor="#ffffff"
           // Saves user text message to textTwo on icon press.
           onPress={this.twoText}
         />
@@ -155,7 +155,7 @@ class TextMessage extends Component {
             type="feather"
             color="#517fa4"
             raised={true}
-            backgroundColor="white"
+            backgroundColor="#ffffff"
             // Saves user text message to textThree on icon press.
             onPress={this.threeText}
           />
@@ -165,7 +165,7 @@ class TextMessage extends Component {
           type="feather"
           color="#517fa4"
           raised={true}
-          backgroundColor="white"
+          backgroundColor="#ffffff"
           // Saves user text message to textFour on icon press.
           onPress={this.fourText}
         />
@@ -176,7 +176,7 @@ class TextMessage extends Component {
           type="feather"
           color="#517fa4"
           raised={true}
-          backgroundColor="white"
+          backgroundColor="#ffffff"
           // Saves user text message to textFive on icon press.
           onPress={this.fiveText}
         />
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 8,
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     // borderRadius: 10,
     fontSize: 15,
     fontWeight: 'bold'

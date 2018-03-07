@@ -167,7 +167,7 @@ class ContactsComponent extends React.PureComponent {
     const contactSearch = this.state.contactSearch;
 
     return (
-      <View style={styles.GetContactsContainer}>
+      <View style={styles.getContactsContainer}>
         {/* <TouchableOpacity onPress={this.showFirstContactAsync.bind(this)}>
           <Icon name="users" type="feather" color="#517fa4" raised={true} />
           <Text>Contacts</Text>
@@ -220,10 +220,7 @@ class ContactsComponent extends React.PureComponent {
 }
 
 const styles = StyleSheet.create({
-  Header: {
-    backgroundColor: 'green'
-  },
-  GetContactsContainer: {
+  getContactsContainer: {
     flexDirection: 'column',
     flex: 1
     // backgroundColor: '#95dcf4',

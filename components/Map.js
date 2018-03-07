@@ -44,10 +44,11 @@ class Map extends Component {
     this.state = {
       address: '',
       location: { coords: { latitude: 0, longitude: 0 } },
+      distance: 101,
       markers: {},
       contact: null,
       message: null,
-      radius: 100,
+
       coordinate: {
         latitude: null,
         longitude: null
@@ -178,20 +179,14 @@ class Map extends Component {
     navigator.geolocation.getCurrentPosition(
       position => {
         // Stores distance in meters to distance variable.
-
-        const distance = geolib.getDistance(position.coords, {
+        const userDistance = geolib.getDistance(position.coords, {
           latitude: mark.latitude,
           longitude: mark.longitude
         });
-
+        this.setState({ distance: userDistance });
         // If distance variable is less than the radius (200 meters), then
         // mesage will be sent. ie, if user is within 200 meters of their endpoint
         // then message is sent.
-        {
-          distance < this.state.radius
-            ? this.sendMessage()
-            : console.log(distance);
-        }
       },
       // enableHighAccuracy for higher accuracy with geolib package.
       {
@@ -199,6 +194,13 @@ class Map extends Component {
       }
     );
   };
+
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.distance < 100) {
+      console.log('location update', this.state.distance);
+      this.sendMessage();
+    }
+  }
 
   // Handles Twilio API post request through our backend server.
   sendMessage = async () => {
@@ -220,14 +222,20 @@ class Map extends Component {
     } catch (e) {
       console.log(e);
       // Sends message to user to confirm that their message was delivered.
-    } finally {
-      Alert.alert('Message was sent!');
     }
+    // finally {
+    //   await Alert.alert('Message was sent!');
+    // }
   };
 
   // Kills all functionality if user wants to cancel message.
   killSwitch = () => {
-    this.setState({ contact: null, message: null, press: false });
+    this.setState({
+      contact: null,
+      message: null,
+      press: false,
+      distance: 100
+    });
   };
 
   // Render React elements to device.
@@ -242,7 +250,7 @@ class Map extends Component {
             placeholder="Where are you going?"
             controlled={true}
             multiline={false}
-            placeholderTextColor="black"
+            placeholderTextColor="#000000"
             autoCapitalize="none"
             returnKeyType="search"
             onChangeText={this.handleAddress}
@@ -293,10 +301,6 @@ class Map extends Component {
             {/* Renders markers on map. */}
             <MapView.Marker coordinate={this.state.markers} title="Endpoint" />
             {/* Renders an (invisible) radius on map for geolocation purposes. */}
-            <MapView.Circle
-              // center={marker.coordinate}
-              radius={this.state.radius}
-            />
           </MapView.Animated>
         </View>
       </KeyboardAvoidingView>
@@ -307,7 +311,7 @@ class Map extends Component {
 const styles = StyleSheet.create({
   MapNavContainer: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: '#ffffff'
   },
   IconText: {
     justifyContent: 'flex-start',
@@ -333,7 +337,7 @@ const styles = StyleSheet.create({
 
   AddressInput: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     padding: 2,
     fontSize: 18,
     borderRadius: 10,

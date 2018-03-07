@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center'
   }
