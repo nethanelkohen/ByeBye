@@ -50,7 +50,7 @@ class OnBoarding extends Component {
           {
             title: 'Write a Message',
             subtitle:
-              'Type your drunken nonsense message in the text field or choose one of ours. It will be sent to your contact choice.',
+              'Type your drunken nonsense message in the text field or choose one of ours. It will be sent to your contact of choice.',
             backgroundColor: '#003c8f',
             image: (
               <Icon

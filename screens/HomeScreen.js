@@ -24,7 +24,7 @@ class HomeScreen extends Component {
   // Render React elements to device.
   render() {
     return (
-      <View style={styles.HomeScreenContainer}>
+      <View style={styles.homeScreenContainer}>
         {/* Render ContactsComponent which handles user's contact functionality
            with navigation props for OnClick. */}
         <ContactsComponent navigation={this.props.navigation} />
@@ -122,7 +122,7 @@ const HomeScreenTabNavigator = TabNavigator(
 );
 
 const styles = StyleSheet.create({
-  HomeScreenContainer: {
+  homeScreenContainer: {
     flex: 1,
     backgroundColor: '#ffffff'
   }

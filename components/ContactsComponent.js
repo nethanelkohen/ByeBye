@@ -84,7 +84,7 @@ class ContactsComponent extends React.PureComponent {
   // };
 
   // Loading handler for contacts list -- not being used since FlatList has built
-  // loading capability.
+  // in loading capability.
   // handleLoadMore = () => {
   //   this.setState(
   //     {

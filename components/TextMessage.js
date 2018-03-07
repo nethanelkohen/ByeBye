@@ -102,10 +102,10 @@ class TextMessage extends Component {
     // Pass in navigation props.
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.SaveMessageContainer}>
+      <View style={styles.saveMessageContainer}>
         {/* Text input from react native component used to record what user types. */}
         <TextInput
-          style={styles.MessageInput}
+          style={styles.messageInput}
           multiline={true}
           placeholder="Enter Your Message"
           placeholderTextColor="#000000"
@@ -189,7 +189,7 @@ class TextMessage extends Component {
 
 // React Native styles.
 const styles = StyleSheet.create({
-  SaveMessageContainer: {
+  saveMessageContainer: {
     flex: 1,
     alignItems: 'flex-start',
     justifyContent: 'center',
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold'
   },
-  MessageInput: {
+  messageInput: {
     // flex: 1,
     height: 70,
     backgroundColor: '#95dcf4',
@@ -208,9 +208,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderRadius: 10,
     alignSelf: 'stretch'
-  },
-  SaveMessageButton: {
-    padding: 5
   }
 });
 
