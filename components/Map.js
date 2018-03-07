@@ -242,11 +242,11 @@ class Map extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.keyboard}>
-        <View style={styles.MapNavContainer}>
+        <View style={styles.mapNavContainer}>
           {/* Text input from react native component used to record what user
             types for address search. */}
           <TextInput
-            style={styles.AddressInput}
+            style={styles.addressInput}
             placeholder="Where are you going?"
             controlled={true}
             multiline={false}
@@ -255,16 +255,16 @@ class Map extends Component {
             returnKeyType="search"
             onChangeText={this.handleAddress}
           />
-          <View style={styles.IconTextBar}>
-            <Text style={styles.IconText}>Search</Text>
-            <Text style={styles.IconText}>Track Me</Text>
-            <Text style={styles.IconText}>Cancel</Text>
+          <View style={styles.iconTextBar}>
+            <Text style={styles.iconText}>Search</Text>
+            <Text style={styles.iconText}>Track Me</Text>
+            <Text style={styles.iconText}>Cancel</Text>
           </View>
-          <View style={styles.NavBoxContainer}>
+          <View style={styles.navBoxContainer}>
             {/* Renders icons from react-native-elements for easier UI display.
               Icons used to fire getFromLocation, beginTracking and killSwitch. */}
             <Icon
-              style={styles.Icon}
+              style={styles.icon}
               name="search"
               type="feather"
               color="#517fa4"
@@ -272,7 +272,7 @@ class Map extends Component {
               onPress={this.getFromLocation}
             />
             <Icon
-              style={styles.Icon}
+              style={styles.icon}
               name="target"
               type="feather"
               // Changes color of icon if press state is true
@@ -281,7 +281,7 @@ class Map extends Component {
               onPress={this.beginTracking}
             />
             <Icon
-              style={styles.Icon}
+              style={styles.icon}
               name="cancel"
               type="materialCommunityIcons"
               color="#517fa4"
@@ -309,33 +309,32 @@ class Map extends Component {
 }
 
 const styles = StyleSheet.create({
-  MapNavContainer: {
+  mapNavContainer: {
     flex: 1,
     backgroundColor: '#ffffff'
   },
-  IconText: {
+  iconText: {
     justifyContent: 'flex-start',
     flexDirection: 'row',
     marginTop: 0,
     fontSize: 17
   },
-  Icon: {
+  icon: {
     justifyContent: 'flex-start',
     flexDirection: 'row',
     marginTop: 0
   },
-  IconTextBar: {
+  iconTextBar: {
     justifyContent: 'space-around',
     flexDirection: 'row',
     marginTop: 0
   },
-  NavBoxContainer: {
+  navBoxContainer: {
     flex: 1,
     justifyContent: 'space-around',
     flexDirection: 'row'
   },
-
-  AddressInput: {
+  addressInput: {
     flex: 1,
     backgroundColor: '#ffffff',
     padding: 2,
