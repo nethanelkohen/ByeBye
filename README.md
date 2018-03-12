@@ -11,7 +11,11 @@
 
 ### _Give Your Sober Friends Peace of Mind_
 
-A mobile app created by [Nethanel Kohen](https://github.com/nethanelkohen) and [Martin Pham](https://github.com/martinliempham) that lets friends stay connected after their night out.
+A iOS application created by [Nethanel Kohen](https://github.com/nethanelkohen) and [Martin Pham](https://github.com/martinliempham) that lets your friends know you've made it home after a night out
+
+<br>
+
+<img src="./assets/video/ByeBye_demo.gif" width="500" height="auto" />
 
 <br>
 
@@ -23,7 +27,7 @@ Download the [Expo Client for iOS](https://itunes.apple.com/app/apple-store/id98
 
 Then, scan the QR code below:
 
-<img src="./assets/images/qr_code.png" align= "center" width="100" height="100" />
+<img src="./assets/images/qr_code.png" align= "center" width="150" height="auto" />
 
 or go to our [project](https://expo.io/@nethanelkohen/ByeBye) on Expo.
 
@@ -49,15 +53,15 @@ On the home screen, type in your desired message in the text input and choose a 
 
 ## What's Inside
 
-<img src="./assets/images/react-native.png" align= "center" width="75" height="75" />
+<img src="./assets/images/react-native.png" align= "center" width="150" height="auto" />
 
 [React-Native](https://facebook.github.io/react-native/)
 
-<img src="./assets/images/expo.png" align= "center" width="75" height="75" />
+<img src="./assets/images/expo.png" align= "center" width="150" height="auto" />
 
 [Expo](https://expo.io/)
 
-<img src="./assets/images/twilio.png" align= "center" width="75" height="75" />
+<img src="./assets/images/twilio.png" align= "center" width="150" height="auto" />
 
 [Twilio](https://www.twilio.com/)
 
