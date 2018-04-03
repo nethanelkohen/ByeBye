@@ -254,6 +254,7 @@ class Map extends Component {
             autoCapitalize="none"
             returnKeyType="search"
             onChangeText={this.handleAddress}
+            onSubmitEditing={this.getFromLocation}
           />
           <View style={styles.iconTextBar}>
             <Text style={styles.iconText}>Search</Text>
