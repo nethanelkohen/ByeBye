@@ -44,11 +44,10 @@ class Map extends Component {
     this.state = {
       address: '',
       location: { coords: { latitude: 0, longitude: 0 } },
-      distance: 101,
       markers: {},
       contact: null,
       message: null,
-
+      radius: 100,
       coordinate: {
         latitude: null,
         longitude: null
@@ -176,17 +175,22 @@ class Map extends Component {
     }
     let mark = this.state.markers;
     // Calculates distance from marker coordinate to user's current location.
-    navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.watchPosition(
       position => {
-        // Stores distance in meters to distance variable.
-        const userDistance = geolib.getDistance(position.coords, {
+        // Stores distance in meters to distance variable
+        const distance = geolib.getDistance(position.coords, {
           latitude: mark.latitude,
           longitude: mark.longitude
         });
-        this.setState({ distance: userDistance });
+
         // If distance variable is less than the radius (200 meters), then
         // mesage will be sent. ie, if user is within 200 meters of their endpoint
         // then message is sent.
+        {
+          distance < this.state.radius
+            ? this.sendMessage()
+            : console.log(distance);
+        }
       },
       // enableHighAccuracy for higher accuracy with geolib package.
       {
@@ -194,13 +198,6 @@ class Map extends Component {
       }
     );
   };
-
-  componentWillUpdate(nextProps, nextState) {
-    if (nextState.distance < 100) {
-      console.log('location update', this.state.distance);
-      this.sendMessage();
-    }
-  }
 
   // Handles Twilio API post request through our backend server.
   sendMessage = async () => {
@@ -222,20 +219,14 @@ class Map extends Component {
     } catch (e) {
       console.log(e);
       // Sends message to user to confirm that their message was delivered.
+    } finally {
+      await Alert.alert('Message was sent!');
     }
-    // finally {
-    //   await Alert.alert('Message was sent!');
-    // }
   };
 
   // Kills all functionality if user wants to cancel message.
   killSwitch = () => {
-    this.setState({
-      contact: null,
-      message: null,
-      press: false,
-      distance: 100
-    });
+    this.setState({ contact: null, message: null, press: false });
   };
 
   // Render React elements to device.
@@ -302,6 +293,10 @@ class Map extends Component {
             {/* Renders markers on map. */}
             <MapView.Marker coordinate={this.state.markers} title="Endpoint" />
             {/* Renders an (invisible) radius on map for geolocation purposes. */}
+            <MapView.Circle
+              // center={marker.coordinate}
+              radius={this.state.radius}
+            />
           </MapView.Animated>
         </View>
       </KeyboardAvoidingView>
