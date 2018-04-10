@@ -195,10 +195,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 8,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#ffffff'
     // borderRadius: 10,
-    fontSize: 15,
-    fontWeight: 'bold'
   },
   messageInput: {
     // flex: 1,

@@ -44,10 +44,9 @@ class Map extends Component {
     this.state = {
       address: '',
       location: { coords: { latitude: 0, longitude: 0 } },
-      markers: {},
+      markers: null,
       contact: null,
       message: null,
-      radius: 100,
       coordinate: {
         latitude: null,
         longitude: null
@@ -58,8 +57,7 @@ class Map extends Component {
   }
 
   // Instantiate React life cycle method to check user's device -- app will not
-  // run on Android. Platform will be checked as soon as the
-  // component loads.
+  // run on Android. Platform will be checked as soon as the component loads.
   componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
       // Fills out error message if user is on Android.
@@ -183,13 +181,11 @@ class Map extends Component {
           longitude: mark.longitude
         });
 
-        // If distance variable is less than the radius (200 meters), then
-        // mesage will be sent. ie, if user is within 200 meters of their endpoint
+        // If distance variable is less than the radius (100 meters), then
+        // mesage will be sent. ie, if user is within 100 meters of their endpoint
         // then message is sent.
         {
-          distance < this.state.radius
-            ? this.sendMessage()
-            : console.log(distance);
+          distance < 100 ? this.sendMessage() : console.log(distance);
         }
       },
       // enableHighAccuracy for higher accuracy with geolib package.
@@ -292,11 +288,6 @@ class Map extends Component {
           >
             {/* Renders markers on map. */}
             <MapView.Marker coordinate={this.state.markers} title="Endpoint" />
-            {/* Renders an (invisible) radius on map for geolocation purposes. */}
-            <MapView.Circle
-              // center={marker.coordinate}
-              radius={this.state.radius}
-            />
           </MapView.Animated>
         </View>
       </KeyboardAvoidingView>
